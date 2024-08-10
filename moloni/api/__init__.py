@@ -252,7 +252,6 @@ from .taxexemptions_client import TaxexemptionsCountModifiedSinceModel
 from .taxexemptions_client import TaxexemptionsGetModifiedSinceModel
 from .users_client import UsersClient
 from .users_client import UsersGetAllModel
-from .users_client import UsersUpdateMeModel
 from .vehicles_client import VehiclesClient
 from .vehicles_client import VehiclesCountModifiedSinceModel
 from .vehicles_client import VehiclesDeleteModel
@@ -525,7 +524,6 @@ __all__ = [
     "TaxexemptionsGetModifiedSinceModel",
     "UsersClient",
     "UsersGetAllModel",
-    "UsersUpdateMeModel",
     "VehiclesClient",
     "VehiclesCountModifiedSinceModel",
     "VehiclesDeleteModel",
