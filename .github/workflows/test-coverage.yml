@@ -58,6 +58,9 @@ jobs:
           CURRENT_VERSION=$(grep "__version__" moloni/__version__.py | cut -d "'" -f2)
           echo "Current version: $CURRENT_VERSION"
 
+          # Initialize NEW_VERSION variable to avoid issues with uninitialized variables
+          NEW_VERSION=""
+
           # Retrieve the last commit message
           COMMIT_MSG=$(git log -1 --pretty=%B)
 
@@ -65,8 +68,10 @@ jobs:
           if echo "$COMMIT_MSG" | grep -q "version:"; then
             NEW_VERSION=$(echo "$COMMIT_MSG" | grep -oP "(?<=version: ).*")
             echo "Using specified version: $NEW_VERSION"
-          else
-            # Split the current version into its components
+          fi
+
+          # If NEW_VERSION is still empty, increment the patch version
+          if [ -z "$NEW_VERSION" ]; then
             IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
             MAJOR_VERSION=${VERSION_PARTS[0]}
             MINOR_VERSION=${VERSION_PARTS[1]}
@@ -78,6 +83,12 @@ jobs:
             PATCH_VERSION=$((PATCH_VERSION + 1))
             NEW_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}"
             echo "Incremented version: $NEW_VERSION"
+          fi
+
+          # Ensure NEW_VERSION is not empty before proceeding
+          if [ -z "$NEW_VERSION" ]; then
+            echo "Error: NEW_VERSION is empty. Exiting."
+            exit 1
           fi
 
           # Update the version in the version file
