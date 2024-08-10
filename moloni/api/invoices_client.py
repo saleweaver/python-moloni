@@ -1,5 +1,6 @@
-from pydantic import BaseModel, ValidationError
 from typing import Union
+
+from pydantic import BaseModel
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -7,16 +8,16 @@ from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 class InvoicesCountModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
-    date: str
-    document_set_id: Union[str, int]
-    expiration_date: str
-    number: str
-    our_reference: str
-    salesman_id: Union[str, int]
-    supplier_id: Union[str, int]
-    year: str
-    your_reference: str
+    customer_id: Union[str, int] = None
+    date: str = None
+    document_set_id: Union[str, int] = None
+    expiration_date: str = None
+    number: str = None
+    our_reference: str = None
+    salesman_id: Union[str, int] = None
+    supplier_id: Union[str, int] = None
+    year: str = None
+    your_reference: str = None
 
 
 class InvoicesDeleteModel(BaseModel):
@@ -26,33 +27,33 @@ class InvoicesDeleteModel(BaseModel):
 
 class InvoicesGetAllModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
-    date: str
-    document_set_id: Union[str, int]
-    expiration_date: str
-    number: str
+    customer_id: Union[str, int] = None
+    date: str = None
+    document_set_id: Union[str, int] = None
+    expiration_date: str = None
+    number: str = None
     offset: Union[str, int] = 0
-    our_reference: str
+    our_reference: str = None
     qty: Union[str, int] = 25
-    salesman_id: Union[str, int]
-    supplier_id: Union[str, int]
-    year: str
-    your_reference: str
+    salesman_id: Union[str, int] = None
+    supplier_id: Union[str, int] = None
+    year: str = None
+    your_reference: str = None
 
 
 class InvoicesGetOneModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
-    date: str
-    document_id: Union[str, int]
-    document_set_id: Union[str, int]
-    expiration_date: str
-    number: str
-    our_reference: str
-    salesman_id: Union[str, int]
-    supplier_id: Union[str, int]
-    year: str
-    your_reference: str
+    customer_id: Union[str, int] = None
+    date: str = None
+    document_id: Union[str, int] = None
+    document_set_id: Union[str, int] = None
+    expiration_date: str = None
+    number: str = None
+    our_reference: str = None
+    salesman_id: Union[str, int] = None
+    supplier_id: Union[str, int] = None
+    year: str = None
+    your_reference: str = None
 
 
 class InvoicesInsertModel(BaseModel):
