@@ -55,6 +55,20 @@ logger.info(companies.get_all())
 products = ProductsClient()
 logger.info(products.get_all(dict(company_id=5, category_id=8231525)))
 
+product = products.insert(
+    dict(
+        company_id=5,
+        category_id=123456,
+        unit_id=134568,
+        has_stock="0",
+        name="Name",
+        reference="Reference",
+        price="10",
+        type="1",
+        taxes=[{"tax_id": 123455, "order": 0, "cumulative": 0}],
+    )
+)
+
 #  or with a model
 
 products_response = products.get_all(
