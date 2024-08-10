@@ -13,6 +13,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: write  # Explicitly added for creating releases
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -48,3 +50,34 @@ jobs:
           # Commit only if there are changes
           git diff --quiet && echo "No changes to commit" || git commit -m "Update coverage badge"
           git push || echo "Nothing to push"
+
+      - name: Increment version
+        id: versioning
+        run: |
+          CURRENT_VERSION=$(grep "__version__" moloni/__version__.py | cut -d "'" -f2)
+          echo "Current version: $CURRENT_VERSION"
+          COMMIT_MSG=$(git log -1 --pretty=%B)
+          if echo "$COMMIT_MSG" | grep -q "version:"; then
+            NEW_VERSION=$(echo "$COMMIT_MSG" | grep -oP "(?<=version: ).*")
+            echo "Using specified version: $NEW_VERSION"
+          else
+            IFS='.' read -r -a VERSION_PARTS <<< "$CURRENT_VERSION"
+            NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.$((${VERSION_PARTS[2]} + 1))"
+            echo "Incremented version: $NEW_VERSION"
+          fi
+          echo "__version__ = '$NEW_VERSION'" > moloni/__version__.py
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "GitHub Actions"
+          git add moloni/__version__.py
+          git commit -m "Bump version to $NEW_VERSION"
+          git push || echo "Nothing to push"
+          echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
+
+      - name: Create a new GitHub release
+        if: steps.versioning.outputs.new_version != ''
+        uses: actions/create-release@v1
+        with:
+          tag_name: "v${{ env.new_version }}"
+          release_name: "v${{ env.new_version }}"
+          draft: false
+          prerelease: false
