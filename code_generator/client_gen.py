@@ -188,15 +188,15 @@ class {{ class_name }}(MoloniBaseClient):
 
         # Function to convert OpenAPI type to Python type
         def get_python_type(openapi_type):
-            if openapi_type == "string":
-                return "str"
-            if openapi_type == "integer":
-                return "int"
-            if openapi_type == "boolean":
-                return "bool"
-            if openapi_type == "number":
-                return "float"
-            return "Optional[str]"
+            # if openapi_type == "string":
+            #     return "str"
+            # if openapi_type == "integer":
+            #     return "int"
+            # if openapi_type == "boolean":
+            #     return "bool"
+            # if openapi_type == "number":
+            #     return "float"
+            return "Optional[Union[str, int]]"
 
         # Generate Pydantic models from OpenAPI components
         for model_name, model_info in components.items():

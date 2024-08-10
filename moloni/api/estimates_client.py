@@ -6,28 +6,28 @@ from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
 class Associated_documents(BaseModel):
-    associated_id: str
-    value: str
+    associated_id: Optional[Union[str, int]]
+    value: Optional[Union[str, int]]
 
 
 class Payments(BaseModel):
-    date: str
-    notes: str
-    payment_method_id: str
-    value: str
+    date: Optional[Union[str, int]]
+    notes: Optional[Union[str, int]]
+    payment_method_id: Optional[Union[str, int]]
+    value: Optional[Union[str, int]]
 
 
 class Products(BaseModel):
-    discount: str
-    exemption_reason: str
-    name: str
-    order: str
-    price: str
-    product_id: str
-    qty: str
-    summary: str
-    taxes: str
-    warehouse_id: str
+    discount: Optional[Union[str, int]]
+    exemption_reason: Optional[Union[str, int]]
+    name: Optional[Union[str, int]]
+    order: Optional[Union[str, int]]
+    price: Optional[Union[str, int]]
+    product_id: Optional[Union[str, int]]
+    qty: Optional[Union[str, int]]
+    summary: Optional[Union[str, int]]
+    taxes: Optional[Union[str, int]]
+    warehouse_id: Optional[Union[str, int]]
 
 
 class EstimatesCountModel(BaseModel):
