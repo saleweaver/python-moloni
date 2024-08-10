@@ -92,6 +92,8 @@ jobs:
 
           # Set the new version as an output for the next steps
           echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
+          # Set the new version as an output for the next steps
+          echo "::set-output name=new_version::$NEW_VERSION"
 
       - name: Create a new GitHub release
         if: steps.versioning.outputs.new_version != ''
