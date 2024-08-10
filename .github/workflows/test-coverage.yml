@@ -62,7 +62,8 @@ jobs:
             echo "Using specified version: $NEW_VERSION"
           else
             IFS='.' read -r -a VERSION_PARTS <<< "$CURRENT_VERSION"
-            NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.$((${VERSION_PARTS[2]} + 1))"
+            PATCH_VERSION=$((VERSION_PARTS[2] + 1))
+            NEW_VERSION="${VERSION_PARTS[0]}.${VERSION_PARTS[1]}.$PATCH_VERSION"
             echo "Incremented version: $NEW_VERSION"
           fi
           echo "__version__ = '$NEW_VERSION'" > moloni/__version__.py
