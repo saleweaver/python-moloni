@@ -54,27 +54,43 @@ jobs:
       - name: Increment version
         id: versioning
         run: |
+          # Extract the current version
           CURRENT_VERSION=$(grep "__version__" moloni/__version__.py | cut -d "'" -f2)
           echo "Current version: $CURRENT_VERSION"
+
+          # Retrieve the last commit message
           COMMIT_MSG=$(git log -1 --pretty=%B)
+
+          # Check if the commit message specifies a version
           if echo "$COMMIT_MSG" | grep -q "version:"; then
             NEW_VERSION=$(echo "$COMMIT_MSG" | grep -oP "(?<=version: ).*")
             echo "Using specified version: $NEW_VERSION"
           else
+            # Split the current version into its components
             IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
             MAJOR_VERSION=${VERSION_PARTS[0]}
             MINOR_VERSION=${VERSION_PARTS[1]}
             PATCH_VERSION=${VERSION_PARTS[2]}
+
+            echo "Parsed version: MAJOR_VERSION=$MAJOR_VERSION, MINOR_VERSION=$MINOR_VERSION, PATCH_VERSION=$PATCH_VERSION"
+
+            # Increment the patch version
             PATCH_VERSION=$((PATCH_VERSION + 1))
             NEW_VERSION="${MAJOR_VERSION}.${MINOR_VERSION}.${PATCH_VERSION}"
             echo "Incremented version: $NEW_VERSION"
           fi
+
+          # Update the version in the version file
           echo "__version__ = '$NEW_VERSION'" > moloni/__version__.py
+
+          # Configure git and commit the change
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "GitHub Actions"
           git add moloni/__version__.py
           git commit -m "Bump version to $NEW_VERSION"
           git push || echo "Nothing to push"
+
+          # Set the new version as an output for the next steps
           echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
 
       - name: Create a new GitHub release
