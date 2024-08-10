@@ -77,6 +77,7 @@ password: str = os.getenv("MOLONI_PASSWORD")
 
 ```
 
+[![Coverage](./coverage.svg)](./coverage.svg)
 
 ##### Disclaimer
 
