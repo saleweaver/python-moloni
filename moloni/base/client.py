@@ -124,6 +124,23 @@ class MoloniBaseClient:
         )
         logger.setLevel(log_level)
 
+    def flatten_dict(self, data, parent_key='', sep='[', end_sep=']'):
+        items = []
+        if isinstance(data, dict):
+            for k, v in data.items():
+                new_key = f"{parent_key}{sep}{k}{end_sep}" if parent_key else k
+                items.extend(self.flatten_dict(v, new_key, sep, end_sep).items())
+        elif isinstance(data, list):
+            for i, v in enumerate(data):
+                new_key = f"{parent_key}{sep}{i}{end_sep}"
+                items.extend(self.flatten_dict(v, new_key, sep, end_sep).items())
+        else:
+            items.append((parent_key, data))
+        return dict(items)
+
+    def create_form_data(self, data):
+        return {k: str(v) if v is not None else '' for k, v in self.flatten_dict(data).items()}
+
     def _request(self, path, data=None, **kwargs) -> ApiResponse:
         data = data or {}
 
@@ -134,7 +151,7 @@ class MoloniBaseClient:
             url=f"{self.base_url}{path}",
             headers=self.headers,
             params={"access_token": self.auth()},
-            data=data,
+            data=self.create_form_data(data),
         )
         logger.debug(res)
         logger.debug(res.request.url)
