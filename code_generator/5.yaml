@@ -1,0 +1,4836 @@
+components:
+  schemas:
+    associated_documents:
+      properties:
+        associated_id:
+          type: string
+        value:
+          type: string
+      type: object
+    payments:
+      properties:
+        date:
+          type: string
+        notes:
+          type: string
+        payment_method_id:
+          type: string
+        value:
+          type: string
+      type: object
+    products:
+      properties:
+        discount:
+          type: string
+        exemption_reason:
+          type: string
+        name:
+          type: string
+        order:
+          type: string
+        price:
+          type: string
+        product_id:
+          type: string
+        qty:
+          type: string
+        summary:
+          type: string
+        taxes:
+          type: string
+        warehouse_id:
+          type: string
+      type: object
+info:
+  title: Moloni API
+  version: 1.0.0
+openapi: 3.0.0
+paths:
+  /billsOfLading/count/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                number:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - number
+              - date
+              - company_id
+              - document_set_id
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            count"
+  /billsOfLading/delete/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            delete"
+  /billsOfLading/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                number:
+                  type: string
+                offset:
+                  type: string
+                qty:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - offset
+              - number
+              - date
+              - company_id
+              - document_set_id
+              - qty
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /billsOfLading/getOne/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                number:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - document_id
+              - number
+              - date
+              - company_id
+              - document_set_id
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getOne"
+  /billsOfLading/insert/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_set_id:
+                  type: string
+                notes:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                related_documents_notes:
+                  type: string
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - delivery_destination_zip_code
+              - customer_id
+              - vehicle_id
+              - products[name]
+              - products[exemption_reason]
+              - products[taxes][value]
+              - delivery_destination_city
+              - date
+              - delivery_destination_country
+              - company_id
+              - delivery_departure_city
+              - products[taxes][order]
+              - products[product_id]
+              - products[qty]
+              - delivery_datetime
+              - document_set_id
+              - products[price]
+              - products[warehouse_id]
+              - delivery_departure_address
+              - products[discount]
+              - products[taxes][cumulative]
+              - delivery_destination_address
+              - related_documents_notes
+              - products[summary]
+              - delivery_method_id
+              - your_reference
+              - delivery_departure_country
+              - status
+              - associated_documents[value]
+              - associated_documents[associated_id]
+              - delivery_departure_zip_code
+              - products[order]
+              - products[taxes][tax_id]
+              - notes
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            insert"
+  /billsOfLading/setTransportCode/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+                transport_code:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              - transport_code
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            setTransportCode"
+  /billsOfLading/update/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                notes:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                related_documents_notes:
+                  type: string
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            update"
+  /creditNotes/count/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                our_reference:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - our_reference
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - document_set_id
+              - salesman_id
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            count"
+  /creditNotes/delete/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            delete"
+  /creditNotes/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                offset:
+                  type: string
+                our_reference:
+                  type: string
+                qty:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - offset
+              - our_reference
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - salesman_id
+              - document_set_id
+              - qty
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /creditNotes/getOne/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                our_reference:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - our_reference
+              - document_id
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - salesman_id
+              - document_set_id
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getOne"
+  /creditNotes/insert/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                deduction_id:
+                  type: string
+                document_set_id:
+                  type: string
+                financial_discount:
+                  type: string
+                notes:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                related_documents_notes:
+                  type: string
+                salesman_commission:
+                  type: string
+                salesman_id:
+                  type: string
+                status:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - customer_id
+              - products[name]
+              - products[exemption_reason]
+              - products[taxes][value]
+              - date
+              - salesman_id
+              - company_id
+              - products[taxes][order]
+              - products[product_id]
+              - salesman_commission
+              - products[qty]
+              - document_set_id
+              - products[price]
+              - products[warehouse_id]
+              - products[discount]
+              - products[taxes][cumulative]
+              - products[related_id]
+              - related_documents_notes
+              - deduction_id
+              - products[summary]
+              - your_reference
+              - status
+              - associated_documents[value]
+              - associated_documents[associated_id]
+              - financial_discount
+              - products[order]
+              - products[taxes][tax_id]
+              - notes
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            insert"
+  /creditNotes/update/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                deduction_id:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                financial_discount:
+                  type: string
+                notes:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                related_documents_notes:
+                  type: string
+                salesman_commission:
+                  type: string
+                salesman_id:
+                  type: string
+                status:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            update"
+  /customerReturnNotes/count/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                number:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - number
+              - date
+              - company_id
+              - document_set_id
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            count"
+  /customerReturnNotes/delete/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            delete"
+  /customerReturnNotes/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                number:
+                  type: string
+                offset:
+                  type: string
+                qty:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - offset
+              - number
+              - date
+              - company_id
+              - document_set_id
+              - qty
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /customerReturnNotes/getOne/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                number:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - document_id
+              - number
+              - date
+              - company_id
+              - document_set_id
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getOne"
+  /customerReturnNotes/insert/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_set_id:
+                  type: string
+                financial_discount:
+                  type: string
+                notes:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                related_documents_notes:
+                  type: string
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - delivery_destination_zip_code
+              - customer_id
+              - vehicle_id
+              - products[name]
+              - products[exemption_reason]
+              - products[taxes][value]
+              - delivery_destination_city
+              - date
+              - delivery_destination_country
+              - company_id
+              - delivery_departure_city
+              - products[taxes][order]
+              - products[product_id]
+              - products[qty]
+              - delivery_datetime
+              - document_set_id
+              - products[price]
+              - products[warehouse_id]
+              - delivery_departure_address
+              - products[discount]
+              - products[taxes][cumulative]
+              - delivery_destination_address
+              - related_documents_notes
+              - products[summary]
+              - delivery_method_id
+              - your_reference
+              - delivery_departure_country
+              - status
+              - associated_documents[value]
+              - associated_documents[associated_id]
+              - delivery_departure_zip_code
+              - financial_discount
+              - products[order]
+              - products[taxes][tax_id]
+              - notes
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            insert"
+  /customerReturnNotes/setTransportCode/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+                transport_code:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              - transport_code
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            setTransportCode"
+  /customerReturnNotes/update/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                financial_discount:
+                  type: string
+                notes:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                related_documents_notes:
+                  type: string
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            update"
+  /debitNotes/count/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                our_reference:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - our_reference
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - document_set_id
+              - salesman_id
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            count"
+  /debitNotes/delete/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            delete"
+  /debitNotes/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                offset:
+                  type: string
+                our_reference:
+                  type: string
+                qty:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - offset
+              - our_reference
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - salesman_id
+              - document_set_id
+              - qty
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /debitNotes/getOne/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                our_reference:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - our_reference
+              - document_id
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - salesman_id
+              - document_set_id
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getOne"
+  /debitNotes/insert/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                notes:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                salesman_commission:
+                  type: string
+                salesman_id:
+                  type: string
+                status:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - customer_id
+              - products[name]
+              - products[exemption_reason]
+              - products[taxes][value]
+              - date
+              - salesman_id
+              - company_id
+              - products[taxes][order]
+              - products[product_id]
+              - salesman_commission
+              - products[qty]
+              - document_set_id
+              - products[price]
+              - products[warehouse_id]
+              - products[discount]
+              - products[taxes][cumulative]
+              - products[summary]
+              - expiration_date
+              - your_reference
+              - status
+              - products[order]
+              - products[taxes][tax_id]
+              - notes
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            insert"
+  /debitNotes/update/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                notes:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                salesman_commission:
+                  type: string
+                salesman_id:
+                  type: string
+                status:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            update"
+  /deliveryNotes/count/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                number:
+                  type: string
+                salesman_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - number
+              - date
+              - salesman_id
+              - company_id
+              - document_set_id
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            count"
+  /deliveryNotes/delete/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            delete"
+  /deliveryNotes/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                number:
+                  type: string
+                offset:
+                  type: string
+                qty:
+                  type: string
+                salesman_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - offset
+              - number
+              - date
+              - salesman_id
+              - company_id
+              - document_set_id
+              - qty
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /deliveryNotes/getOne/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                number:
+                  type: string
+                salesman_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - document_id
+              - number
+              - date
+              - salesman_id
+              - company_id
+              - document_set_id
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getOne"
+  /deliveryNotes/insert/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_set_id:
+                  type: string
+                notes:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                related_documents_notes:
+                  type: string
+                salesman_commission:
+                  type: string
+                salesman_id:
+                  type: string
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - delivery_destination_zip_code
+              - customer_id
+              - vehicle_id
+              - products[name]
+              - products[exemption_reason]
+              - products[taxes][value]
+              - delivery_destination_city
+              - date
+              - delivery_destination_country
+              - salesman_id
+              - company_id
+              - delivery_departure_city
+              - products[taxes][order]
+              - products[product_id]
+              - salesman_commission
+              - products[qty]
+              - delivery_datetime
+              - document_set_id
+              - products[price]
+              - products[warehouse_id]
+              - delivery_departure_address
+              - products[discount]
+              - products[taxes][cumulative]
+              - delivery_destination_address
+              - related_documents_notes
+              - products[summary]
+              - delivery_method_id
+              - your_reference
+              - delivery_departure_country
+              - status
+              - associated_documents[value]
+              - associated_documents[associated_id]
+              - delivery_departure_zip_code
+              - products[order]
+              - products[taxes][tax_id]
+              - notes
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            insert"
+  /deliveryNotes/setTransportCode/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+                transport_code:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              - transport_code
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            setTransportCode"
+  /deliveryNotes/update/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                notes:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                related_documents_notes:
+                  type: string
+                salesman_commission:
+                  type: string
+                salesman_id:
+                  type: string
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            update"
+  /documents/count/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                our_reference:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - our_reference
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - document_set_id
+              - salesman_id
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            count"
+  /documents/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                offset:
+                  type: string
+                our_reference:
+                  type: string
+                qty:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - offset
+              - our_reference
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - salesman_id
+              - document_set_id
+              - qty
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /documents/getAllDocumentTypes/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                language_id:
+                  type: string
+              required:
+              - language_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAllDocumentTypes"
+  /documents/getOne/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                our_reference:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - our_reference
+              - document_id
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - salesman_id
+              - document_set_id
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getOne"
+  /documents/getPDFLink/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getPDFLink"
+  /estimates/count/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                salesman_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - number
+              - date
+              - salesman_id
+              - company_id
+              - document_set_id
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            count"
+  /estimates/delete/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            delete"
+  /estimates/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                offset:
+                  type: string
+                qty:
+                  type: string
+                salesman_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - offset
+              - number
+              - date
+              - salesman_id
+              - company_id
+              - document_set_id
+              - qty
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /estimates/getOne/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                salesman_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - document_id
+              - number
+              - date
+              - salesman_id
+              - company_id
+              - document_set_id
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getOne"
+  /estimates/insert/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                deduction_id:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                financial_discount:
+                  type: string
+                notes:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                salesman_commission:
+                  type: string
+                salesman_id:
+                  type: string
+                special_discount:
+                  type: string
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - delivery_destination_zip_code
+              - customer_id
+              - vehicle_id
+              - products[name]
+              - products[exemption_reason]
+              - products[taxes][value]
+              - delivery_destination_city
+              - date
+              - delivery_destination_country
+              - salesman_id
+              - company_id
+              - delivery_departure_city
+              - products[taxes][order]
+              - products[product_id]
+              - salesman_commission
+              - products[qty]
+              - delivery_datetime
+              - document_set_id
+              - products[price]
+              - products[warehouse_id]
+              - delivery_departure_address
+              - products[discount]
+              - products[taxes][cumulative]
+              - special_discount
+              - delivery_destination_address
+              - deduction_id
+              - products[summary]
+              - expiration_date
+              - your_reference
+              - delivery_method_id
+              - delivery_departure_country
+              - status
+              - delivery_departure_zip_code
+              - financial_discount
+              - products[order]
+              - products[taxes][tax_id]
+              - notes
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            insert"
+  /estimates/update/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                deduction_id:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                financial_discount:
+                  type: string
+                notes:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                salesman_commission:
+                  type: string
+                salesman_id:
+                  type: string
+                special_discount:
+                  type: string
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            update"
+  /invoiceReceipts/count/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                our_reference:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - our_reference
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - document_set_id
+              - salesman_id
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            count"
+  /invoiceReceipts/delete/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            delete"
+  /invoiceReceipts/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                offset:
+                  type: string
+                our_reference:
+                  type: string
+                qty:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - offset
+              - our_reference
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - salesman_id
+              - document_set_id
+              - qty
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /invoiceReceipts/getOne/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                our_reference:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - our_reference
+              - document_id
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - salesman_id
+              - document_set_id
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getOne"
+  /invoiceReceipts/insert/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                deduction_id:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                financial_discount:
+                  type: string
+                notes:
+                  type: string
+                our_reference:
+                  type: string
+                payments:
+                  items:
+                    $ref: '#/components/schemas/payments'
+                  type: array
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                related_documents_notes:
+                  type: string
+                salesman_commission:
+                  type: string
+                salesman_id:
+                  type: string
+                special_discount:
+                  type: string
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - delivery_destination_zip_code
+              - payments[date]
+              - customer_id
+              - vehicle_id
+              - products[name]
+              - products[exemption_reason]
+              - products[taxes][value]
+              - delivery_destination_city
+              - date
+              - delivery_destination_country
+              - salesman_id
+              - company_id
+              - delivery_departure_city
+              - products[taxes][order]
+              - payments[value]
+              - products[product_id]
+              - salesman_commission
+              - products[qty]
+              - delivery_datetime
+              - document_set_id
+              - products[price]
+              - payments[notes]
+              - products[warehouse_id]
+              - our_reference
+              - delivery_departure_address
+              - products[discount]
+              - products[taxes][cumulative]
+              - special_discount
+              - delivery_destination_address
+              - related_documents_notes
+              - deduction_id
+              - products[summary]
+              - expiration_date
+              - your_reference
+              - delivery_method_id
+              - delivery_departure_country
+              - status
+              - associated_documents[value]
+              - payments[payment_method_id]
+              - associated_documents[associated_id]
+              - delivery_departure_zip_code
+              - financial_discount
+              - products[order]
+              - products[taxes][tax_id]
+              - notes
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            insert"
+  /invoiceReceipts/update/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                deduction_id:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                financial_discount:
+                  type: string
+                notes:
+                  type: string
+                our_reference:
+                  type: string
+                payments:
+                  items:
+                    $ref: '#/components/schemas/payments'
+                  type: array
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                related_documents_notes:
+                  type: string
+                salesman_commission:
+                  type: string
+                salesman_id:
+                  type: string
+                special_discount:
+                  type: string
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            update"
+  /invoices/count/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                our_reference:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - our_reference
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - document_set_id
+              - salesman_id
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            count"
+  /invoices/delete/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            delete"
+  /invoices/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                offset:
+                  type: string
+                our_reference:
+                  type: string
+                qty:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - offset
+              - our_reference
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - salesman_id
+              - document_set_id
+              - qty
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /invoices/getOne/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                our_reference:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - our_reference
+              - document_id
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - salesman_id
+              - document_set_id
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getOne"
+  /invoices/insert/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                alternate_address_id:
+                  type: string
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                deduction_id:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                financial_discount:
+                  type: string
+                notes:
+                  type: string
+                our_reference:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                related_documents_notes:
+                  type: string
+                salesman_commission:
+                  type: string
+                salesman_id:
+                  type: string
+                special_discount:
+                  type: string
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - delivery_destination_zip_code
+              - customer_id
+              - vehicle_id
+              - products[name]
+              - products[exemption_reason]
+              - products[taxes][value]
+              - delivery_destination_city
+              - date
+              - delivery_destination_country
+              - salesman_id
+              - company_id
+              - delivery_departure_city
+              - products[taxes][order]
+              - products[product_id]
+              - salesman_commission
+              - products[qty]
+              - delivery_datetime
+              - document_set_id
+              - products[price]
+              - products[warehouse_id]
+              - our_reference
+              - delivery_departure_address
+              - products[discount]
+              - products[taxes][cumulative]
+              - special_discount
+              - delivery_destination_address
+              - related_documents_notes
+              - deduction_id
+              - products[summary]
+              - expiration_date
+              - your_reference
+              - delivery_method_id
+              - delivery_departure_country
+              - status
+              - associated_documents[value]
+              - associated_documents[associated_id]
+              - alternate_address_id
+              - delivery_departure_zip_code
+              - financial_discount
+              - products[order]
+              - products[taxes][tax_id]
+              - notes
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "\xBBinsert"
+  /invoices/update/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                alternate_address_id:
+                  type: string
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                deduction_id:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                financial_discount:
+                  type: string
+                notes:
+                  type: string
+                our_reference:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                related_documents_notes:
+                  type: string
+                salesman_commission:
+                  type: string
+                salesman_id:
+                  type: string
+                special_discount:
+                  type: string
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            update"
+  /ownAssetsMovementGuides/count/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                number:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - number
+              - date
+              - company_id
+              - document_set_id
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            count"
+  /ownAssetsMovementGuides/delete/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            delete"
+  /ownAssetsMovementGuides/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                number:
+                  type: string
+                offset:
+                  type: string
+                qty:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - offset
+              - number
+              - date
+              - company_id
+              - document_set_id
+              - qty
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /ownAssetsMovementGuides/getOne/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                number:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - document_id
+              - number
+              - date
+              - company_id
+              - document_set_id
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getOne"
+  /ownAssetsMovementGuides/insert/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_set_id:
+                  type: string
+                notes:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - delivery_destination_zip_code
+              - customer_id
+              - vehicle_id
+              - products[name]
+              - products[exemption_reason]
+              - products[taxes][value]
+              - delivery_destination_city
+              - date
+              - delivery_destination_country
+              - company_id
+              - delivery_departure_city
+              - products[taxes][order]
+              - products[product_id]
+              - products[qty]
+              - delivery_datetime
+              - document_set_id
+              - products[price]
+              - products[warehouse_id]
+              - delivery_departure_address
+              - products[discount]
+              - products[taxes][cumulative]
+              - delivery_destination_address
+              - products[summary]
+              - delivery_method_id
+              - your_reference
+              - delivery_departure_country
+              - status
+              - delivery_departure_zip_code
+              - products[order]
+              - products[taxes][tax_id]
+              - notes
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            insert"
+  /ownAssetsMovementGuides/setTransportCode/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+                transport_code:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              - transport_code
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            setTransportCode"
+  /ownAssetsMovementGuides/update/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                notes:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            update"
+  /receipts/count/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                our_reference:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - our_reference
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - document_set_id
+              - salesman_id
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            count"
+  /receipts/delete/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            delete"
+  /receipts/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                offset:
+                  type: string
+                our_reference:
+                  type: string
+                qty:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - offset
+              - our_reference
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - salesman_id
+              - document_set_id
+              - qty
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /receipts/getOne/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                our_reference:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - our_reference
+              - document_id
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - salesman_id
+              - document_set_id
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getOne"
+  /receipts/insert/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                net_value:
+                  type: string
+                notes:
+                  type: string
+                payments:
+                  items:
+                    $ref: '#/components/schemas/payments'
+                  type: array
+                related_documents_notes:
+                  type: string
+                status:
+                  type: string
+              required:
+              - payments[date]
+              - customer_id
+              - status
+              - associated_documents[value]
+              - payments[payment_method_id]
+              - date
+              - associated_documents[associated_id]
+              - related_documents_notes
+              - company_id
+              - document_set_id
+              - payments[notes]
+              - payments[value]
+              - notes
+              - net_value
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            insert"
+  /receipts/update/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                net_value:
+                  type: string
+                notes:
+                  type: string
+                payments:
+                  items:
+                    $ref: '#/components/schemas/payments'
+                  type: array
+                related_documents_notes:
+                  type: string
+                status:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            update"
+  /simplifiedInvoices/count/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                our_reference:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - our_reference
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - document_set_id
+              - salesman_id
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            count"
+  /simplifiedInvoices/delete/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            delete"
+  /simplifiedInvoices/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                offset:
+                  type: string
+                our_reference:
+                  type: string
+                qty:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - offset
+              - our_reference
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - salesman_id
+              - document_set_id
+              - qty
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /simplifiedInvoices/getOne/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                number:
+                  type: string
+                our_reference:
+                  type: string
+                salesman_id:
+                  type: string
+                supplier_id:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - our_reference
+              - document_id
+              - number
+              - date
+              - supplier_id
+              - company_id
+              - salesman_id
+              - document_set_id
+              - expiration_date
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getOne"
+  /simplifiedInvoices/insert/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                deduction_id:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                financial_discount:
+                  type: string
+                notes:
+                  type: string
+                our_reference:
+                  type: string
+                payments:
+                  items:
+                    $ref: '#/components/schemas/payments'
+                  type: array
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                related_documents_notes:
+                  type: string
+                salesman_commission:
+                  type: string
+                salesman_id:
+                  type: string
+                special_discount:
+                  type: string
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - delivery_destination_zip_code
+              - payments[date]
+              - customer_id
+              - vehicle_id
+              - products[name]
+              - products[exemption_reason]
+              - products[taxes][value]
+              - delivery_destination_city
+              - date
+              - delivery_destination_country
+              - salesman_id
+              - company_id
+              - delivery_departure_city
+              - products[taxes][order]
+              - payments[value]
+              - products[product_id]
+              - salesman_commission
+              - products[qty]
+              - delivery_datetime
+              - document_set_id
+              - products[price]
+              - payments[notes]
+              - products[warehouse_id]
+              - our_reference
+              - delivery_departure_address
+              - products[discount]
+              - products[taxes][cumulative]
+              - special_discount
+              - delivery_destination_address
+              - related_documents_notes
+              - deduction_id
+              - products[summary]
+              - expiration_date
+              - your_reference
+              - delivery_method_id
+              - delivery_departure_country
+              - status
+              - associated_documents[value]
+              - payments[payment_method_id]
+              - associated_documents[associated_id]
+              - delivery_departure_zip_code
+              - financial_discount
+              - products[order]
+              - products[taxes][tax_id]
+              - notes
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            insert"
+  /simplifiedInvoices/update/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                deduction_id:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                expiration_date:
+                  type: string
+                financial_discount:
+                  type: string
+                notes:
+                  type: string
+                our_reference:
+                  type: string
+                payments:
+                  items:
+                    $ref: '#/components/schemas/payments'
+                  type: array
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                related_documents_notes:
+                  type: string
+                salesman_commission:
+                  type: string
+                salesman_id:
+                  type: string
+                special_discount:
+                  type: string
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            update"
+  /waybills/count/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                number:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - number
+              - date
+              - company_id
+              - document_set_id
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            count"
+  /waybills/delete/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            delete"
+  /waybills/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_set_id:
+                  type: string
+                number:
+                  type: string
+                offset:
+                  type: string
+                qty:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - offset
+              - number
+              - date
+              - company_id
+              - document_set_id
+              - qty
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /waybills/getOne/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                number:
+                  type: string
+                year:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - year
+              - customer_id
+              - document_id
+              - number
+              - date
+              - company_id
+              - document_set_id
+              - your_reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getOne"
+  /waybills/insert/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_set_id:
+                  type: string
+                financial_discount:
+                  type: string
+                notes:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                related_documents_notes:
+                  type: string
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - delivery_destination_zip_code
+              - customer_id
+              - vehicle_id
+              - products[name]
+              - products[exemption_reason]
+              - products[taxes][value]
+              - delivery_destination_city
+              - date
+              - delivery_destination_country
+              - company_id
+              - delivery_departure_city
+              - products[taxes][order]
+              - products[product_id]
+              - products[qty]
+              - delivery_datetime
+              - document_set_id
+              - products[price]
+              - products[warehouse_id]
+              - delivery_departure_address
+              - products[discount]
+              - products[taxes][cumulative]
+              - delivery_destination_address
+              - related_documents_notes
+              - products[summary]
+              - delivery_method_id
+              - your_reference
+              - delivery_departure_country
+              - status
+              - associated_documents[value]
+              - associated_documents[associated_id]
+              - delivery_departure_zip_code
+              - financial_discount
+              - products[order]
+              - products[taxes][tax_id]
+              - notes
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            insert"
+  /waybills/setTransportCode/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                document_id:
+                  type: string
+                transport_code:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              - transport_code
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            setTransportCode"
+  /waybills/update/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                associated_documents:
+                  items:
+                    $ref: '#/components/schemas/associated_documents'
+                  type: array
+                company_id:
+                  type: string
+                customer_id:
+                  type: string
+                date:
+                  type: string
+                delivery_datetime:
+                  type: string
+                delivery_departure_address:
+                  type: string
+                delivery_departure_city:
+                  type: string
+                delivery_departure_country:
+                  type: string
+                delivery_departure_zip_code:
+                  type: string
+                delivery_destination_address:
+                  type: string
+                delivery_destination_city:
+                  type: string
+                delivery_destination_country:
+                  type: string
+                delivery_destination_zip_code:
+                  type: string
+                delivery_method_id:
+                  type: string
+                document_id:
+                  type: string
+                document_set_id:
+                  type: string
+                financial_discount:
+                  type: string
+                notes:
+                  type: string
+                products:
+                  items:
+                    $ref: '#/components/schemas/products'
+                  type: array
+                related_documents_notes:
+                  type: string
+                status:
+                  type: string
+                vehicle_id:
+                  type: string
+                your_reference:
+                  type: string
+              required:
+              - document_id
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            update"

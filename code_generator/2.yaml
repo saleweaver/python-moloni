@@ -1,0 +1,1225 @@
+components:
+  schemas:
+    suppliers:
+      properties:
+        cost_price:
+          type: string
+        supplier_id:
+          type: string
+      type: object
+    taxes:
+      properties:
+        cumulative:
+          type: string
+        order:
+          type: string
+        tax_id:
+          type: string
+        value:
+          type: string
+      type: object
+    warehouses:
+      properties:
+        stock:
+          type: string
+        warehouse_id:
+          type: string
+      type: object
+info:
+  title: Moloni API
+  version: 1.0.0
+openapi: 3.0.0
+paths:
+  /companies/getAll/:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /companies/getOne/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+              required:
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getOne"
+  /companies/update/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                address:
+                  type: string
+                capital:
+                  type: string
+                city:
+                  type: string
+                commercial_registration_number:
+                  type: string
+                company_id:
+                  type: string
+                country_id:
+                  type: string
+                currency_id:
+                  type: string
+                customer_series:
+                  type: string
+                decimal_places:
+                  type: string
+                decimal_separator:
+                  type: string
+                delivery_method_id:
+                  type: string
+                detached_series_doc_number:
+                  type: string
+                docs_commercial_info_on_footer:
+                  type: string
+                docs_company_info_position:
+                  type: string
+                docs_copies:
+                  type: string
+                docs_footer:
+                  type: string
+                docs_pdf_model_id:
+                  type: string
+                docs_qty_products_page:
+                  type: string
+                docs_show_client_phone:
+                  type: string
+                docs_show_client_vat_prefix:
+                  type: string
+                docs_show_company_notes:
+                  type: string
+                docs_show_related:
+                  type: string
+                docs_show_values_on_movement_docs:
+                  type: string
+                docs_show_values_on_return_docs:
+                  type: string
+                docs_show_values_orders_docs:
+                  type: string
+                docs_show_values_with_taxes:
+                  type: string
+                email:
+                  type: string
+                fax:
+                  type: string
+                is_retailer_or_tsp:
+                  type: string
+                mails_sender_address:
+                  type: string
+                mails_sender_name:
+                  type: string
+                maturity_date_id:
+                  type: string
+                maturity_on_week_day:
+                  type: string
+                name:
+                  type: string
+                notes:
+                  type: string
+                notify_late_documents:
+                  type: string
+                numeric_code_ordering:
+                  type: string
+                payment_method_id:
+                  type: string
+                phone:
+                  type: string
+                registry_office:
+                  type: string
+                show_home_charts:
+                  type: string
+                show_inactive_customers:
+                  type: string
+                show_inactive_products:
+                  type: string
+                thousands_separator:
+                  type: string
+                vat:
+                  type: string
+                website:
+                  type: string
+                zip_code:
+                  type: string
+              required:
+              - name
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            update"
+  /productCategories/delete/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                category_id:
+                  type: string
+                company_id:
+                  type: string
+              required:
+              - company_id
+              - category_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            delete"
+  /productCategories/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                parent_id:
+                  type: string
+              required:
+              - company_id
+              - parent_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /productCategories/getModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                lastmodified:
+                  type: string
+              required:
+              - lastmodified
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getModifiedSince"
+  /productCategories/insert/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                description:
+                  type: string
+                name:
+                  type: string
+                parent_id:
+                  type: string
+                pos_enabled:
+                  type: string
+              required:
+              - name
+              - description
+              - company_id
+              - parent_id
+              - pos_enabled
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            insert"
+  /productCategories/update/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                category_id:
+                  type: string
+                company_id:
+                  type: string
+                description:
+                  type: string
+                name:
+                  type: string
+                parent_id:
+                  type: string
+                pos_enabled:
+                  type: string
+              required:
+              - company_id
+              - category_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            update"
+  /products/count/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                category_id:
+                  type: string
+                company_id:
+                  type: string
+              required:
+              - company_id
+              - category_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            count"
+  /products/countByEAN/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                ean:
+                  type: string
+              required:
+              - company_id
+              - ean
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            countByEAN"
+  /products/countByName/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                name:
+                  type: string
+              required:
+              - name
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            countByName"
+  /products/countByReference/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                reference:
+                  type: string
+              required:
+              - company_id
+              - reference
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            countByReference"
+  /products/countBySearch/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                search:
+                  type: string
+              required:
+              - search
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            countBySearch"
+  /products/countModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                lastmodified:
+                  type: string
+              required:
+              - lastmodified
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            countModifiedSince"
+  /products/delete/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                product_id:
+                  type: string
+              required:
+              - company_id
+              - product_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            delete"
+  /products/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                category_id:
+                  type: string
+                company_id:
+                  type: string
+                offset:
+                  type: string
+                qty:
+                  type: string
+              required:
+              - company_id
+              - qty
+              - offset
+              - category_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /products/getByEAN/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                ean:
+                  type: string
+                offset:
+                  type: string
+                qty:
+                  type: string
+              required:
+              - company_id
+              - offset
+              - ean
+              - qty
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getByEAN"
+  /products/getByName/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                name:
+                  type: string
+                offset:
+                  type: string
+                qty:
+                  type: string
+              required:
+              - name
+              - company_id
+              - offset
+              - qty
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getByName"
+  /products/getByReference/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                offset:
+                  type: string
+                qty:
+                  type: string
+                reference:
+                  type: string
+              required:
+              - company_id
+              - offset
+              - reference
+              - qty
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getByReference"
+  /products/getBySearch/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                offset:
+                  type: string
+                qty:
+                  type: string
+                search:
+                  type: string
+              required:
+              - search
+              - company_id
+              - offset
+              - qty
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getBySearch"
+  /products/getModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                lastmodified:
+                  type: string
+                offset:
+                  type: string
+                qty:
+                  type: string
+              required:
+              - lastmodified
+              - company_id
+              - offset
+              - qty
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getModifiedSince"
+  /products/getOne/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                product_id:
+                  type: string
+              required:
+              - company_id
+              - product_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getOne"
+  /products/insert/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                at_product_category:
+                  type: string
+                category_id:
+                  type: string
+                company_id:
+                  type: string
+                ean:
+                  type: string
+                exemption_reason:
+                  type: string
+                has_stock:
+                  type: string
+                name:
+                  type: string
+                pos_favorite:
+                  type: string
+                price:
+                  type: string
+                reference:
+                  type: string
+                stock:
+                  type: string
+                summary:
+                  type: string
+                suppliers:
+                  items:
+                    $ref: '#/components/schemas/suppliers'
+                  type: array
+                taxes:
+                  items:
+                    $ref: '#/components/schemas/taxes'
+                  type: array
+                type:
+                  type: string
+                unit_id:
+                  type: string
+                warehouse_id:
+                  type: string
+                warehouses:
+                  items:
+                    $ref: '#/components/schemas/warehouses'
+                  type: array
+              required:
+              - name
+              - at_product_category
+              - suppliers[supplier_id]
+              - company_id
+              - taxes[value]
+              - price
+              - warehouses[stock]
+              - taxes[tax_id]
+              - reference
+              - pos_favorite
+              - type
+              - summary
+              - taxes[order]
+              - suppliers[cost_price]
+              - warehouses[warehouse_id]
+              - exemption_reason
+              - ean
+              - category_id
+              - unit_id
+              - stock
+              - taxes[cumulative]
+              - warehouse_id
+              - has_stock
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            insert"
+  /products/update/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                at_product_category:
+                  type: string
+                category_id:
+                  type: string
+                company_id:
+                  type: string
+                ean:
+                  type: string
+                exemption_reason:
+                  type: string
+                has_stock:
+                  type: string
+                name:
+                  type: string
+                pos_favorite:
+                  type: string
+                price:
+                  type: string
+                product_id:
+                  type: string
+                reference:
+                  type: string
+                stock:
+                  type: string
+                summary:
+                  type: string
+                suppliers:
+                  items:
+                    $ref: '#/components/schemas/suppliers'
+                  type: array
+                taxes:
+                  items:
+                    $ref: '#/components/schemas/taxes'
+                  type: array
+                type:
+                  type: string
+                unit_id:
+                  type: string
+                warehouse_id:
+                  type: string
+              required:
+              - company_id
+              - product_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            update"
+  /subscription/getOne/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+              required:
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getOne"
+  /users/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+              required:
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /warehouses/countModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                lastmodified:
+                  type: string
+              required:
+              - lastmodified
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            countModifiedSince"
+  /warehouses/delete/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                warehouse_id:
+                  type: string
+              required:
+              - company_id
+              - warehouse_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            delete"
+  /warehouses/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+              required:
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /warehouses/getModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                company_id:
+                  type: string
+                lastmodified:
+                  type: string
+              required:
+              - lastmodified
+              - company_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getModifiedSince"
+  /warehouses/insert/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                address:
+                  type: string
+                city:
+                  type: string
+                code:
+                  type: string
+                company_id:
+                  type: string
+                contact_email:
+                  type: string
+                contact_name:
+                  type: string
+                country_id:
+                  type: string
+                fax:
+                  type: string
+                is_default:
+                  type: string
+                phone:
+                  type: string
+                title:
+                  type: string
+                zip_code:
+                  type: string
+              required:
+              - contact_name
+              - is_default
+              - city
+              - fax
+              - country_id
+              - zip_code
+              - company_id
+              - code
+              - title
+              - phone
+              - address
+              - contact_email
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            insert"
+  /warehouses/update/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                address:
+                  type: string
+                city:
+                  type: string
+                code:
+                  type: string
+                company_id:
+                  type: string
+                contact_email:
+                  type: string
+                contact_name:
+                  type: string
+                country_id:
+                  type: string
+                fax:
+                  type: string
+                is_default:
+                  type: string
+                phone:
+                  type: string
+                title:
+                  type: string
+                warehouse_id:
+                  type: string
+                zip_code:
+                  type: string
+              required:
+              - company_id
+              - warehouse_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            update"

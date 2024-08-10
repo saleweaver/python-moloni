@@ -1,0 +1,69 @@
+                                        <!--
+  ~ Copyright (c) 2024. Michael Primke
+  ~
+  ~ All rights reserved. This software and associated documentation
+  ~ (if any) are proprietary to Michael Primke.
+  ~ Redistribution and use in source and binary forms, with or without
+  ~ modification, are not permitted without express permission from
+  ~ Michael Primke.
+  ~
+  -->
+
+<div class="tabs_conteudo" id="tab_conteudo_profile" style="display: none;">
+                                                                <div class="modelo_holder">
+                                        <div class="modelo_titulo" id="group_action_btn_profile_users">
+                                            <div class="icone_sinal_mais">+</div>My Profile</div>
+                                        <div class="modelo_resumo">É o próprio utilizador que está a aceder à sua própria conta através da API</div>                                        <div class="group_action_holder" id="group_action_conteudo_profile_users" style="display: none;">
+                                                                                                <div class="action_holder">
+                                                        <div class="action_title" onmouseover="$(this).addClassName('action_title_on');" onmouseout="$(this).removeClassName('action_title_on');" id="action_btn_profile_users_getme">
+                                                            <div class="icone_sinal_mais">+
+                                                            </div>getMe</div>
+                                                        <div class="action_url">
+                                                            https://api.moloni.pt/sandbox/users/getMe/?access_token=[current_access_token]                                                        </div>
+                                                        <div class="action_form" id="action_form_profile_users_getme" style="display: none;">
+                                                            <form method="post" action="?request=1">
+                                                                <input type="hidden" name="refresh_token" value="7c0a0e88d5a012e2f3ad30d628e0b7d5c6a0c899">
+                                                                <input type="hidden" name="access_token" value="de31d2b6d8ab8ca43548713b4013957f2dec781d">
+                                                                <input type="hidden" name="action" value="users/getMe">
+                                                                <input type="hidden" name="action_path" value="profile_users_getMe">
+                                                                                                                                <input type="submit" value="Submit: getMe">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                                                                    <div class="action_holder">
+                                                        <div class="action_title" onmouseover="$(this).addClassName('action_title_on');" onmouseout="$(this).removeClassName('action_title_on');" id="action_btn_profile_users_updateme">
+                                                            <div class="icone_sinal_mais">+
+                                                            </div>updateMe</div>
+                                                        <div class="action_url">
+                                                            https://api.moloni.pt/sandbox/users/updateMe/?access_token=[current_access_token]                                                        </div>
+                                                        <div class="action_form" id="action_form_profile_users_updateme" style="display: none;">
+                                                            <form method="post" action="?request=1">
+                                                                <input type="hidden" name="refresh_token" value="7c0a0e88d5a012e2f3ad30d628e0b7d5c6a0c899">
+                                                                <input type="hidden" name="access_token" value="de31d2b6d8ab8ca43548713b4013957f2dec781d">
+                                                                <input type="hidden" name="action" value="users/updateMe">
+                                                                <input type="hidden" name="action_path" value="profile_users_updateMe">
+                                                                                                                                    <ul>
+                                                                                                                                                    <li>
+                                                                                <label>name</label>
+                                                                                <input type="text" id="profile_users_updateMe_name_enablee" name="name">
+                                                                                                                                                            </li>
+                                                                                                                                                        <li>
+                                                                                <label>email</label>
+                                                                                <input type="text" id="profile_users_updateMe_email_enablee" name="email">
+                                                                                                                                                            </li>
+                                                                                                                                                        <li>
+                                                                                <label>cellphone</label>
+                                                                                <input type="text" id="profile_users_updateMe_cellphone_enablee" name="cellphone">
+                                                                                                                                                            </li>
+                                                                                                                                                        <li>
+                                                                                <label>language_id</label>
+                                                                                <input type="text" id="profile_users_updateMe_language_id_enablee" name="language_id">
+                                                                                                                                                            </li>
+                                                                                                                                                </ul>
+                                                                                                                                <input type="submit" class="extra_padding_btn" value="Submit: updateMe">
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                                                        </div>
+                                    </div>
+                                                        </div>

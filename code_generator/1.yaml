@@ -1,0 +1,58 @@
+components:
+  schemas: {}
+info:
+  title: Moloni API
+  version: 1.0.0
+openapi: 3.0.0
+paths:
+  /users/getMe/:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getMe"
+  /users/updateMe/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                cellphone:
+                  type: string
+                email:
+                  type: string
+                language_id:
+                  type: string
+                name:
+                  type: string
+              required:
+              - name
+              - language_id
+              - email
+              - cellphone
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            updateMe"

@@ -1,0 +1,425 @@
+components:
+  schemas: {}
+info:
+  title: Moloni API
+  version: 1.0.0
+openapi: 3.0.0
+paths:
+  /countries/countModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                lastmodified:
+                  type: string
+              required:
+              - lastmodified
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            countModifiedSince"
+  /countries/getAll/:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /countries/getModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                lastmodified:
+                  type: string
+              required:
+              - lastmodified
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getModifiedSince"
+  /currencies/countModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                lastmodified:
+                  type: string
+              required:
+              - lastmodified
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            countModifiedSince"
+  /currencies/getAll/:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /currencies/getModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                lastmodified:
+                  type: string
+              required:
+              - lastmodified
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getModifiedSince"
+  /documentModels/countModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                lastmodified:
+                  type: string
+              required:
+              - lastmodified
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            countModifiedSince"
+  /documentModels/getAll/:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /documentModels/getModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                lastmodified:
+                  type: string
+              required:
+              - lastmodified
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getModifiedSince"
+  /fiscalZones/countModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                lastmodified:
+                  type: string
+              required:
+              - lastmodified
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            countModifiedSince"
+  /fiscalZones/getAll/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                country_id:
+                  type: string
+              required:
+              - country_id
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /fiscalZones/getModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                lastmodified:
+                  type: string
+              required:
+              - lastmodified
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getModifiedSince"
+  /languages/countModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                lastmodified:
+                  type: string
+              required:
+              - lastmodified
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            countModifiedSince"
+  /languages/getAll/:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /languages/getModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                lastmodified:
+                  type: string
+              required:
+              - lastmodified
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getModifiedSince"
+  /taxExemptions/countModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                lastmodified:
+                  type: string
+              required:
+              - lastmodified
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            countModifiedSince"
+  /taxExemptions/getAll/:
+    post:
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getAll"
+  /taxExemptions/getModifiedSince/:
+    post:
+      requestBody:
+        content:
+          application/json:
+            schema:
+              properties:
+                lastmodified:
+                  type: string
+              required:
+              - lastmodified
+              type: object
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: object
+          description: Successful response
+        '400':
+          description: Bad request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal server error
+      summary: "+\n                                                            getModifiedSince"
