@@ -76,13 +76,12 @@ jobs:
           git commit -m "Bump version to $NEW_VERSION"
           git push || echo "Nothing to push"
           echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
-          echo "::set-output name=new_version::$NEW_VERSION"
 
       - name: Create a new GitHub release
         if: steps.versioning.outputs.new_version != ''
         uses: actions/create-release@v1
         with:
-          tag_name: "v${{ steps.versioning.outputs.new_version }}"
-          release_name: "v${{ steps.versioning.outputs.new_version }}"
+          tag_name: "v${{ env.new_version }}"
+          release_name: "v${{ env.new_version }}"
           draft: false
           prerelease: false
