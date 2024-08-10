@@ -44,7 +44,7 @@ logger.info(companies.get_all())
 
 ```python
 from moloni.api.companies_client import CompaniesClient
-from moloni.api.products_client import ProductsClient
+from moloni.api.products_client import ProductsClient, ProductsGetAllModel
 import logging 
 
 logger = logging.getLogger(__name__)
@@ -54,6 +54,10 @@ companies = CompaniesClient()
 logger.info(companies.get_all())
 products = ProductsClient()
 logger.info(products.get_all(dict(company_id=5, category_id=8231525)))
+
+#  or with a model
+
+products_response = products.get_all(ProductsGetAllModel(company_id=5, category_id=8231525))
 
 ```
 
