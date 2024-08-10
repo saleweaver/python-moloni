@@ -239,9 +239,9 @@ class {{ class_name }}(MoloniBaseClient):
             new_exports.append(class_name)
 
             for model_name, code in self.generate_components().items():
-                model_import = f"from .{inflection.underscore(class_name)} import {model_name.capitalize()}"
+                model_import = f"from .{inflection.underscore(class_name)} import {model_name.capitalize()} as {class_name}{model_name.capitalize()}Model"
                 new_imports.append(model_import)
-                new_exports.append(model_name.capitalize())
+                new_exports.append(f"{class_name}{model_name.capitalize()}Model")
 
             for model_name in details["models"].keys():
                 model_import = (
