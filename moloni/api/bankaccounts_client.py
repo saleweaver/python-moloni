@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union
+from typing import Union, Optional
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -29,9 +29,9 @@ class BankaccountsInsertModel(BaseModel):
 class BankaccountsUpdateModel(BaseModel):
     bank_account_id: Union[str, int]
     company_id: Union[str, int]
-    name: str = None
-    order: str = None
-    value: str = None
+    name: Optional[str] = None
+    order: Optional[str] = None
+    value: Optional[str] = None
 
 
 class BankaccountsClient(MoloniBaseClient):

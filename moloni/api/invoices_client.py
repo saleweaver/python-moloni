@@ -1,6 +1,5 @@
-from typing import Union
-
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
+from typing import Union, Optional
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -8,16 +7,16 @@ from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 class InvoicesCountModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int] = None
-    date: str = None
-    document_set_id: Union[str, int] = None
-    expiration_date: str = None
-    number: str = None
-    our_reference: str = None
-    salesman_id: Union[str, int] = None
-    supplier_id: Union[str, int] = None
-    year: str = None
-    your_reference: str = None
+    customer_id: Union[str, int]
+    date: str
+    document_set_id: Union[str, int]
+    expiration_date: str
+    number: str
+    our_reference: str
+    salesman_id: Union[str, int]
+    supplier_id: Union[str, int]
+    year: str
+    your_reference: str
 
 
 class InvoicesDeleteModel(BaseModel):
@@ -27,33 +26,33 @@ class InvoicesDeleteModel(BaseModel):
 
 class InvoicesGetAllModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int] = None
-    date: str = None
-    document_set_id: Union[str, int] = None
-    expiration_date: str = None
-    number: str = None
+    customer_id: Union[str, int]
+    date: str
+    document_set_id: Union[str, int]
+    expiration_date: str
+    number: str
     offset: Union[str, int] = 0
-    our_reference: str = None
+    our_reference: str
     qty: Union[str, int] = 25
-    salesman_id: Union[str, int] = None
-    supplier_id: Union[str, int] = None
-    year: str = None
-    your_reference: str = None
+    salesman_id: Union[str, int]
+    supplier_id: Union[str, int]
+    year: str
+    your_reference: str
 
 
 class InvoicesGetOneModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int] = None
-    date: str = None
-    document_id: Union[str, int] = None
-    document_set_id: Union[str, int] = None
-    expiration_date: str = None
-    number: str = None
-    our_reference: str = None
-    salesman_id: Union[str, int] = None
-    supplier_id: Union[str, int] = None
-    year: str = None
-    your_reference: str = None
+    customer_id: Union[str, int]
+    date: str
+    document_id: Union[str, int]
+    document_set_id: Union[str, int]
+    expiration_date: str
+    number: str
+    our_reference: str
+    salesman_id: Union[str, int]
+    supplier_id: Union[str, int]
+    year: str
+    your_reference: str
 
 
 class InvoicesInsertModel(BaseModel):
@@ -84,41 +83,41 @@ class InvoicesInsertModel(BaseModel):
     status: str
     vehicle_id: Union[str, int]
     your_reference: str
-    associated_documents: str = None
-    products: str = None
+    associated_documents: Optional[str] = None
+    products: Optional[str] = None
 
 
 class InvoicesUpdateModel(BaseModel):
     company_id: Union[str, int]
     document_id: Union[str, int]
-    alternate_address_id: Union[str, int] = None
-    associated_documents: str = None
-    customer_id: Union[str, int] = None
-    date: str = None
-    deduction_id: Union[str, int] = None
-    delivery_datetime: str = None
-    delivery_departure_address: str = None
-    delivery_departure_city: str = None
-    delivery_departure_country: str = None
-    delivery_departure_zip_code: str = None
-    delivery_destination_address: str = None
-    delivery_destination_city: str = None
-    delivery_destination_country: str = None
-    delivery_destination_zip_code: str = None
-    delivery_method_id: Union[str, int] = None
-    document_set_id: Union[str, int] = None
-    expiration_date: str = None
-    financial_discount: str = None
-    notes: str = None
-    our_reference: str = None
-    products: str = None
-    related_documents_notes: str = None
-    salesman_commission: str = None
-    salesman_id: Union[str, int] = None
-    special_discount: str = None
-    status: str = None
-    vehicle_id: Union[str, int] = None
-    your_reference: str = None
+    alternate_address_id: Optional[Union[str, int]] = None
+    associated_documents: Optional[str] = None
+    customer_id: Optional[Union[str, int]] = None
+    date: Optional[str] = None
+    deduction_id: Optional[Union[str, int]] = None
+    delivery_datetime: Optional[str] = None
+    delivery_departure_address: Optional[str] = None
+    delivery_departure_city: Optional[str] = None
+    delivery_departure_country: Optional[str] = None
+    delivery_departure_zip_code: Optional[str] = None
+    delivery_destination_address: Optional[str] = None
+    delivery_destination_city: Optional[str] = None
+    delivery_destination_country: Optional[str] = None
+    delivery_destination_zip_code: Optional[str] = None
+    delivery_method_id: Optional[Union[str, int]] = None
+    document_set_id: Optional[Union[str, int]] = None
+    expiration_date: Optional[str] = None
+    financial_discount: Optional[str] = None
+    notes: Optional[str] = None
+    our_reference: Optional[str] = None
+    products: Optional[str] = None
+    related_documents_notes: Optional[str] = None
+    salesman_commission: Optional[str] = None
+    salesman_id: Optional[Union[str, int]] = None
+    special_discount: Optional[str] = None
+    status: Optional[str] = None
+    vehicle_id: Optional[Union[str, int]] = None
+    your_reference: Optional[str] = None
 
 
 class InvoicesClient(MoloniBaseClient):

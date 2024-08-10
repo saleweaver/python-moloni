@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union
+from typing import Union, Optional
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -62,7 +62,7 @@ class OwnassetsmovementguidesInsertModel(BaseModel):
     status: str
     vehicle_id: Union[str, int]
     your_reference: str
-    products: str = None
+    products: Optional[str] = None
 
 
 class OwnassetsmovementguidesSetTransportCodeModel(BaseModel):
@@ -74,24 +74,24 @@ class OwnassetsmovementguidesSetTransportCodeModel(BaseModel):
 class OwnassetsmovementguidesUpdateModel(BaseModel):
     company_id: Union[str, int]
     document_id: Union[str, int]
-    customer_id: Union[str, int] = None
-    date: str = None
-    delivery_datetime: str = None
-    delivery_departure_address: str = None
-    delivery_departure_city: str = None
-    delivery_departure_country: str = None
-    delivery_departure_zip_code: str = None
-    delivery_destination_address: str = None
-    delivery_destination_city: str = None
-    delivery_destination_country: str = None
-    delivery_destination_zip_code: str = None
-    delivery_method_id: Union[str, int] = None
-    document_set_id: Union[str, int] = None
-    notes: str = None
-    products: str = None
-    status: str = None
-    vehicle_id: Union[str, int] = None
-    your_reference: str = None
+    customer_id: Optional[Union[str, int]] = None
+    date: Optional[str] = None
+    delivery_datetime: Optional[str] = None
+    delivery_departure_address: Optional[str] = None
+    delivery_departure_city: Optional[str] = None
+    delivery_departure_country: Optional[str] = None
+    delivery_departure_zip_code: Optional[str] = None
+    delivery_destination_address: Optional[str] = None
+    delivery_destination_city: Optional[str] = None
+    delivery_destination_country: Optional[str] = None
+    delivery_destination_zip_code: Optional[str] = None
+    delivery_method_id: Optional[Union[str, int]] = None
+    document_set_id: Optional[Union[str, int]] = None
+    notes: Optional[str] = None
+    products: Optional[str] = None
+    status: Optional[str] = None
+    vehicle_id: Optional[Union[str, int]] = None
+    your_reference: Optional[str] = None
 
 
 class OwnassetsmovementguidesClient(MoloniBaseClient):

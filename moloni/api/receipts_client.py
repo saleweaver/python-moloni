@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union
+from typing import Union, Optional
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -64,22 +64,22 @@ class ReceiptsInsertModel(BaseModel):
     notes: str
     related_documents_notes: str
     status: str
-    associated_documents: str = None
-    payments: str = None
+    associated_documents: Optional[str] = None
+    payments: Optional[str] = None
 
 
 class ReceiptsUpdateModel(BaseModel):
     company_id: Union[str, int]
     document_id: Union[str, int]
-    associated_documents: str = None
-    customer_id: Union[str, int] = None
-    date: str = None
-    document_set_id: Union[str, int] = None
-    net_value: str = None
-    notes: str = None
-    payments: str = None
-    related_documents_notes: str = None
-    status: str = None
+    associated_documents: Optional[str] = None
+    customer_id: Optional[Union[str, int]] = None
+    date: Optional[str] = None
+    document_set_id: Optional[Union[str, int]] = None
+    net_value: Optional[str] = None
+    notes: Optional[str] = None
+    payments: Optional[str] = None
+    related_documents_notes: Optional[str] = None
+    status: Optional[str] = None
 
 
 class ReceiptsClient(MoloniBaseClient):

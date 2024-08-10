@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union
+from typing import Union, Optional
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -12,51 +12,51 @@ class CompaniesGetOneModel(BaseModel):
 class CompaniesUpdateModel(BaseModel):
     company_id: Union[str, int]
     name: str
-    address: str = None
-    capital: str = None
-    city: str = None
-    commercial_registration_number: str = None
-    country_id: Union[str, int] = None
-    currency_id: Union[str, int] = None
-    customer_series: str = None
-    decimal_places: str = None
-    decimal_separator: str = None
-    delivery_method_id: Union[str, int] = None
-    detached_series_doc_number: str = None
-    docs_commercial_info_on_footer: str = None
-    docs_company_info_position: str = None
-    docs_copies: str = None
-    docs_footer: str = None
-    docs_pdf_model_id: Union[str, int] = None
-    docs_qty_products_page: str = None
-    docs_show_client_phone: str = None
-    docs_show_client_vat_prefix: str = None
-    docs_show_company_notes: str = None
-    docs_show_related: str = None
-    docs_show_values_on_movement_docs: str = None
-    docs_show_values_on_return_docs: str = None
-    docs_show_values_orders_docs: str = None
-    docs_show_values_with_taxes: str = None
-    email: str = None
-    fax: str = None
-    is_retailer_or_tsp: bool = None
-    mails_sender_address: str = None
-    mails_sender_name: str = None
-    maturity_date_id: Union[str, int] = None
-    maturity_on_week_day: str = None
-    notes: str = None
-    notify_late_documents: str = None
-    numeric_code_ordering: str = None
-    payment_method_id: Union[str, int] = None
-    phone: str = None
-    registry_office: str = None
-    show_home_charts: str = None
-    show_inactive_customers: str = None
-    show_inactive_products: str = None
-    thousands_separator: str = None
-    vat: str = None
-    website: str = None
-    zip_code: str = None
+    address: Optional[str] = None
+    capital: Optional[str] = None
+    city: Optional[str] = None
+    commercial_registration_number: Optional[str] = None
+    country_id: Optional[Union[str, int]] = None
+    currency_id: Optional[Union[str, int]] = None
+    customer_series: Optional[str] = None
+    decimal_places: Optional[str] = None
+    decimal_separator: Optional[str] = None
+    delivery_method_id: Optional[Union[str, int]] = None
+    detached_series_doc_number: Optional[str] = None
+    docs_commercial_info_on_footer: Optional[str] = None
+    docs_company_info_position: Optional[str] = None
+    docs_copies: Optional[str] = None
+    docs_footer: Optional[str] = None
+    docs_pdf_model_id: Optional[Union[str, int]] = None
+    docs_qty_products_page: Optional[str] = None
+    docs_show_client_phone: Optional[str] = None
+    docs_show_client_vat_prefix: Optional[str] = None
+    docs_show_company_notes: Optional[str] = None
+    docs_show_related: Optional[str] = None
+    docs_show_values_on_movement_docs: Optional[str] = None
+    docs_show_values_on_return_docs: Optional[str] = None
+    docs_show_values_orders_docs: Optional[str] = None
+    docs_show_values_with_taxes: Optional[str] = None
+    email: Optional[str] = None
+    fax: Optional[str] = None
+    is_retailer_or_tsp: Optional[bool] = None
+    mails_sender_address: Optional[str] = None
+    mails_sender_name: Optional[str] = None
+    maturity_date_id: Optional[Union[str, int]] = None
+    maturity_on_week_day: Optional[str] = None
+    notes: Optional[str] = None
+    notify_late_documents: Optional[str] = None
+    numeric_code_ordering: Optional[str] = None
+    payment_method_id: Optional[Union[str, int]] = None
+    phone: Optional[str] = None
+    registry_office: Optional[str] = None
+    show_home_charts: Optional[str] = None
+    show_inactive_customers: Optional[str] = None
+    show_inactive_products: Optional[str] = None
+    thousands_separator: Optional[str] = None
+    vat: Optional[str] = None
+    website: Optional[str] = None
+    zip_code: Optional[str] = None
 
 
 class CompaniesClient(MoloniBaseClient):

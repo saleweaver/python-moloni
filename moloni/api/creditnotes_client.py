@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union
+from typing import Union, Optional
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -68,26 +68,26 @@ class CreditnotesInsertModel(BaseModel):
     salesman_id: Union[str, int]
     status: str
     your_reference: str
-    associated_documents: str = None
-    products: str = None
+    associated_documents: Optional[str] = None
+    products: Optional[str] = None
 
 
 class CreditnotesUpdateModel(BaseModel):
     company_id: Union[str, int]
     document_id: Union[str, int]
-    associated_documents: str = None
-    customer_id: Union[str, int] = None
-    date: str = None
-    deduction_id: Union[str, int] = None
-    document_set_id: Union[str, int] = None
-    financial_discount: str = None
-    notes: str = None
-    products: str = None
-    related_documents_notes: str = None
-    salesman_commission: str = None
-    salesman_id: Union[str, int] = None
-    status: str = None
-    your_reference: str = None
+    associated_documents: Optional[str] = None
+    customer_id: Optional[Union[str, int]] = None
+    date: Optional[str] = None
+    deduction_id: Optional[Union[str, int]] = None
+    document_set_id: Optional[Union[str, int]] = None
+    financial_discount: Optional[str] = None
+    notes: Optional[str] = None
+    products: Optional[str] = None
+    related_documents_notes: Optional[str] = None
+    salesman_commission: Optional[str] = None
+    salesman_id: Optional[Union[str, int]] = None
+    status: Optional[str] = None
+    your_reference: Optional[str] = None
 
 
 class CreditnotesClient(MoloniBaseClient):

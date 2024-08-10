@@ -10,7 +10,7 @@ class OpenAPIClientGenerator:
     class_template = Template(
         '''
 from pydantic import BaseModel, ValidationError
-from typing import Union
+from typing import Union, Optional
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -72,6 +72,11 @@ class {{ class_name }}(MoloniBaseClient):
                 else "str"
             )  # Default type is string for simplicity
             field_type = "bool" if prop_name.startswith("is_") else field_type
+            field_type = (
+                f"Optional[{field_type}]"
+                if prop_name not in required_fields
+                else field_type
+            )
 
             if prop_name in required_fields:
                 fields[prop_name] = (field_type, ...)  # Required fields

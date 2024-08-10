@@ -1,6 +1,5 @@
-from typing import Union
-
-from pydantic import BaseModel
+from pydantic import BaseModel, ValidationError
+from typing import Union, Optional
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -104,30 +103,30 @@ class ProductsInsertModel(BaseModel):
     type: str
     unit_id: Union[str, int]
     warehouse_id: Union[str, int]
-    suppliers: str = None
-    taxes: str = None
-    warehouses: str = None
+    suppliers: Optional[str] = None
+    taxes: Optional[str] = None
+    warehouses: Optional[str] = None
 
 
 class ProductsUpdateModel(BaseModel):
     company_id: Union[str, int]
     product_id: Union[str, int]
-    at_product_category: str = None
-    category_id: Union[str, int] = None
-    ean: str = None
-    exemption_reason: str = None
-    has_stock: str = None
-    name: str = None
-    pos_favorite: str = None
-    price: str = None
-    reference: str = None
-    stock: str = None
-    summary: str = None
-    suppliers: str = None
-    taxes: str = None
-    type: str = None
-    unit_id: Union[str, int] = None
-    warehouse_id: Union[str, int] = None
+    at_product_category: Optional[str] = None
+    category_id: Optional[Union[str, int]] = None
+    ean: Optional[str] = None
+    exemption_reason: Optional[str] = None
+    has_stock: Optional[str] = None
+    name: Optional[str] = None
+    pos_favorite: Optional[str] = None
+    price: Optional[str] = None
+    reference: Optional[str] = None
+    stock: Optional[str] = None
+    summary: Optional[str] = None
+    suppliers: Optional[str] = None
+    taxes: Optional[str] = None
+    type: Optional[str] = None
+    unit_id: Optional[Union[str, int]] = None
+    warehouse_id: Optional[Union[str, int]] = None
 
 
 class ProductsClient(MoloniBaseClient):

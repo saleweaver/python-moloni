@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union
+from typing import Union, Optional
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -35,10 +35,10 @@ class DocumentsetsInsertModel(BaseModel):
 class DocumentsetsUpdateModel(BaseModel):
     company_id: Union[str, int]
     document_set_id: Union[str, int]
-    active_by_default: str = None
-    cash_vat_scheme_indicator: str = None
-    name: str = None
-    template_id: Union[str, int] = None
+    active_by_default: Optional[str] = None
+    cash_vat_scheme_indicator: Optional[str] = None
+    name: Optional[str] = None
+    template_id: Optional[Union[str, int]] = None
 
 
 class DocumentsetsClient(MoloniBaseClient):

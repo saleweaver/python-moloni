@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union
+from typing import Union, Optional
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -115,29 +115,29 @@ class SuppliersInsertModel(BaseModel):
 class SuppliersUpdateModel(BaseModel):
     company_id: Union[str, int]
     supplier_id: Union[str, int]
-    address: str = None
-    city: str = None
-    contact_email: str = None
-    contact_name: str = None
-    contact_phone: str = None
-    country_id: Union[str, int] = None
-    credit_limit: str = None
-    delivery_method_id: Union[str, int] = None
-    discount: str = None
-    email: str = None
-    fax: str = None
-    field_notes: str = None
-    language_id: Union[str, int] = None
-    maturity_date_id: Union[str, int] = None
-    name: str = None
-    notes: str = None
-    number: str = None
-    payment_method_id: Union[str, int] = None
-    phone: str = None
-    qty_copies_document: str = None
-    vat: str = None
-    website: str = None
-    zip_code: str = None
+    address: Optional[str] = None
+    city: Optional[str] = None
+    contact_email: Optional[str] = None
+    contact_name: Optional[str] = None
+    contact_phone: Optional[str] = None
+    country_id: Optional[Union[str, int]] = None
+    credit_limit: Optional[str] = None
+    delivery_method_id: Optional[Union[str, int]] = None
+    discount: Optional[str] = None
+    email: Optional[str] = None
+    fax: Optional[str] = None
+    field_notes: Optional[str] = None
+    language_id: Optional[Union[str, int]] = None
+    maturity_date_id: Optional[Union[str, int]] = None
+    name: Optional[str] = None
+    notes: Optional[str] = None
+    number: Optional[str] = None
+    payment_method_id: Optional[Union[str, int]] = None
+    phone: Optional[str] = None
+    qty_copies_document: Optional[str] = None
+    vat: Optional[str] = None
+    website: Optional[str] = None
+    zip_code: Optional[str] = None
 
 
 class SuppliersClient(MoloniBaseClient):

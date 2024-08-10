@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union
+from typing import Union, Optional
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -33,8 +33,8 @@ class MeasurementunitsInsertModel(BaseModel):
 class MeasurementunitsUpdateModel(BaseModel):
     company_id: Union[str, int]
     unit_id: Union[str, int]
-    name: str = None
-    short_name: str = None
+    name: Optional[str] = None
+    short_name: Optional[str] = None
 
 
 class MeasurementunitsClient(MoloniBaseClient):

@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union
+from typing import Union, Optional
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -45,20 +45,20 @@ class IdentificationtemplatesInsertModel(BaseModel):
 class IdentificationtemplatesUpdateModel(BaseModel):
     company_id: Union[str, int]
     template_id: Union[str, int]
-    address: str = None
-    business_name: str = None
-    city: str = None
-    country_id: Union[str, int] = None
-    documents_footnote: str = None
-    email: str = None
-    email_sender_address: str = None
-    email_sender_name: str = None
-    fax: str = None
-    name: str = None
-    notes: str = None
-    phone: str = None
-    website: str = None
-    zip_code: str = None
+    address: Optional[str] = None
+    business_name: Optional[str] = None
+    city: Optional[str] = None
+    country_id: Optional[Union[str, int]] = None
+    documents_footnote: Optional[str] = None
+    email: Optional[str] = None
+    email_sender_address: Optional[str] = None
+    email_sender_name: Optional[str] = None
+    fax: Optional[str] = None
+    name: Optional[str] = None
+    notes: Optional[str] = None
+    phone: Optional[str] = None
+    website: Optional[str] = None
+    zip_code: Optional[str] = None
 
 
 class IdentificationtemplatesClient(MoloniBaseClient):
