@@ -10,7 +10,7 @@ setup(
         "aws-caching": ["aws-secretsmanager-caching", "boto3"],
         "aws": ["boto3"],
     },
-    packages=["moloni.api", "moloni.base"],
+    packages=["moloni.api", "moloni.base", "moloni"],
     url="https://github.com/saleweaver/python-moloni",
     license="MIT",
     author="Michael",
