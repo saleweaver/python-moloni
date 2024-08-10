@@ -6,20 +6,20 @@ from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
 class Suppliers(BaseModel):
-    cost_price: Optional[Union[str, int]]
-    supplier_id: Optional[Union[str, int]]
+    cost_price: Optional[Union[str, int]] = None
+    supplier_id: Optional[Union[str, int]] = None
 
 
 class Taxes(BaseModel):
-    cumulative: Optional[Union[str, int]]
-    order: Optional[Union[str, int]]
-    tax_id: Optional[Union[str, int]]
-    value: Optional[Union[str, int]]
+    cumulative: Optional[Union[str, int]] = None
+    order: Optional[Union[str, int]] = None
+    tax_id: Optional[Union[str, int]] = None
+    value: Optional[Union[str, int]] = None
 
 
 class Warehouses(BaseModel):
-    stock: Optional[Union[str, int]]
-    warehouse_id: Optional[Union[str, int]]
+    stock: Optional[Union[str, int]] = None
+    warehouse_id: Optional[Union[str, int]] = None
 
 
 class SubscriptionGetOneModel(BaseModel):

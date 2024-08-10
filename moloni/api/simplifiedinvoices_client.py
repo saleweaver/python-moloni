@@ -6,28 +6,28 @@ from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
 class Associated_documents(BaseModel):
-    associated_id: Optional[Union[str, int]]
-    value: Optional[Union[str, int]]
+    associated_id: Optional[Union[str, int]] = None
+    value: Optional[Union[str, int]] = None
 
 
 class Payments(BaseModel):
-    date: Optional[Union[str, int]]
-    notes: Optional[Union[str, int]]
-    payment_method_id: Optional[Union[str, int]]
-    value: Optional[Union[str, int]]
+    date: Optional[Union[str, int]] = None
+    notes: Optional[Union[str, int]] = None
+    payment_method_id: Optional[Union[str, int]] = None
+    value: Optional[Union[str, int]] = None
 
 
 class Products(BaseModel):
-    discount: Optional[Union[str, int]]
-    exemption_reason: Optional[Union[str, int]]
-    name: Optional[Union[str, int]]
-    order: Optional[Union[str, int]]
-    price: Optional[Union[str, int]]
-    product_id: Optional[Union[str, int]]
-    qty: Optional[Union[str, int]]
-    summary: Optional[Union[str, int]]
-    taxes: Optional[Union[str, int]]
-    warehouse_id: Optional[Union[str, int]]
+    discount: Optional[Union[str, int]] = None
+    exemption_reason: Optional[Union[str, int]] = None
+    name: Optional[Union[str, int]] = None
+    order: Optional[Union[str, int]] = None
+    price: Optional[Union[str, int]] = None
+    product_id: Optional[Union[str, int]] = None
+    qty: Optional[Union[str, int]] = None
+    summary: Optional[Union[str, int]] = None
+    taxes: Optional[Union[str, int]] = None
+    warehouse_id: Optional[Union[str, int]] = None
 
 
 class SimplifiedinvoicesCountModel(BaseModel):

@@ -205,7 +205,7 @@ class {{ class_name }}(MoloniBaseClient):
 
             for field_name, field_info in properties.items():
                 python_type = get_python_type(field_info["type"])
-                fields.append(f"    {field_name}: {python_type}")
+                fields.append(f"    {field_name}: {python_type} = None")
 
             model_str = (
                 f"class {model_name.capitalize()}(BaseModel):\n"
@@ -297,7 +297,15 @@ class {{ class_name }}(MoloniBaseClient):
 
         # Write back the updated __init__.py
         with open("../moloni/api/__init__.py", "w") as init_file:
-            init_file.write(new_init_content)
+            init_file.write(
+                "\n".join(
+                    "/n".join(
+                        new_init_content.split(
+                            "from .users_client import UsersUpdateMeModel"
+                        )
+                    ).split('"UsersUpdateMeModel",')
+                )
+            )
         print("__init__.py has been updated with the generated classes and models.")
 
 
