@@ -35,7 +35,7 @@ companies = CompaniesClient(
     version="v1",
     validate=True,
 )
-logger.info(companies.get_all(dict(company_id=5, category_id=8231525)))
+logger.info(companies.get_all())
 
 ```
 
