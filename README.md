@@ -5,6 +5,11 @@ PYTHON-MOLONI
 
 A wrapper to access **Moloni's API** with an easy-to-use interface.
 
+# Documentation
+
+[![Documentation Status](https://img.shields.io/readthedocs/python-moloni?style=for-the-badge)](https://python-moloni.readthedocs.io/en/latest/)
+
+
 ## Usage:
 
 #### Full configuration
