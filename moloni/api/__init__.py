@@ -302,7 +302,6 @@ from .users_client import Suppliers
 from .users_client import Taxes
 from .users_client import UsersClient
 from .users_client import UsersGetAllModel
-from .users_client import UsersUpdateMeModel
 from .users_client import Warehouses
 from .vehicles_client import VehiclesClient
 from .vehicles_client import VehiclesCountModifiedSinceModel
@@ -587,7 +586,6 @@ __all__ = [
     "TaxexemptionsGetModifiedSinceModel",
     "UsersClient",
     "UsersGetAllModel",
-    "UsersUpdateMeModel",
     "VehiclesClient",
     "VehiclesCountModifiedSinceModel",
     "VehiclesDeleteModel",
