@@ -6,6 +6,12 @@ OwnassetsmovementguidesClient
 Models:
 -------
 
+.. autoclass:: moloni.api.Associated_documents
+
+.. autoclass:: moloni.api.Payments
+
+.. autoclass:: moloni.api.Products
+
 .. autoclass:: moloni.api.OwnassetsmovementguidesCountModel
 
 .. autoclass:: moloni.api.OwnassetsmovementguidesDeleteModel

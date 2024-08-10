@@ -6,6 +6,12 @@ InvoicereceiptsClient
 Models:
 -------
 
+.. autoclass:: moloni.api.Associated_documents
+
+.. autoclass:: moloni.api.Payments
+
+.. autoclass:: moloni.api.Products
+
 .. autoclass:: moloni.api.InvoicereceiptsCountModel
 
 .. autoclass:: moloni.api.InvoicereceiptsDeleteModel
