@@ -1,3 +1,4 @@
+import os
 import re
 import subprocess
 
@@ -52,11 +53,86 @@ class {{ class_name }}(MoloniBaseClient):
     {% endfor %}
 '''
     )
+    test_template = Template(
+        """
+import unittest
+from unittest.mock import patch, Mock
+from requests import Response
+from moloni.api.{{ module_name|lower }} import {{ class_name }}{% if model_imports %}, {{ model_imports }}{% endif %}
+from moloni.base import ApiResponse, NoMoreRecords
+
+
+class Test{{ class_name }}(unittest.TestCase):
+    def setUp(self):
+        self.client = {{ class_name }}()
+
+    {% for method_name, details in methods.items() %}
+    @patch.object(
+        {{ class_name }},
+        "_request"
+    )
+    def test_{{ method_name }}(self, mock_request):
+        # Mock the Response object
+        mock_response = Mock(spec=Response)
+        mock_response.json.return_value = {"some_key": "some_value"}
+        mock_response.status_code = 200
+        mock_response.headers = {"Content-Type": "application/json"}
+
+        # Create the ApiResponse object with the mocked Response
+        mock_request.return_value = ApiResponse(
+            response=mock_response,
+            request_data={"qty": 10, "offset": 0}
+        )
+
+        {% if details['model_name'] != 'dict' %}
+        model_data = {{ details['model_name'] }}(
+            {% for param_name, param_type in details['params'].items() %}
+            {% if param_name in ['products', 'warehouse', 'taxes', 'associated_documents', 'payments', 'suppliers', 'warehouses'] %}
+            {{ param_name }}=[],
+            {% else %} {{ param_name }}={% if param_type == 'str' %}"{{ param_name }}"{% elif param_type.startswith('Optional[List') %}[]{% elif param_type == 'int' %}1{% elif param_type == 'float' %}1.0{% elif param_type == 'bool' %}True{% else %}"sample_value"{% endif %},
+            {% endif %}
+            {% endfor %}
+        )
+        response = self.client.{{ method_name }}(data=model_data)
+        {% else %}
+        response = self.client.{{ method_name }}()
+        {% endif %}
+        
+        # Assertions
+        self.assertIsInstance(response, ApiResponse)
+        self.assertEqual(response.payload, {"some_key": "some_value"})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.headers["Content-Type"], "application/json")
+        mock_request.assert_called_once()
+
+        # Test pagination functionality
+        try:
+            next_params = response.next(qty=5)
+            self.assertEqual(next_params["offset"], 10)
+            self.assertEqual(next_params["qty"], 5)
+        except NoMoreRecords:
+            pass
+        
+    {% endfor %}
+"""
+    )
 
     def __init__(self, openapi_spec_path):
         with open(openapi_spec_path, "r") as file:
             self.openapi_spec = yaml.safe_load(file)
         self.client_classes = {}
+
+    def generate_test_code(self, module_name, class_name, methods, models):
+        model_imports = ", ".join(models.keys())
+
+        test_code = self.test_template.render(
+            module_name=module_name,
+            class_name=class_name,
+            methods=methods,
+            models=models,
+            model_imports=model_imports,
+        )
+        return test_code
 
     def generate_class_name(self, path):
         return "".join(word.capitalize() for word in path.split("/")[1:2]) + "Client"
@@ -166,17 +242,28 @@ class {{ class_name }}(MoloniBaseClient):
         generated_files = []
 
         for class_name, details in self.client_classes.items():
+            module_name = inflection.underscore(class_name)
             rendered_class = self.class_template.render(
                 class_name=class_name,
                 methods=details["methods"],
                 models=details["models"],
                 components=self.generate_components(),
             )
+
             file_name = f"../moloni/api/{inflection.underscore(class_name)}.py"
             with open(file_name, "w") as f:
                 f.write(rendered_class.strip())
                 print(f"Generated {class_name}.py")
             generated_files.append(file_name)
+
+            test_code = self.generate_test_code(
+                module_name, class_name, details["methods"], details["models"]
+            )
+            test_file_name = f"../tests/{module_name}_test.py"
+            with open(test_file_name, "w") as f:
+                f.write(test_code.strip())
+                print(f"Generated {module_name}_test.py")
+            generated_files.append(test_file_name)
 
         return generated_files
 
@@ -310,6 +397,7 @@ class {{ class_name }}(MoloniBaseClient):
 
 
 if __name__ == "__main__":
+    os.unlink("../moloni/api/__init__.py")
     for i in range(1, 7):
         generator = OpenAPIClientGenerator(f"{i}.yaml")
         files = generator.generate_code()
