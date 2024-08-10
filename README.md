@@ -57,7 +57,9 @@ logger.info(products.get_all(dict(company_id=5, category_id=8231525)))
 
 #  or with a model
 
-products_response = products.get_all(ProductsGetAllModel(company_id=5, category_id=8231525))
+products_response = products.get_all(
+    ProductsGetAllModel(company_id=5, category_id=8231525)
+)
 
 ```
 
