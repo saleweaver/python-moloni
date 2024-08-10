@@ -1,16 +1,16 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
 class CountriesCountModifiedSinceModel(BaseModel):
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class CountriesGetModifiedSinceModel(BaseModel):
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class CountriesClient(MoloniBaseClient):

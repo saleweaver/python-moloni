@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -7,12 +7,12 @@ from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 class PaymentmethodsCountModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class PaymentmethodsDeleteModel(BaseModel):
     company_id: Union[str, int]
-    payment_method_id: Union[str, int]
+    payment_method_id: Optional[Union[str, int]] = None
 
 
 class PaymentmethodsGetAllModel(BaseModel):
@@ -21,18 +21,18 @@ class PaymentmethodsGetAllModel(BaseModel):
 
 class PaymentmethodsGetModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class PaymentmethodsInsertModel(BaseModel):
     company_id: Union[str, int]
-    name: str
+    name: Optional[str] = None
 
 
 class PaymentmethodsUpdateModel(BaseModel):
     company_id: Union[str, int]
-    payment_method_id: Union[str, int]
     name: Optional[str] = None
+    payment_method_id: Optional[Union[str, int]] = None
 
 
 class PaymentmethodsClient(MoloniBaseClient):

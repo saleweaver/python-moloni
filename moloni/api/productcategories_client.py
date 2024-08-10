@@ -1,36 +1,53 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
+class Suppliers(BaseModel):
+    cost_price: str
+    supplier_id: str
+
+
+class Taxes(BaseModel):
+    cumulative: str
+    order: str
+    tax_id: str
+    value: str
+
+
+class Warehouses(BaseModel):
+    stock: str
+    warehouse_id: str
+
+
 class ProductcategoriesDeleteModel(BaseModel):
-    category_id: Union[str, int]
     company_id: Union[str, int]
+    category_id: Optional[Union[str, int]] = None
 
 
 class ProductcategoriesGetAllModel(BaseModel):
     company_id: Union[str, int]
-    parent_id: Union[str, int]
+    parent_id: Optional[Union[str, int]] = None
 
 
 class ProductcategoriesGetModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class ProductcategoriesInsertModel(BaseModel):
     company_id: Union[str, int]
-    description: str
-    name: str
-    parent_id: Union[str, int]
-    pos_enabled: str
+    description: Optional[str] = None
+    name: Optional[str] = None
+    parent_id: Optional[Union[str, int]] = None
+    pos_enabled: Optional[str] = None
 
 
 class ProductcategoriesUpdateModel(BaseModel):
-    category_id: Union[str, int]
     company_id: Union[str, int]
+    category_id: Optional[Union[str, int]] = None
     description: Optional[str] = None
     name: Optional[str] = None
     parent_id: Optional[Union[str, int]] = None

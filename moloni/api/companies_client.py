@@ -1,8 +1,25 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
+
+
+class Suppliers(BaseModel):
+    cost_price: str
+    supplier_id: str
+
+
+class Taxes(BaseModel):
+    cumulative: str
+    order: str
+    tax_id: str
+    value: str
+
+
+class Warehouses(BaseModel):
+    stock: str
+    warehouse_id: str
 
 
 class CompaniesGetOneModel(BaseModel):
@@ -11,7 +28,6 @@ class CompaniesGetOneModel(BaseModel):
 
 class CompaniesUpdateModel(BaseModel):
     company_id: Union[str, int]
-    name: str
     address: Optional[str] = None
     capital: Optional[str] = None
     city: Optional[str] = None
@@ -44,6 +60,7 @@ class CompaniesUpdateModel(BaseModel):
     mails_sender_name: Optional[str] = None
     maturity_date_id: Optional[Union[str, int]] = None
     maturity_on_week_day: Optional[str] = None
+    name: Optional[str] = None
     notes: Optional[str] = None
     notify_late_documents: Optional[str] = None
     numeric_code_ordering: Optional[str] = None

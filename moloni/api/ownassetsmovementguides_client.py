@@ -1,79 +1,75 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
+class Associated_documents(BaseModel):
+    associated_id: str
+    value: str
+
+
+class Payments(BaseModel):
+    date: str
+    notes: str
+    payment_method_id: str
+    value: str
+
+
+class Products(BaseModel):
+    discount: str
+    exemption_reason: str
+    name: str
+    order: str
+    price: str
+    product_id: str
+    qty: str
+    summary: str
+    taxes: str
+    warehouse_id: str
+
+
 class OwnassetsmovementguidesCountModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
-    date: str
-    document_set_id: Union[str, int]
-    number: str
-    year: str
-    your_reference: str
+    customer_id: Optional[Union[str, int]] = None
+    date: Optional[str] = None
+    document_set_id: Optional[Union[str, int]] = None
+    number: Optional[str] = None
+    year: Optional[str] = None
+    your_reference: Optional[str] = None
 
 
 class OwnassetsmovementguidesDeleteModel(BaseModel):
     company_id: Union[str, int]
-    document_id: Union[str, int]
+    document_id: Optional[Union[str, int]] = None
 
 
 class OwnassetsmovementguidesGetAllModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
-    date: str
-    document_set_id: Union[str, int]
-    number: str
-    offset: Union[str, int] = 0
-    qty: Union[str, int] = 25
-    year: str
-    your_reference: str
+    customer_id: Optional[Union[str, int]] = None
+    date: Optional[str] = None
+    document_set_id: Optional[Union[str, int]] = None
+    number: Optional[str] = None
+    offset: Optional[Union[str, int]] = 0
+    qty: Optional[Union[str, int]] = 25
+    year: Optional[str] = None
+    your_reference: Optional[str] = None
 
 
 class OwnassetsmovementguidesGetOneModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
-    date: str
-    document_id: Union[str, int]
-    document_set_id: Union[str, int]
-    number: str
-    year: str
-    your_reference: str
+    customer_id: Optional[Union[str, int]] = None
+    date: Optional[str] = None
+    document_id: Optional[Union[str, int]] = None
+    document_set_id: Optional[Union[str, int]] = None
+    number: Optional[str] = None
+    year: Optional[str] = None
+    your_reference: Optional[str] = None
 
 
 class OwnassetsmovementguidesInsertModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
-    date: str
-    delivery_datetime: str
-    delivery_departure_address: str
-    delivery_departure_city: str
-    delivery_departure_country: str
-    delivery_departure_zip_code: str
-    delivery_destination_address: str
-    delivery_destination_city: str
-    delivery_destination_country: str
-    delivery_destination_zip_code: str
-    delivery_method_id: Union[str, int]
-    document_set_id: Union[str, int]
-    notes: str
-    status: str
-    vehicle_id: Union[str, int]
-    your_reference: str
-    products: Optional[str] = None
-
-
-class OwnassetsmovementguidesSetTransportCodeModel(BaseModel):
-    company_id: Union[str, int]
-    document_id: Union[str, int]
-    transport_code: str
-
-
-class OwnassetsmovementguidesUpdateModel(BaseModel):
-    company_id: Union[str, int]
-    document_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
     delivery_datetime: Optional[str] = None
@@ -88,7 +84,36 @@ class OwnassetsmovementguidesUpdateModel(BaseModel):
     delivery_method_id: Optional[Union[str, int]] = None
     document_set_id: Optional[Union[str, int]] = None
     notes: Optional[str] = None
-    products: Optional[str] = None
+    products: Optional[List[Products]] = None
+    status: Optional[str] = None
+    vehicle_id: Optional[Union[str, int]] = None
+    your_reference: Optional[str] = None
+
+
+class OwnassetsmovementguidesSetTransportCodeModel(BaseModel):
+    company_id: Union[str, int]
+    document_id: Optional[Union[str, int]] = None
+    transport_code: Optional[str] = None
+
+
+class OwnassetsmovementguidesUpdateModel(BaseModel):
+    company_id: Union[str, int]
+    customer_id: Optional[Union[str, int]] = None
+    date: Optional[str] = None
+    delivery_datetime: Optional[str] = None
+    delivery_departure_address: Optional[str] = None
+    delivery_departure_city: Optional[str] = None
+    delivery_departure_country: Optional[str] = None
+    delivery_departure_zip_code: Optional[str] = None
+    delivery_destination_address: Optional[str] = None
+    delivery_destination_city: Optional[str] = None
+    delivery_destination_country: Optional[str] = None
+    delivery_destination_zip_code: Optional[str] = None
+    delivery_method_id: Optional[Union[str, int]] = None
+    document_id: Optional[Union[str, int]] = None
+    document_set_id: Optional[Union[str, int]] = None
+    notes: Optional[str] = None
+    products: Optional[List[Products]] = None
     status: Optional[str] = None
     vehicle_id: Optional[Union[str, int]] = None
     your_reference: Optional[str] = None

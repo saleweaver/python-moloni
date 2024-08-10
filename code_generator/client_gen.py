@@ -10,10 +10,14 @@ class OpenAPIClientGenerator:
     class_template = Template(
         '''
 from pydantic import BaseModel, ValidationError
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
+
+{% for model_name, model_code in components.items() %}
+{{ model_code }}
+{% endfor %}
 
 
 {% for model_name, model_code in models.items() %}
@@ -64,6 +68,7 @@ class {{ class_name }}(MoloniBaseClient):
         return inflection.underscore(method_name).lstrip("_")
 
     def generate_pydantic_model(self, model_name, properties, required_fields):
+        required_fields = ["company_id"]
         fields = {}
         for prop_name, prop_details in properties.items():
             field_type = (
@@ -77,6 +82,9 @@ class {{ class_name }}(MoloniBaseClient):
                 if prop_name not in required_fields
                 else field_type
             )
+
+            if prop_details.get("type") == "array":
+                field_type = f"Optional[List[{prop_details.get('items').get('$ref').split('/')[-1].capitalize()}]]"
 
             if prop_name in required_fields:
                 fields[prop_name] = (field_type, ...)  # Required fields
@@ -162,6 +170,7 @@ class {{ class_name }}(MoloniBaseClient):
                 class_name=class_name,
                 methods=details["methods"],
                 models=details["models"],
+                components=self.generate_components(),
             )
             file_name = f"../moloni/api/{inflection.underscore(class_name)}.py"
             with open(file_name, "w") as f:
@@ -170,6 +179,45 @@ class {{ class_name }}(MoloniBaseClient):
             generated_files.append(file_name)
 
         return generated_files
+
+    def generate_components(self):
+        components = self.openapi_spec["components"]["schemas"]
+
+        # Dictionary to store generated model classes
+        models = {}
+
+        # Function to convert OpenAPI type to Python type
+        def get_python_type(openapi_type):
+            if openapi_type == "string":
+                return "str"
+            if openapi_type == "integer":
+                return "int"
+            if openapi_type == "boolean":
+                return "bool"
+            if openapi_type == "number":
+                return "float"
+            return "Optional[str]"
+
+        # Generate Pydantic models from OpenAPI components
+        for model_name, model_info in components.items():
+            properties = model_info.get("properties", {})
+            fields = []
+
+            for field_name, field_info in properties.items():
+                python_type = get_python_type(field_info["type"])
+                fields.append(f"    {field_name}: {python_type}")
+
+            model_str = (
+                f"class {model_name.capitalize()}(BaseModel):\n"
+                + "\n".join(fields)
+                + "\n"
+            )
+            models[model_name] = model_str
+
+        # Output the generated models
+        for model_name, model_code in models.items():
+            print(model_code)
+        return models
 
     def format_code_with_black(self, files):
         try:

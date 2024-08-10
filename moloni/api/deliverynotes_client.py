@@ -1,87 +1,79 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
+class Associated_documents(BaseModel):
+    associated_id: str
+    value: str
+
+
+class Payments(BaseModel):
+    date: str
+    notes: str
+    payment_method_id: str
+    value: str
+
+
+class Products(BaseModel):
+    discount: str
+    exemption_reason: str
+    name: str
+    order: str
+    price: str
+    product_id: str
+    qty: str
+    summary: str
+    taxes: str
+    warehouse_id: str
+
+
 class DeliverynotesCountModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
-    date: str
-    document_set_id: Union[str, int]
-    number: str
-    salesman_id: Union[str, int]
-    year: str
-    your_reference: str
+    customer_id: Optional[Union[str, int]] = None
+    date: Optional[str] = None
+    document_set_id: Optional[Union[str, int]] = None
+    number: Optional[str] = None
+    salesman_id: Optional[Union[str, int]] = None
+    year: Optional[str] = None
+    your_reference: Optional[str] = None
 
 
 class DeliverynotesDeleteModel(BaseModel):
     company_id: Union[str, int]
-    document_id: Union[str, int]
+    document_id: Optional[Union[str, int]] = None
 
 
 class DeliverynotesGetAllModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
-    date: str
-    document_set_id: Union[str, int]
-    number: str
-    offset: Union[str, int] = 0
-    qty: Union[str, int] = 25
-    salesman_id: Union[str, int]
-    year: str
-    your_reference: str
+    customer_id: Optional[Union[str, int]] = None
+    date: Optional[str] = None
+    document_set_id: Optional[Union[str, int]] = None
+    number: Optional[str] = None
+    offset: Optional[Union[str, int]] = 0
+    qty: Optional[Union[str, int]] = 25
+    salesman_id: Optional[Union[str, int]] = None
+    year: Optional[str] = None
+    your_reference: Optional[str] = None
 
 
 class DeliverynotesGetOneModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
-    date: str
-    document_id: Union[str, int]
-    document_set_id: Union[str, int]
-    number: str
-    salesman_id: Union[str, int]
-    year: str
-    your_reference: str
+    customer_id: Optional[Union[str, int]] = None
+    date: Optional[str] = None
+    document_id: Optional[Union[str, int]] = None
+    document_set_id: Optional[Union[str, int]] = None
+    number: Optional[str] = None
+    salesman_id: Optional[Union[str, int]] = None
+    year: Optional[str] = None
+    your_reference: Optional[str] = None
 
 
 class DeliverynotesInsertModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
-    date: str
-    delivery_datetime: str
-    delivery_departure_address: str
-    delivery_departure_city: str
-    delivery_departure_country: str
-    delivery_departure_zip_code: str
-    delivery_destination_address: str
-    delivery_destination_city: str
-    delivery_destination_country: str
-    delivery_destination_zip_code: str
-    delivery_method_id: Union[str, int]
-    document_set_id: Union[str, int]
-    notes: str
-    related_documents_notes: str
-    salesman_commission: str
-    salesman_id: Union[str, int]
-    status: str
-    vehicle_id: Union[str, int]
-    your_reference: str
-    associated_documents: Optional[str] = None
-    products: Optional[str] = None
-
-
-class DeliverynotesSetTransportCodeModel(BaseModel):
-    company_id: Union[str, int]
-    document_id: Union[str, int]
-    transport_code: str
-
-
-class DeliverynotesUpdateModel(BaseModel):
-    company_id: Union[str, int]
-    document_id: Union[str, int]
-    associated_documents: Optional[str] = None
+    associated_documents: Optional[List[Associated_documents]] = None
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
     delivery_datetime: Optional[str] = None
@@ -96,7 +88,40 @@ class DeliverynotesUpdateModel(BaseModel):
     delivery_method_id: Optional[Union[str, int]] = None
     document_set_id: Optional[Union[str, int]] = None
     notes: Optional[str] = None
-    products: Optional[str] = None
+    products: Optional[List[Products]] = None
+    related_documents_notes: Optional[str] = None
+    salesman_commission: Optional[str] = None
+    salesman_id: Optional[Union[str, int]] = None
+    status: Optional[str] = None
+    vehicle_id: Optional[Union[str, int]] = None
+    your_reference: Optional[str] = None
+
+
+class DeliverynotesSetTransportCodeModel(BaseModel):
+    company_id: Union[str, int]
+    document_id: Optional[Union[str, int]] = None
+    transport_code: Optional[str] = None
+
+
+class DeliverynotesUpdateModel(BaseModel):
+    company_id: Union[str, int]
+    associated_documents: Optional[List[Associated_documents]] = None
+    customer_id: Optional[Union[str, int]] = None
+    date: Optional[str] = None
+    delivery_datetime: Optional[str] = None
+    delivery_departure_address: Optional[str] = None
+    delivery_departure_city: Optional[str] = None
+    delivery_departure_country: Optional[str] = None
+    delivery_departure_zip_code: Optional[str] = None
+    delivery_destination_address: Optional[str] = None
+    delivery_destination_city: Optional[str] = None
+    delivery_destination_country: Optional[str] = None
+    delivery_destination_zip_code: Optional[str] = None
+    delivery_method_id: Optional[Union[str, int]] = None
+    document_id: Optional[Union[str, int]] = None
+    document_set_id: Optional[Union[str, int]] = None
+    notes: Optional[str] = None
+    products: Optional[List[Products]] = None
     related_documents_notes: Optional[str] = None
     salesman_commission: Optional[str] = None
     salesman_id: Optional[Union[str, int]] = None

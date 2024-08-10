@@ -1,18 +1,35 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
+class Suppliers(BaseModel):
+    cost_price: str
+    supplier_id: str
+
+
+class Taxes(BaseModel):
+    cumulative: str
+    order: str
+    tax_id: str
+    value: str
+
+
+class Warehouses(BaseModel):
+    stock: str
+    warehouse_id: str
+
+
 class WarehousesCountModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class WarehousesDeleteModel(BaseModel):
     company_id: Union[str, int]
-    warehouse_id: Union[str, int]
+    warehouse_id: Optional[Union[str, int]] = None
 
 
 class WarehousesGetAllModel(BaseModel):
@@ -21,27 +38,11 @@ class WarehousesGetAllModel(BaseModel):
 
 class WarehousesGetModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class WarehousesInsertModel(BaseModel):
-    address: str
-    city: str
-    code: str
     company_id: Union[str, int]
-    contact_email: str
-    contact_name: str
-    country_id: Union[str, int]
-    fax: str
-    is_default: bool
-    phone: str
-    title: str
-    zip_code: str
-
-
-class WarehousesUpdateModel(BaseModel):
-    company_id: Union[str, int]
-    warehouse_id: Union[str, int]
     address: Optional[str] = None
     city: Optional[str] = None
     code: Optional[str] = None
@@ -52,6 +53,22 @@ class WarehousesUpdateModel(BaseModel):
     is_default: Optional[bool] = None
     phone: Optional[str] = None
     title: Optional[str] = None
+    zip_code: Optional[str] = None
+
+
+class WarehousesUpdateModel(BaseModel):
+    company_id: Union[str, int]
+    address: Optional[str] = None
+    city: Optional[str] = None
+    code: Optional[str] = None
+    contact_email: Optional[str] = None
+    contact_name: Optional[str] = None
+    country_id: Optional[Union[str, int]] = None
+    fax: Optional[str] = None
+    is_default: Optional[bool] = None
+    phone: Optional[str] = None
+    title: Optional[str] = None
+    warehouse_id: Optional[Union[str, int]] = None
     zip_code: Optional[str] = None
 
 

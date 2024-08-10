@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -11,66 +11,66 @@ class CustomersCountModel(BaseModel):
 
 class CustomersCountByNameModel(BaseModel):
     company_id: Union[str, int]
-    name: str
+    name: Optional[str] = None
 
 
 class CustomersCountByNumberModel(BaseModel):
     company_id: Union[str, int]
-    number: str
+    number: Optional[str] = None
 
 
 class CustomersCountBySearchModel(BaseModel):
     company_id: Union[str, int]
-    search: str
+    search: Optional[str] = None
 
 
 class CustomersCountByVatModel(BaseModel):
     company_id: Union[str, int]
-    vat: str
+    vat: Optional[str] = None
 
 
 class CustomersCountModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class CustomersDeleteModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
+    customer_id: Optional[Union[str, int]] = None
 
 
 class CustomersGetAllModel(BaseModel):
     company_id: Union[str, int]
-    offset: Union[str, int] = 0
-    qty: Union[str, int] = 25
+    offset: Optional[Union[str, int]] = 0
+    qty: Optional[Union[str, int]] = 25
 
 
 class CustomersGetByNameModel(BaseModel):
     company_id: Union[str, int]
-    name: str
-    offset: Union[str, int] = 0
-    qty: Union[str, int] = 25
+    name: Optional[str] = None
+    offset: Optional[Union[str, int]] = 0
+    qty: Optional[Union[str, int]] = 25
 
 
 class CustomersGetByNumberModel(BaseModel):
     company_id: Union[str, int]
-    number: str
-    offset: Union[str, int] = 0
-    qty: Union[str, int] = 25
+    number: Optional[str] = None
+    offset: Optional[Union[str, int]] = 0
+    qty: Optional[Union[str, int]] = 25
 
 
 class CustomersGetBySearchModel(BaseModel):
     company_id: Union[str, int]
-    offset: Union[str, int] = 0
-    qty: Union[str, int] = 25
-    search: str
+    offset: Optional[Union[str, int]] = 0
+    qty: Optional[Union[str, int]] = 25
+    search: Optional[str] = None
 
 
 class CustomersGetByVatModel(BaseModel):
     company_id: Union[str, int]
-    offset: Union[str, int] = 0
-    qty: Union[str, int] = 25
-    vat: str
+    offset: Optional[Union[str, int]] = 0
+    qty: Optional[Union[str, int]] = 25
+    vat: Optional[str] = None
 
 
 class CustomersGetLastNumberModel(BaseModel):
@@ -79,48 +79,18 @@ class CustomersGetLastNumberModel(BaseModel):
 
 class CustomersGetModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
-    offset: Union[str, int] = 0
-    qty: Union[str, int] = 25
+    lastmodified: Optional[str] = None
+    offset: Optional[Union[str, int]] = 0
+    qty: Optional[Union[str, int]] = 25
 
 
 class CustomersGetOneModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
+    customer_id: Optional[Union[str, int]] = None
 
 
 class CustomersInsertModel(BaseModel):
-    address: str
-    city: str
     company_id: Union[str, int]
-    contact_email: str
-    contact_name: str
-    contact_phone: str
-    country_id: Union[str, int]
-    credit_limit: str
-    delivery_method_id: Union[str, int]
-    discount: str
-    email: str
-    fax: str
-    field_notes: str
-    language_id: Union[str, int]
-    maturity_date_id: Union[str, int]
-    name: str
-    notes: str
-    number: str
-    payment_day: str
-    payment_method_id: Union[str, int]
-    phone: str
-    qty_copies_document: str
-    salesman_id: Union[str, int]
-    vat: str
-    website: str
-    zip_code: str
-
-
-class CustomersUpdateModel(BaseModel):
-    company_id: Union[str, int]
-    customer_id: Union[str, int]
     address: Optional[str] = None
     city: Optional[str] = None
     contact_email: Optional[str] = None
@@ -128,6 +98,36 @@ class CustomersUpdateModel(BaseModel):
     contact_phone: Optional[str] = None
     country_id: Optional[Union[str, int]] = None
     credit_limit: Optional[str] = None
+    delivery_method_id: Optional[Union[str, int]] = None
+    discount: Optional[str] = None
+    email: Optional[str] = None
+    fax: Optional[str] = None
+    field_notes: Optional[str] = None
+    language_id: Optional[Union[str, int]] = None
+    maturity_date_id: Optional[Union[str, int]] = None
+    name: Optional[str] = None
+    notes: Optional[str] = None
+    number: Optional[str] = None
+    payment_day: Optional[str] = None
+    payment_method_id: Optional[Union[str, int]] = None
+    phone: Optional[str] = None
+    qty_copies_document: Optional[str] = None
+    salesman_id: Optional[Union[str, int]] = None
+    vat: Optional[str] = None
+    website: Optional[str] = None
+    zip_code: Optional[str] = None
+
+
+class CustomersUpdateModel(BaseModel):
+    company_id: Union[str, int]
+    address: Optional[str] = None
+    city: Optional[str] = None
+    contact_email: Optional[str] = None
+    contact_name: Optional[str] = None
+    contact_phone: Optional[str] = None
+    country_id: Optional[Union[str, int]] = None
+    credit_limit: Optional[str] = None
+    customer_id: Optional[Union[str, int]] = None
     delivery_method_id: Optional[Union[str, int]] = None
     discount: Optional[str] = None
     email: Optional[str] = None

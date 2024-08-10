@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -7,12 +7,12 @@ from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 class SalesmenCountModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class SalesmenDeleteModel(BaseModel):
     company_id: Union[str, int]
-    salesman_id: Union[str, int]
+    salesman_id: Optional[Union[str, int]] = None
 
 
 class SalesmenGetAllModel(BaseModel):
@@ -21,36 +21,16 @@ class SalesmenGetAllModel(BaseModel):
 
 class SalesmenGetModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class SalesmenGetOneModel(BaseModel):
     company_id: Union[str, int]
-    salesman_id: Union[str, int]
+    salesman_id: Optional[Union[str, int]] = None
 
 
 class SalesmenInsertModel(BaseModel):
-    address: str
-    base_commission: str
-    city: str
     company_id: Union[str, int]
-    country_id: Union[str, int]
-    email: str
-    fax: str
-    language_id: Union[str, int]
-    name: str
-    notes: str
-    number: str
-    phone: str
-    qty_copies_document: str
-    vat: str
-    website: str
-    zip_code: str
-
-
-class SalesmenUpdateModel(BaseModel):
-    company_id: Union[str, int]
-    salesman_id: Union[str, int]
     address: Optional[str] = None
     base_commission: Optional[str] = None
     city: Optional[str] = None
@@ -63,6 +43,26 @@ class SalesmenUpdateModel(BaseModel):
     number: Optional[str] = None
     phone: Optional[str] = None
     qty_copies_document: Optional[str] = None
+    vat: Optional[str] = None
+    website: Optional[str] = None
+    zip_code: Optional[str] = None
+
+
+class SalesmenUpdateModel(BaseModel):
+    company_id: Union[str, int]
+    address: Optional[str] = None
+    base_commission: Optional[str] = None
+    city: Optional[str] = None
+    country_id: Optional[Union[str, int]] = None
+    email: Optional[str] = None
+    fax: Optional[str] = None
+    language_id: Optional[Union[str, int]] = None
+    name: Optional[str] = None
+    notes: Optional[str] = None
+    number: Optional[str] = None
+    phone: Optional[str] = None
+    qty_copies_document: Optional[str] = None
+    salesman_id: Optional[Union[str, int]] = None
     vat: Optional[str] = None
     website: Optional[str] = None
     zip_code: Optional[str] = None

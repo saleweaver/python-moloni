@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -7,12 +7,12 @@ from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 class IdentificationtemplatesCountModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class IdentificationtemplatesDeleteModel(BaseModel):
     company_id: Union[str, int]
-    template_id: Union[str, int]
+    template_id: Optional[Union[str, int]] = None
 
 
 class IdentificationtemplatesGetAllModel(BaseModel):
@@ -21,30 +21,11 @@ class IdentificationtemplatesGetAllModel(BaseModel):
 
 class IdentificationtemplatesGetModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class IdentificationtemplatesInsertModel(BaseModel):
-    address: str
-    business_name: str
-    city: str
     company_id: Union[str, int]
-    country_id: Union[str, int]
-    documents_footnote: str
-    email: str
-    email_sender_address: str
-    email_sender_name: str
-    fax: str
-    name: str
-    notes: str
-    phone: str
-    website: str
-    zip_code: str
-
-
-class IdentificationtemplatesUpdateModel(BaseModel):
-    company_id: Union[str, int]
-    template_id: Union[str, int]
     address: Optional[str] = None
     business_name: Optional[str] = None
     city: Optional[str] = None
@@ -57,6 +38,25 @@ class IdentificationtemplatesUpdateModel(BaseModel):
     name: Optional[str] = None
     notes: Optional[str] = None
     phone: Optional[str] = None
+    website: Optional[str] = None
+    zip_code: Optional[str] = None
+
+
+class IdentificationtemplatesUpdateModel(BaseModel):
+    company_id: Union[str, int]
+    address: Optional[str] = None
+    business_name: Optional[str] = None
+    city: Optional[str] = None
+    country_id: Optional[Union[str, int]] = None
+    documents_footnote: Optional[str] = None
+    email: Optional[str] = None
+    email_sender_address: Optional[str] = None
+    email_sender_name: Optional[str] = None
+    fax: Optional[str] = None
+    name: Optional[str] = None
+    notes: Optional[str] = None
+    phone: Optional[str] = None
+    template_id: Optional[Union[str, int]] = None
     website: Optional[str] = None
     zip_code: Optional[str] = None
 

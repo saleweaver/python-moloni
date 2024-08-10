@@ -1,83 +1,108 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
+class Associated_documents(BaseModel):
+    associated_id: str
+    value: str
+
+
+class Payments(BaseModel):
+    date: str
+    notes: str
+    payment_method_id: str
+    value: str
+
+
+class Products(BaseModel):
+    discount: str
+    exemption_reason: str
+    name: str
+    order: str
+    price: str
+    product_id: str
+    qty: str
+    summary: str
+    taxes: str
+    warehouse_id: str
+
+
 class DebitnotesCountModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
-    date: str
-    document_set_id: Union[str, int]
-    expiration_date: str
-    number: str
-    our_reference: str
-    salesman_id: Union[str, int]
-    supplier_id: Union[str, int]
-    year: str
-    your_reference: str
+    customer_id: Optional[Union[str, int]] = None
+    date: Optional[str] = None
+    document_set_id: Optional[Union[str, int]] = None
+    expiration_date: Optional[str] = None
+    number: Optional[str] = None
+    our_reference: Optional[str] = None
+    salesman_id: Optional[Union[str, int]] = None
+    supplier_id: Optional[Union[str, int]] = None
+    year: Optional[str] = None
+    your_reference: Optional[str] = None
 
 
 class DebitnotesDeleteModel(BaseModel):
     company_id: Union[str, int]
-    document_id: Union[str, int]
+    document_id: Optional[Union[str, int]] = None
 
 
 class DebitnotesGetAllModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
-    date: str
-    document_set_id: Union[str, int]
-    expiration_date: str
-    number: str
-    offset: Union[str, int] = 0
-    our_reference: str
-    qty: Union[str, int] = 25
-    salesman_id: Union[str, int]
-    supplier_id: Union[str, int]
-    year: str
-    your_reference: str
+    customer_id: Optional[Union[str, int]] = None
+    date: Optional[str] = None
+    document_set_id: Optional[Union[str, int]] = None
+    expiration_date: Optional[str] = None
+    number: Optional[str] = None
+    offset: Optional[Union[str, int]] = 0
+    our_reference: Optional[str] = None
+    qty: Optional[Union[str, int]] = 25
+    salesman_id: Optional[Union[str, int]] = None
+    supplier_id: Optional[Union[str, int]] = None
+    year: Optional[str] = None
+    your_reference: Optional[str] = None
 
 
 class DebitnotesGetOneModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
-    date: str
-    document_id: Union[str, int]
-    document_set_id: Union[str, int]
-    expiration_date: str
-    number: str
-    our_reference: str
-    salesman_id: Union[str, int]
-    supplier_id: Union[str, int]
-    year: str
-    your_reference: str
+    customer_id: Optional[Union[str, int]] = None
+    date: Optional[str] = None
+    document_id: Optional[Union[str, int]] = None
+    document_set_id: Optional[Union[str, int]] = None
+    expiration_date: Optional[str] = None
+    number: Optional[str] = None
+    our_reference: Optional[str] = None
+    salesman_id: Optional[Union[str, int]] = None
+    supplier_id: Optional[Union[str, int]] = None
+    year: Optional[str] = None
+    your_reference: Optional[str] = None
 
 
 class DebitnotesInsertModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
-    date: str
-    document_set_id: Union[str, int]
-    expiration_date: str
-    notes: str
-    salesman_commission: str
-    salesman_id: Union[str, int]
-    status: str
-    your_reference: str
-    products: Optional[str] = None
-
-
-class DebitnotesUpdateModel(BaseModel):
-    company_id: Union[str, int]
-    document_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
     document_set_id: Optional[Union[str, int]] = None
     expiration_date: Optional[str] = None
     notes: Optional[str] = None
-    products: Optional[str] = None
+    products: Optional[List[Products]] = None
+    salesman_commission: Optional[str] = None
+    salesman_id: Optional[Union[str, int]] = None
+    status: Optional[str] = None
+    your_reference: Optional[str] = None
+
+
+class DebitnotesUpdateModel(BaseModel):
+    company_id: Union[str, int]
+    customer_id: Optional[Union[str, int]] = None
+    date: Optional[str] = None
+    document_id: Optional[Union[str, int]] = None
+    document_set_id: Optional[Union[str, int]] = None
+    expiration_date: Optional[str] = None
+    notes: Optional[str] = None
+    products: Optional[List[Products]] = None
     salesman_commission: Optional[str] = None
     salesman_id: Optional[Union[str, int]] = None
     status: Optional[str] = None

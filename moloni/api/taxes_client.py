@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -7,12 +7,12 @@ from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 class TaxesCountModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class TaxesDeleteModel(BaseModel):
     company_id: Union[str, int]
-    tax_id: Union[str, int]
+    tax_id: Optional[Union[str, int]] = None
 
 
 class TaxesGetAllModel(BaseModel):
@@ -21,31 +21,31 @@ class TaxesGetAllModel(BaseModel):
 
 class TaxesGetModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class TaxesInsertModel(BaseModel):
-    active_by_default: str
     company_id: Union[str, int]
-    exemption_reason: str
-    fiscal_zone: str
-    name: str
-    saft_type: str
-    stamp_tax: str
-    type: str
-    value: str
-    vat_type: str
-
-
-class TaxesUpdateModel(BaseModel):
-    company_id: Union[str, int]
-    tax_id: Union[str, int]
     active_by_default: Optional[str] = None
     exemption_reason: Optional[str] = None
     fiscal_zone: Optional[str] = None
     name: Optional[str] = None
     saft_type: Optional[str] = None
     stamp_tax: Optional[str] = None
+    type: Optional[str] = None
+    value: Optional[str] = None
+    vat_type: Optional[str] = None
+
+
+class TaxesUpdateModel(BaseModel):
+    company_id: Union[str, int]
+    active_by_default: Optional[str] = None
+    exemption_reason: Optional[str] = None
+    fiscal_zone: Optional[str] = None
+    name: Optional[str] = None
+    saft_type: Optional[str] = None
+    stamp_tax: Optional[str] = None
+    tax_id: Optional[Union[str, int]] = None
     type: Optional[str] = None
     value: Optional[str] = None
     vat_type: Optional[str] = None

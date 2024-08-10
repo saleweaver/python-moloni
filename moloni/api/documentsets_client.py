@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -7,12 +7,12 @@ from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 class DocumentsetsCountModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class DocumentsetsDeleteModel(BaseModel):
     company_id: Union[str, int]
-    document_set_id: Union[str, int]
+    document_set_id: Optional[Union[str, int]] = None
 
 
 class DocumentsetsGetAllModel(BaseModel):
@@ -21,22 +21,22 @@ class DocumentsetsGetAllModel(BaseModel):
 
 class DocumentsetsGetModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class DocumentsetsInsertModel(BaseModel):
-    active_by_default: str
-    cash_vat_scheme_indicator: str
     company_id: Union[str, int]
-    name: str
-    template_id: Union[str, int]
+    active_by_default: Optional[str] = None
+    cash_vat_scheme_indicator: Optional[str] = None
+    name: Optional[str] = None
+    template_id: Optional[Union[str, int]] = None
 
 
 class DocumentsetsUpdateModel(BaseModel):
     company_id: Union[str, int]
-    document_set_id: Union[str, int]
     active_by_default: Optional[str] = None
     cash_vat_scheme_indicator: Optional[str] = None
+    document_set_id: Optional[Union[str, int]] = None
     name: Optional[str] = None
     template_id: Optional[Union[str, int]] = None
 

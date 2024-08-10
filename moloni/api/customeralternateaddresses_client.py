@@ -1,5 +1,5 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
@@ -7,46 +7,46 @@ from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 class CustomeralternateaddressesCountModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class CustomeralternateaddressesDeleteModel(BaseModel):
-    address_id: Union[str, int]
     company_id: Union[str, int]
-    customer_id: Union[str, int]
+    address_id: Optional[Union[str, int]] = None
+    customer_id: Optional[Union[str, int]] = None
 
 
 class CustomeralternateaddressesGetAllModel(BaseModel):
     company_id: Union[str, int]
-    customer_id: Union[str, int]
+    customer_id: Optional[Union[str, int]] = None
 
 
 class CustomeralternateaddressesGetModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
-    offset: Union[str, int] = 0
-    qty: Union[str, int] = 25
+    lastmodified: Optional[str] = None
+    offset: Optional[Union[str, int]] = 0
+    qty: Optional[Union[str, int]] = 25
 
 
 class CustomeralternateaddressesInsertModel(BaseModel):
-    address: str
-    city: str
-    code: str
     company_id: Union[str, int]
-    contact_name: str
-    country_id: Union[str, int]
-    customer_id: Union[str, int]
-    designation: str
-    email: str
-    fax: str
-    phone: str
-    zip_code: str
+    address: Optional[str] = None
+    city: Optional[str] = None
+    code: Optional[str] = None
+    contact_name: Optional[str] = None
+    country_id: Optional[Union[str, int]] = None
+    customer_id: Optional[Union[str, int]] = None
+    designation: Optional[str] = None
+    email: Optional[str] = None
+    fax: Optional[str] = None
+    phone: Optional[str] = None
+    zip_code: Optional[str] = None
 
 
 class CustomeralternateaddressesUpdateModel(BaseModel):
-    address_id: Union[str, int]
     company_id: Union[str, int]
     address: Optional[str] = None
+    address_id: Optional[Union[str, int]] = None
     city: Optional[str] = None
     code: Optional[str] = None
     contact_name: Optional[str] = None

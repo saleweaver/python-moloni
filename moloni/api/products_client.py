@@ -1,116 +1,111 @@
 from pydantic import BaseModel, ValidationError
-from typing import Union, Optional
+from typing import Union, Optional, List
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
+class Suppliers(BaseModel):
+    cost_price: str
+    supplier_id: str
+
+
+class Taxes(BaseModel):
+    cumulative: str
+    order: str
+    tax_id: str
+    value: str
+
+
+class Warehouses(BaseModel):
+    stock: str
+    warehouse_id: str
+
+
 class ProductsCountModel(BaseModel):
-    category_id: Union[str, int]
     company_id: Union[str, int]
+    category_id: Optional[Union[str, int]] = None
 
 
 class ProductsCountByEanModel(BaseModel):
     company_id: Union[str, int]
-    ean: str
+    ean: Optional[str] = None
 
 
 class ProductsCountByNameModel(BaseModel):
     company_id: Union[str, int]
-    name: str
+    name: Optional[str] = None
 
 
 class ProductsCountByReferenceModel(BaseModel):
     company_id: Union[str, int]
-    reference: str
+    reference: Optional[str] = None
 
 
 class ProductsCountBySearchModel(BaseModel):
     company_id: Union[str, int]
-    search: str
+    search: Optional[str] = None
 
 
 class ProductsCountModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
+    lastmodified: Optional[str] = None
 
 
 class ProductsDeleteModel(BaseModel):
     company_id: Union[str, int]
-    product_id: Union[str, int]
+    product_id: Optional[Union[str, int]] = None
 
 
 class ProductsGetAllModel(BaseModel):
-    category_id: Union[str, int]
     company_id: Union[str, int]
-    offset: Union[str, int] = 0
-    qty: Union[str, int] = 25
+    category_id: Optional[Union[str, int]] = None
+    offset: Optional[Union[str, int]] = 0
+    qty: Optional[Union[str, int]] = 25
 
 
 class ProductsGetByEanModel(BaseModel):
     company_id: Union[str, int]
-    ean: str
-    offset: Union[str, int] = 0
-    qty: Union[str, int] = 25
+    ean: Optional[str] = None
+    offset: Optional[Union[str, int]] = 0
+    qty: Optional[Union[str, int]] = 25
 
 
 class ProductsGetByNameModel(BaseModel):
     company_id: Union[str, int]
-    name: str
-    offset: Union[str, int] = 0
-    qty: Union[str, int] = 25
+    name: Optional[str] = None
+    offset: Optional[Union[str, int]] = 0
+    qty: Optional[Union[str, int]] = 25
 
 
 class ProductsGetByReferenceModel(BaseModel):
     company_id: Union[str, int]
-    offset: Union[str, int] = 0
-    qty: Union[str, int] = 25
-    reference: str
+    offset: Optional[Union[str, int]] = 0
+    qty: Optional[Union[str, int]] = 25
+    reference: Optional[str] = None
 
 
 class ProductsGetBySearchModel(BaseModel):
     company_id: Union[str, int]
-    offset: Union[str, int] = 0
-    qty: Union[str, int] = 25
-    search: str
+    offset: Optional[Union[str, int]] = 0
+    qty: Optional[Union[str, int]] = 25
+    search: Optional[str] = None
 
 
 class ProductsGetModifiedSinceModel(BaseModel):
     company_id: Union[str, int]
-    lastmodified: str
-    offset: Union[str, int] = 0
-    qty: Union[str, int] = 25
+    lastmodified: Optional[str] = None
+    offset: Optional[Union[str, int]] = 0
+    qty: Optional[Union[str, int]] = 25
 
 
 class ProductsGetOneModel(BaseModel):
     company_id: Union[str, int]
-    product_id: Union[str, int]
+    product_id: Optional[Union[str, int]] = None
 
 
 class ProductsInsertModel(BaseModel):
-    at_product_category: str
-    category_id: Union[str, int]
     company_id: Union[str, int]
-    ean: str
-    exemption_reason: str
-    has_stock: str
-    name: str
-    pos_favorite: str
-    price: str
-    reference: str
-    stock: str
-    summary: str
-    type: str
-    unit_id: Union[str, int]
-    warehouse_id: Union[str, int]
-    suppliers: Optional[str] = None
-    taxes: Optional[str] = None
-    warehouses: Optional[str] = None
-
-
-class ProductsUpdateModel(BaseModel):
-    company_id: Union[str, int]
-    product_id: Union[str, int]
     at_product_category: Optional[str] = None
     category_id: Optional[Union[str, int]] = None
     ean: Optional[str] = None
@@ -122,8 +117,30 @@ class ProductsUpdateModel(BaseModel):
     reference: Optional[str] = None
     stock: Optional[str] = None
     summary: Optional[str] = None
-    suppliers: Optional[str] = None
-    taxes: Optional[str] = None
+    suppliers: Optional[List[Suppliers]] = None
+    taxes: Optional[List[Taxes]] = None
+    type: Optional[str] = None
+    unit_id: Optional[Union[str, int]] = None
+    warehouse_id: Optional[Union[str, int]] = None
+    warehouses: Optional[List[Warehouses]] = None
+
+
+class ProductsUpdateModel(BaseModel):
+    company_id: Union[str, int]
+    at_product_category: Optional[str] = None
+    category_id: Optional[Union[str, int]] = None
+    ean: Optional[str] = None
+    exemption_reason: Optional[str] = None
+    has_stock: Optional[str] = None
+    name: Optional[str] = None
+    pos_favorite: Optional[str] = None
+    price: Optional[str] = None
+    product_id: Optional[Union[str, int]] = None
+    reference: Optional[str] = None
+    stock: Optional[str] = None
+    summary: Optional[str] = None
+    suppliers: Optional[List[Suppliers]] = None
+    taxes: Optional[List[Taxes]] = None
     type: Optional[str] = None
     unit_id: Optional[Union[str, int]] = None
     warehouse_id: Optional[Union[str, int]] = None
