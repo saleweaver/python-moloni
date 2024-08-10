@@ -124,7 +124,7 @@ class MoloniBaseClient:
         )
         logger.setLevel(log_level)
 
-    def flatten_dict(self, data, parent_key='', sep='[', end_sep=']'):
+    def flatten_dict(self, data, parent_key="", sep="[", end_sep="]"):
         items = []
         if isinstance(data, dict):
             for k, v in data.items():
@@ -139,7 +139,10 @@ class MoloniBaseClient:
         return dict(items)
 
     def create_form_data(self, data):
-        return {k: str(v) if v is not None else '' for k, v in self.flatten_dict(data).items()}
+        return {
+            k: str(v) if v is not None else ""
+            for k, v in self.flatten_dict(data).items()
+        }
 
     def _request(self, path, data=None, **kwargs) -> ApiResponse:
         data = data or {}

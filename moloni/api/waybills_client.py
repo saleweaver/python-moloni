@@ -6,28 +6,28 @@ from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
 class Associated_documents(BaseModel):
-    associated_id: Optional[Union[str, int]] = None
-    value: Optional[Union[str, int]] = None
+    associated_id: Optional[Any] = None
+    value: Optional[Any] = None
 
 
 class Payments(BaseModel):
-    date: Optional[Union[str, int]] = None
-    notes: Optional[Union[str, int]] = None
-    payment_method_id: Optional[Union[str, int]] = None
-    value: Optional[Union[str, int]] = None
+    date: Optional[Any] = None
+    notes: Optional[Any] = None
+    payment_method_id: Optional[Any] = None
+    value: Optional[Any] = None
 
 
 class Products(BaseModel):
-    discount: Optional[Union[str, int]] = None
-    exemption_reason: Optional[Union[str, int]] = None
-    name: Optional[Union[str, int]] = None
-    order: Optional[Union[str, int]] = None
-    price: Optional[Union[str, int]] = None
-    product_id: Optional[Union[str, int]] = None
-    qty: Optional[Union[str, int]] = None
-    summary: Optional[Union[str, int]] = None
-    taxes: Optional[Union[str, int]] = None
-    warehouse_id: Optional[Union[str, int]] = None
+    discount: Optional[Any] = None
+    exemption_reason: Optional[Any] = None
+    name: Optional[Any] = None
+    order: Optional[Any] = None
+    price: Optional[Any] = None
+    product_id: Optional[Any] = None
+    qty: Optional[Any] = None
+    summary: Optional[Any] = None
+    taxes: Optional[Any] = None
+    warehouse_id: Optional[Any] = None
 
 
 class WaybillsCountModel(BaseModel):

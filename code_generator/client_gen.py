@@ -196,7 +196,7 @@ class {{ class_name }}(MoloniBaseClient):
             #     return "bool"
             # if openapi_type == "number":
             #     return "float"
-            return "Optional[Union[str, int]]"
+            return "Optional[Any]"
 
         # Generate Pydantic models from OpenAPI components
         for model_name, model_info in components.items():
