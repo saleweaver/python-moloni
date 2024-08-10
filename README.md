@@ -70,3 +70,8 @@ username: str = os.getenv("MOLONI_USERNAME")
 password: str = os.getenv("MOLONI_PASSWORD")
 
 ```
+
+
+##### Disclaimer
+
+We are not affiliated with Moloni, this is an unofficial wrapper to access their API. For more information, please visit their [official website](https://www.moloni.pt/).
