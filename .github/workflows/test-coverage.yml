@@ -63,7 +63,7 @@ jobs:
 
           # Retrieve the last commit message
           COMMIT_MSG=$(git log -1 --pretty=%B)
-          echo "$COMMIT_MSG"
+          echo "Commit Message: $COMMIT_MSG"
           # Check if the commit message specifies a version
           if echo "$COMMIT_MSG" | grep -q "version:"; then
             NEW_VERSION=$(echo "$COMMIT_MSG" | grep -oP "(?<=version: )\d+\.\d+\.\d+")
