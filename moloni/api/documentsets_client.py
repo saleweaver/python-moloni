@@ -5,40 +5,108 @@ from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
-class DocumentsetsCountModifiedSinceModel(BaseModel):
+class ApiRequestModel(BaseModel):
+    _api_client: Any = None
+
+    def connect(self, *args, **kwargs):
+        self._api_client = DocumentsetsClient(*args, **kwargs)
+        return self
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+
+class DocumentsetsCountModifiedSinceModel(ApiRequestModel):
     company_id: Union[str, int]
     lastmodified: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.count_modified_since(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class DocumentsetsDeleteModel(BaseModel):
+
+class DocumentsetsDeleteModel(ApiRequestModel):
     company_id: Union[str, int]
     document_set_id: Optional[Union[str, int]] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.delete(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class DocumentsetsGetAllModel(BaseModel):
+
+class DocumentsetsGetAllModel(ApiRequestModel):
     company_id: Union[str, int]
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_all(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class DocumentsetsGetModifiedSinceModel(BaseModel):
+
+class DocumentsetsGetModifiedSinceModel(ApiRequestModel):
     company_id: Union[str, int]
     lastmodified: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_modified_since(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class DocumentsetsInsertModel(BaseModel):
+
+class DocumentsetsInsertModel(ApiRequestModel):
     company_id: Union[str, int]
     active_by_default: Optional[str] = None
     cash_vat_scheme_indicator: Optional[str] = None
     name: Optional[str] = None
     template_id: Optional[Union[str, int]] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.insert(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class DocumentsetsUpdateModel(BaseModel):
+
+class DocumentsetsUpdateModel(ApiRequestModel):
     company_id: Union[str, int]
     active_by_default: Optional[str] = None
     cash_vat_scheme_indicator: Optional[str] = None
     document_set_id: Optional[Union[str, int]] = None
     name: Optional[str] = None
     template_id: Optional[Union[str, int]] = None
+
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.update(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
 
 class DocumentsetsClient(MoloniBaseClient):

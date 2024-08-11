@@ -16,6 +16,22 @@ from typing import Union, Optional, List, Any
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
+
+
+class ApiRequestModel(BaseModel):
+    _api_client: Any = None
+
+    def connect(self, *args, **kwargs):
+        self._api_client = {{ class_name }}(*args, **kwargs)
+        return self
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+
 {% for model_name, model_code in components.items() %}
 {{ model_code }}
 {% endfor %}
@@ -143,7 +159,9 @@ class Test{{ class_name }}(unittest.TestCase):
         method_name = re.sub(r"\s+", "_", summary)
         return inflection.underscore(method_name).lstrip("_")
 
-    def generate_pydantic_model(self, model_name, properties, required_fields):
+    def generate_pydantic_model(
+        self, model_name, properties, required_fields, method_name
+    ):
         required_fields = ["company_id"]
         fields = {}
         for prop_name, prop_details in properties.items():
@@ -169,7 +187,7 @@ class Test{{ class_name }}(unittest.TestCase):
             else:
                 fields[prop_name] = (field_type, None)  # Optional fields
 
-        model_code = f"class {model_name}(BaseModel):\n"
+        model_code = f"class {model_name}(ApiRequestModel):\n"
         for field_name, (field_type, default_value) in sorted(
             fields.items(), key=lambda x: x[0] in required_fields, reverse=True
         ):
@@ -182,6 +200,18 @@ class Test{{ class_name }}(unittest.TestCase):
             if field_name in ("qty", "offset"):
                 model_code += f" = {25 if field_name == 'qty' else 0}"
             model_code += "\n"
+
+        model_code += "\n"
+        model_code += f"""
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.{method_name}(
+                self.model_dump(exclude={{"_api_client"}}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
+"""
 
         return model_code.strip()
 
@@ -211,7 +241,7 @@ class Test{{ class_name }}(unittest.TestCase):
                 if body_params:
                     model_name = f"{re.sub('Client$', '', class_name)}{inflection.camelize(method_name)}Model"
                     model_code = self.generate_pydantic_model(
-                        model_name, body_params, required_fields
+                        model_name, body_params, required_fields, method_name
                     )
                     params = {
                         param: (

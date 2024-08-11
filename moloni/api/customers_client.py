@@ -5,91 +5,240 @@ from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
-class CustomersCountModel(BaseModel):
+class ApiRequestModel(BaseModel):
+    _api_client: Any = None
+
+    def connect(self, *args, **kwargs):
+        self._api_client = CustomersClient(*args, **kwargs)
+        return self
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+
+class CustomersCountModel(ApiRequestModel):
     company_id: Union[str, int]
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.count(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomersCountByNameModel(BaseModel):
+
+class CustomersCountByNameModel(ApiRequestModel):
     company_id: Union[str, int]
     name: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.count_by_name(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomersCountByNumberModel(BaseModel):
+
+class CustomersCountByNumberModel(ApiRequestModel):
     company_id: Union[str, int]
     number: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.count_by_number(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomersCountBySearchModel(BaseModel):
+
+class CustomersCountBySearchModel(ApiRequestModel):
     company_id: Union[str, int]
     search: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.count_by_search(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomersCountByVatModel(BaseModel):
+
+class CustomersCountByVatModel(ApiRequestModel):
     company_id: Union[str, int]
     vat: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.count_by_vat(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomersCountModifiedSinceModel(BaseModel):
+
+class CustomersCountModifiedSinceModel(ApiRequestModel):
     company_id: Union[str, int]
     lastmodified: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.count_modified_since(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomersDeleteModel(BaseModel):
+
+class CustomersDeleteModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.delete(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomersGetAllModel(BaseModel):
+
+class CustomersGetAllModel(ApiRequestModel):
     company_id: Union[str, int]
     offset: Optional[Union[str, int]] = 0
     qty: Optional[Union[str, int]] = 25
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_all(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomersGetByNameModel(BaseModel):
+
+class CustomersGetByNameModel(ApiRequestModel):
     company_id: Union[str, int]
     name: Optional[str] = None
     offset: Optional[Union[str, int]] = 0
     qty: Optional[Union[str, int]] = 25
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_by_name(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomersGetByNumberModel(BaseModel):
+
+class CustomersGetByNumberModel(ApiRequestModel):
     company_id: Union[str, int]
     number: Optional[str] = None
     offset: Optional[Union[str, int]] = 0
     qty: Optional[Union[str, int]] = 25
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_by_number(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomersGetBySearchModel(BaseModel):
+
+class CustomersGetBySearchModel(ApiRequestModel):
     company_id: Union[str, int]
     offset: Optional[Union[str, int]] = 0
     qty: Optional[Union[str, int]] = 25
     search: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_by_search(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomersGetByVatModel(BaseModel):
+
+class CustomersGetByVatModel(ApiRequestModel):
     company_id: Union[str, int]
     offset: Optional[Union[str, int]] = 0
     qty: Optional[Union[str, int]] = 25
     vat: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_by_vat(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomersGetLastNumberModel(BaseModel):
+
+class CustomersGetLastNumberModel(ApiRequestModel):
     company_id: Union[str, int]
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_last_number(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomersGetModifiedSinceModel(BaseModel):
+
+class CustomersGetModifiedSinceModel(ApiRequestModel):
     company_id: Union[str, int]
     lastmodified: Optional[str] = None
     offset: Optional[Union[str, int]] = 0
     qty: Optional[Union[str, int]] = 25
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_modified_since(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomersGetOneModel(BaseModel):
+
+class CustomersGetOneModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_one(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomersInsertModel(BaseModel):
+
+class CustomersInsertModel(ApiRequestModel):
     company_id: Union[str, int]
     address: Optional[str] = None
     city: Optional[str] = None
@@ -117,8 +266,17 @@ class CustomersInsertModel(BaseModel):
     website: Optional[str] = None
     zip_code: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.insert(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomersUpdateModel(BaseModel):
+
+class CustomersUpdateModel(ApiRequestModel):
     company_id: Union[str, int]
     address: Optional[str] = None
     city: Optional[str] = None
@@ -146,6 +304,15 @@ class CustomersUpdateModel(BaseModel):
     vat: Optional[str] = None
     website: Optional[str] = None
     zip_code: Optional[str] = None
+
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.update(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
 
 class CustomersClient(MoloniBaseClient):
