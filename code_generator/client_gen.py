@@ -129,6 +129,7 @@ class Test{{ class_name }}(unittest.TestCase):
         except NoMoreRecords:
             pass
     
+    {% if details['model_name'] != 'dict' %}
     @patch.object(
         {{ class_name }},
         "_request"
@@ -171,7 +172,7 @@ class Test{{ class_name }}(unittest.TestCase):
         except NoMoreRecords:
             pass
 
-    
+    {% endif %}
     {% endfor %}
 """
     )
