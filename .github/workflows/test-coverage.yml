@@ -51,6 +51,7 @@ jobs:
           git diff --quiet && echo "No changes to commit" || git commit -m "Update coverage badge"
           git push || echo "Nothing to push"
 
+
       - name: Increment version
         id: versioning
         run: |
