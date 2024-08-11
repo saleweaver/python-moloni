@@ -14,7 +14,7 @@ class ApiRequestModel(BaseModel):
         return self
 
     def __enter__(self):
-        return self
+        return self.connect()
 
     def __exit__(self, exc_type, exc_value, traceback):
         pass
