@@ -117,6 +117,8 @@ jobs:
         with:
           file_path: 'moloni/__version__.py'
           version_key: '__version__' # key to search for in the file, holding the version
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          base_branch: 'main'
 
       - name: Create a new GitHub release
         if: env.new_version != ''
