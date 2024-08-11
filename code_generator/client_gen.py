@@ -14,7 +14,7 @@ from pydantic import BaseModel, ValidationError
 from typing import Union, Optional, List, Any
 
 from moloni.base.client import MoloniBaseClient
-from moloni.base.helpers import endpoint, fill_query_params, validate_data
+from moloni.base.helpers import endpoint, fill_query_params, validate_data 
 from moloni.base import ApiResponse
 
 
