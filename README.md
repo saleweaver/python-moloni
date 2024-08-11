@@ -19,7 +19,7 @@ Welcome to the Moloni API Client! This Python package provides a simple and flex
 
 ## Features
 
-- **Comprehensive Coverage:** Supports all major Moloni API endpoints.
+- **Comprehensive Coverage:** Supports all Moloni API endpoints.
 - **Flexible Configuration:** Easily configure and authenticate your requests.
 - **Built-in Models:** Utilize predefined Pydantic models for request validation.
 
