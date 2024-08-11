@@ -90,7 +90,6 @@ class ApiResponseValidator:
         """
         lines = self.response.json()
         pattern = re.compile(r"^\d+ \w+")
-        print(lines)
         return all(pattern.match(line) for line in lines)
 
     def is_error_response(self):
