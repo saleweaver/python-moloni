@@ -5,6 +5,20 @@ from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
+class ApiRequestModel(BaseModel):
+    _api_client: Any = None
+
+    def connect(self, *args, **kwargs):
+        self._api_client = DocumentsClient(*args, **kwargs)
+        return self
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+
 class Associated_documents(BaseModel):
     associated_id: Optional[Any] = None
     value: Optional[Any] = None
@@ -30,7 +44,7 @@ class Products(BaseModel):
     warehouse_id: Optional[Any] = None
 
 
-class DocumentsCountModel(BaseModel):
+class DocumentsCountModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -43,8 +57,17 @@ class DocumentsCountModel(BaseModel):
     year: Optional[str] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.count(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class DocumentsGetAllModel(BaseModel):
+
+class DocumentsGetAllModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -59,12 +82,30 @@ class DocumentsGetAllModel(BaseModel):
     year: Optional[str] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_all(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class DocumentsGetAllDocumentTypesModel(BaseModel):
+
+class DocumentsGetAllDocumentTypesModel(ApiRequestModel):
     language_id: Optional[Union[str, int]] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_all_document_types(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class DocumentsGetOneModel(BaseModel):
+
+class DocumentsGetOneModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -78,10 +119,28 @@ class DocumentsGetOneModel(BaseModel):
     year: Optional[str] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_one(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class DocumentsGetPdfLinkModel(BaseModel):
+
+class DocumentsGetPdfLinkModel(ApiRequestModel):
     company_id: Union[str, int]
     document_id: Optional[Union[str, int]] = None
+
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_pdf_link(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
 
 class DocumentsClient(MoloniBaseClient):

@@ -5,30 +5,80 @@ from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
-class CustomeralternateaddressesCountModifiedSinceModel(BaseModel):
+class ApiRequestModel(BaseModel):
+    _api_client: Any = None
+
+    def connect(self, *args, **kwargs):
+        self._api_client = CustomeralternateaddressesClient(*args, **kwargs)
+        return self
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+
+class CustomeralternateaddressesCountModifiedSinceModel(ApiRequestModel):
     company_id: Union[str, int]
     lastmodified: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.count_modified_since(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomeralternateaddressesDeleteModel(BaseModel):
+
+class CustomeralternateaddressesDeleteModel(ApiRequestModel):
     company_id: Union[str, int]
     address_id: Optional[Union[str, int]] = None
     customer_id: Optional[Union[str, int]] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.delete(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomeralternateaddressesGetAllModel(BaseModel):
+
+class CustomeralternateaddressesGetAllModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_all(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomeralternateaddressesGetModifiedSinceModel(BaseModel):
+
+class CustomeralternateaddressesGetModifiedSinceModel(ApiRequestModel):
     company_id: Union[str, int]
     lastmodified: Optional[str] = None
     offset: Optional[Union[str, int]] = 0
     qty: Optional[Union[str, int]] = 25
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_modified_since(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomeralternateaddressesInsertModel(BaseModel):
+
+class CustomeralternateaddressesInsertModel(ApiRequestModel):
     company_id: Union[str, int]
     address: Optional[str] = None
     city: Optional[str] = None
@@ -42,8 +92,17 @@ class CustomeralternateaddressesInsertModel(BaseModel):
     phone: Optional[str] = None
     zip_code: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.insert(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class CustomeralternateaddressesUpdateModel(BaseModel):
+
+class CustomeralternateaddressesUpdateModel(ApiRequestModel):
     company_id: Union[str, int]
     address: Optional[str] = None
     address_id: Optional[Union[str, int]] = None
@@ -57,6 +116,15 @@ class CustomeralternateaddressesUpdateModel(BaseModel):
     fax: Optional[str] = None
     phone: Optional[str] = None
     zip_code: Optional[str] = None
+
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.update(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
 
 class CustomeralternateaddressesClient(MoloniBaseClient):

@@ -5,34 +5,102 @@ from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
-class PaymentmethodsCountModifiedSinceModel(BaseModel):
+class ApiRequestModel(BaseModel):
+    _api_client: Any = None
+
+    def connect(self, *args, **kwargs):
+        self._api_client = PaymentmethodsClient(*args, **kwargs)
+        return self
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+
+class PaymentmethodsCountModifiedSinceModel(ApiRequestModel):
     company_id: Union[str, int]
     lastmodified: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.count_modified_since(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class PaymentmethodsDeleteModel(BaseModel):
+
+class PaymentmethodsDeleteModel(ApiRequestModel):
     company_id: Union[str, int]
     payment_method_id: Optional[Union[str, int]] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.delete(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class PaymentmethodsGetAllModel(BaseModel):
+
+class PaymentmethodsGetAllModel(ApiRequestModel):
     company_id: Union[str, int]
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_all(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class PaymentmethodsGetModifiedSinceModel(BaseModel):
+
+class PaymentmethodsGetModifiedSinceModel(ApiRequestModel):
     company_id: Union[str, int]
     lastmodified: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_modified_since(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class PaymentmethodsInsertModel(BaseModel):
+
+class PaymentmethodsInsertModel(ApiRequestModel):
     company_id: Union[str, int]
     name: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.insert(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class PaymentmethodsUpdateModel(BaseModel):
+
+class PaymentmethodsUpdateModel(ApiRequestModel):
     company_id: Union[str, int]
     name: Optional[str] = None
     payment_method_id: Optional[Union[str, int]] = None
+
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.update(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
 
 class PaymentmethodsClient(MoloniBaseClient):

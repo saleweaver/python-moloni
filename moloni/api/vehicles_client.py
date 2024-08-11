@@ -5,36 +5,104 @@ from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
-class VehiclesCountModifiedSinceModel(BaseModel):
+class ApiRequestModel(BaseModel):
+    _api_client: Any = None
+
+    def connect(self, *args, **kwargs):
+        self._api_client = VehiclesClient(*args, **kwargs)
+        return self
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+
+class VehiclesCountModifiedSinceModel(ApiRequestModel):
     company_id: Union[str, int]
     lastmodified: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.count_modified_since(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class VehiclesDeleteModel(BaseModel):
+
+class VehiclesDeleteModel(ApiRequestModel):
     company_id: Union[str, int]
     vehicle_id: Optional[Union[str, int]] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.delete(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class VehiclesGetAllModel(BaseModel):
+
+class VehiclesGetAllModel(ApiRequestModel):
     company_id: Union[str, int]
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_all(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class VehiclesGetModifiedSinceModel(BaseModel):
+
+class VehiclesGetModifiedSinceModel(ApiRequestModel):
     company_id: Union[str, int]
     lastmodified: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_modified_since(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class VehiclesInsertModel(BaseModel):
+
+class VehiclesInsertModel(ApiRequestModel):
     company_id: Union[str, int]
     description: Optional[str] = None
     number_plate: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.insert(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class VehiclesUpdateModel(BaseModel):
+
+class VehiclesUpdateModel(ApiRequestModel):
     company_id: Union[str, int]
     description: Optional[str] = None
     number_plate: Optional[str] = None
     vehicle_id: Optional[Union[str, int]] = None
+
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.update(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
 
 class VehiclesClient(MoloniBaseClient):

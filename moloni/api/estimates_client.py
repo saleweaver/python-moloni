@@ -5,6 +5,20 @@ from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
+class ApiRequestModel(BaseModel):
+    _api_client: Any = None
+
+    def connect(self, *args, **kwargs):
+        self._api_client = EstimatesClient(*args, **kwargs)
+        return self
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+
 class Associated_documents(BaseModel):
     associated_id: Optional[Any] = None
     value: Optional[Any] = None
@@ -30,7 +44,7 @@ class Products(BaseModel):
     warehouse_id: Optional[Any] = None
 
 
-class EstimatesCountModel(BaseModel):
+class EstimatesCountModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -41,13 +55,31 @@ class EstimatesCountModel(BaseModel):
     year: Optional[str] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.count(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class EstimatesDeleteModel(BaseModel):
+
+class EstimatesDeleteModel(ApiRequestModel):
     company_id: Union[str, int]
     document_id: Optional[Union[str, int]] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.delete(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class EstimatesGetAllModel(BaseModel):
+
+class EstimatesGetAllModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -60,8 +92,17 @@ class EstimatesGetAllModel(BaseModel):
     year: Optional[str] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_all(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class EstimatesGetOneModel(BaseModel):
+
+class EstimatesGetOneModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -73,8 +114,17 @@ class EstimatesGetOneModel(BaseModel):
     year: Optional[str] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_one(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class EstimatesInsertModel(BaseModel):
+
+class EstimatesInsertModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -101,8 +151,17 @@ class EstimatesInsertModel(BaseModel):
     vehicle_id: Optional[Union[str, int]] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.insert(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class EstimatesUpdateModel(BaseModel):
+
+class EstimatesUpdateModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -129,6 +188,15 @@ class EstimatesUpdateModel(BaseModel):
     status: Optional[str] = None
     vehicle_id: Optional[Union[str, int]] = None
     your_reference: Optional[str] = None
+
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.update(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
 
 class EstimatesClient(MoloniBaseClient):

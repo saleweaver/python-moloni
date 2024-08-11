@@ -5,6 +5,20 @@ from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
+class ApiRequestModel(BaseModel):
+    _api_client: Any = None
+
+    def connect(self, *args, **kwargs):
+        self._api_client = DebitnotesClient(*args, **kwargs)
+        return self
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+
 class Associated_documents(BaseModel):
     associated_id: Optional[Any] = None
     value: Optional[Any] = None
@@ -30,7 +44,7 @@ class Products(BaseModel):
     warehouse_id: Optional[Any] = None
 
 
-class DebitnotesCountModel(BaseModel):
+class DebitnotesCountModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -43,13 +57,31 @@ class DebitnotesCountModel(BaseModel):
     year: Optional[str] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.count(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class DebitnotesDeleteModel(BaseModel):
+
+class DebitnotesDeleteModel(ApiRequestModel):
     company_id: Union[str, int]
     document_id: Optional[Union[str, int]] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.delete(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class DebitnotesGetAllModel(BaseModel):
+
+class DebitnotesGetAllModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -64,8 +96,17 @@ class DebitnotesGetAllModel(BaseModel):
     year: Optional[str] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_all(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class DebitnotesGetOneModel(BaseModel):
+
+class DebitnotesGetOneModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -79,8 +120,17 @@ class DebitnotesGetOneModel(BaseModel):
     year: Optional[str] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_one(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class DebitnotesInsertModel(BaseModel):
+
+class DebitnotesInsertModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -93,8 +143,17 @@ class DebitnotesInsertModel(BaseModel):
     status: Optional[str] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.insert(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class DebitnotesUpdateModel(BaseModel):
+
+class DebitnotesUpdateModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -107,6 +166,15 @@ class DebitnotesUpdateModel(BaseModel):
     salesman_id: Optional[Union[str, int]] = None
     status: Optional[str] = None
     your_reference: Optional[str] = None
+
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.update(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
 
 class DebitnotesClient(MoloniBaseClient):
