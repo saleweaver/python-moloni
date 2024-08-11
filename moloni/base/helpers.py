@@ -77,6 +77,15 @@ class ApiResponseValidator:
         self.response = response
         self.request_data = request_data
 
+    def is_empty_array(self):
+        """
+        Checks if the response is an empty array.
+        """
+        try:
+            return len(self.response.json()) == 0
+        except Exception:
+            return False
+
     def is_all_strings(self):
         """
         Checks if all the elements in the response are strings.
@@ -97,6 +106,9 @@ class ApiResponseValidator:
         Comprehensive error check using multiple validation methods.
         """
         # Check for known error patterns (e.g., messages starting with a number)
+        if self.is_empty_array():
+            return False
+
         if not self.is_all_strings():
             return False
 
