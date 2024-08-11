@@ -58,12 +58,17 @@ class ProductsCountModel(ApiRequestModel):
             ValueError: If the client is not initialized via the `connect` method.
 
         Example:
-            # Assuming you have a model instance `request_model` and an API client `api_client`
-            with request_model.connect(auth_config=auth_config) as api:
-                response = api.request()
 
-            # The above example assumes that the `connect` method has been used to initialize the client.
-            # The request method then sends the model's data to the API and returns the API's response.
+                # Assuming you have a model instance `request_model` and an API client `api_client`
+
+                ..code-block:: python
+
+                    with request_model.connect(auth_config=auth_config) as api:
+                        response = api.request()
+
+                # The above example assumes that the `connect` method has been used to initialize the client.
+                # The request method then sends the model's data to the API and returns the API's response.
+
         """
         if hasattr(self, "_api_client"):
             response = self._api_client.count(
@@ -95,12 +100,17 @@ class ProductsCountByEanModel(ApiRequestModel):
             ValueError: If the client is not initialized via the `connect` method.
 
         Example:
-            # Assuming you have a model instance `request_model` and an API client `api_client`
-            with request_model.connect(auth_config=auth_config) as api:
-                response = api.request()
 
-            # The above example assumes that the `connect` method has been used to initialize the client.
-            # The request method then sends the model's data to the API and returns the API's response.
+                # Assuming you have a model instance `request_model` and an API client `api_client`
+
+                ..code-block:: python
+
+                    with request_model.connect(auth_config=auth_config) as api:
+                        response = api.request()
+
+                # The above example assumes that the `connect` method has been used to initialize the client.
+                # The request method then sends the model's data to the API and returns the API's response.
+
         """
         if hasattr(self, "_api_client"):
             response = self._api_client.count_by_ean(
@@ -132,12 +142,17 @@ class ProductsCountByNameModel(ApiRequestModel):
             ValueError: If the client is not initialized via the `connect` method.
 
         Example:
-            # Assuming you have a model instance `request_model` and an API client `api_client`
-            with request_model.connect(auth_config=auth_config) as api:
-                response = api.request()
 
-            # The above example assumes that the `connect` method has been used to initialize the client.
-            # The request method then sends the model's data to the API and returns the API's response.
+                # Assuming you have a model instance `request_model` and an API client `api_client`
+
+                ..code-block:: python
+
+                    with request_model.connect(auth_config=auth_config) as api:
+                        response = api.request()
+
+                # The above example assumes that the `connect` method has been used to initialize the client.
+                # The request method then sends the model's data to the API and returns the API's response.
+
         """
         if hasattr(self, "_api_client"):
             response = self._api_client.count_by_name(
@@ -169,12 +184,17 @@ class ProductsCountByReferenceModel(ApiRequestModel):
             ValueError: If the client is not initialized via the `connect` method.
 
         Example:
-            # Assuming you have a model instance `request_model` and an API client `api_client`
-            with request_model.connect(auth_config=auth_config) as api:
-                response = api.request()
 
-            # The above example assumes that the `connect` method has been used to initialize the client.
-            # The request method then sends the model's data to the API and returns the API's response.
+                # Assuming you have a model instance `request_model` and an API client `api_client`
+
+                ..code-block:: python
+
+                    with request_model.connect(auth_config=auth_config) as api:
+                        response = api.request()
+
+                # The above example assumes that the `connect` method has been used to initialize the client.
+                # The request method then sends the model's data to the API and returns the API's response.
+
         """
         if hasattr(self, "_api_client"):
             response = self._api_client.count_by_reference(
@@ -206,12 +226,17 @@ class ProductsCountBySearchModel(ApiRequestModel):
             ValueError: If the client is not initialized via the `connect` method.
 
         Example:
-            # Assuming you have a model instance `request_model` and an API client `api_client`
-            with request_model.connect(auth_config=auth_config) as api:
-                response = api.request()
 
-            # The above example assumes that the `connect` method has been used to initialize the client.
-            # The request method then sends the model's data to the API and returns the API's response.
+                # Assuming you have a model instance `request_model` and an API client `api_client`
+
+                ..code-block:: python
+
+                    with request_model.connect(auth_config=auth_config) as api:
+                        response = api.request()
+
+                # The above example assumes that the `connect` method has been used to initialize the client.
+                # The request method then sends the model's data to the API and returns the API's response.
+
         """
         if hasattr(self, "_api_client"):
             response = self._api_client.count_by_search(
@@ -243,12 +268,17 @@ class ProductsCountModifiedSinceModel(ApiRequestModel):
             ValueError: If the client is not initialized via the `connect` method.
 
         Example:
-            # Assuming you have a model instance `request_model` and an API client `api_client`
-            with request_model.connect(auth_config=auth_config) as api:
-                response = api.request()
 
-            # The above example assumes that the `connect` method has been used to initialize the client.
-            # The request method then sends the model's data to the API and returns the API's response.
+                # Assuming you have a model instance `request_model` and an API client `api_client`
+
+                ..code-block:: python
+
+                    with request_model.connect(auth_config=auth_config) as api:
+                        response = api.request()
+
+                # The above example assumes that the `connect` method has been used to initialize the client.
+                # The request method then sends the model's data to the API and returns the API's response.
+
         """
         if hasattr(self, "_api_client"):
             response = self._api_client.count_modified_since(
@@ -280,12 +310,17 @@ class ProductsDeleteModel(ApiRequestModel):
             ValueError: If the client is not initialized via the `connect` method.
 
         Example:
-            # Assuming you have a model instance `request_model` and an API client `api_client`
-            with request_model.connect(auth_config=auth_config) as api:
-                response = api.request()
 
-            # The above example assumes that the `connect` method has been used to initialize the client.
-            # The request method then sends the model's data to the API and returns the API's response.
+                # Assuming you have a model instance `request_model` and an API client `api_client`
+
+                ..code-block:: python
+
+                    with request_model.connect(auth_config=auth_config) as api:
+                        response = api.request()
+
+                # The above example assumes that the `connect` method has been used to initialize the client.
+                # The request method then sends the model's data to the API and returns the API's response.
+
         """
         if hasattr(self, "_api_client"):
             response = self._api_client.delete(
@@ -319,12 +354,17 @@ class ProductsGetAllModel(ApiRequestModel):
             ValueError: If the client is not initialized via the `connect` method.
 
         Example:
-            # Assuming you have a model instance `request_model` and an API client `api_client`
-            with request_model.connect(auth_config=auth_config) as api:
-                response = api.request()
 
-            # The above example assumes that the `connect` method has been used to initialize the client.
-            # The request method then sends the model's data to the API and returns the API's response.
+                # Assuming you have a model instance `request_model` and an API client `api_client`
+
+                ..code-block:: python
+
+                    with request_model.connect(auth_config=auth_config) as api:
+                        response = api.request()
+
+                # The above example assumes that the `connect` method has been used to initialize the client.
+                # The request method then sends the model's data to the API and returns the API's response.
+
         """
         if hasattr(self, "_api_client"):
             response = self._api_client.get_all(
@@ -358,12 +398,17 @@ class ProductsGetByEanModel(ApiRequestModel):
             ValueError: If the client is not initialized via the `connect` method.
 
         Example:
-            # Assuming you have a model instance `request_model` and an API client `api_client`
-            with request_model.connect(auth_config=auth_config) as api:
-                response = api.request()
 
-            # The above example assumes that the `connect` method has been used to initialize the client.
-            # The request method then sends the model's data to the API and returns the API's response.
+                # Assuming you have a model instance `request_model` and an API client `api_client`
+
+                ..code-block:: python
+
+                    with request_model.connect(auth_config=auth_config) as api:
+                        response = api.request()
+
+                # The above example assumes that the `connect` method has been used to initialize the client.
+                # The request method then sends the model's data to the API and returns the API's response.
+
         """
         if hasattr(self, "_api_client"):
             response = self._api_client.get_by_ean(
@@ -397,12 +442,17 @@ class ProductsGetByNameModel(ApiRequestModel):
             ValueError: If the client is not initialized via the `connect` method.
 
         Example:
-            # Assuming you have a model instance `request_model` and an API client `api_client`
-            with request_model.connect(auth_config=auth_config) as api:
-                response = api.request()
 
-            # The above example assumes that the `connect` method has been used to initialize the client.
-            # The request method then sends the model's data to the API and returns the API's response.
+                # Assuming you have a model instance `request_model` and an API client `api_client`
+
+                ..code-block:: python
+
+                    with request_model.connect(auth_config=auth_config) as api:
+                        response = api.request()
+
+                # The above example assumes that the `connect` method has been used to initialize the client.
+                # The request method then sends the model's data to the API and returns the API's response.
+
         """
         if hasattr(self, "_api_client"):
             response = self._api_client.get_by_name(
@@ -436,12 +486,17 @@ class ProductsGetByReferenceModel(ApiRequestModel):
             ValueError: If the client is not initialized via the `connect` method.
 
         Example:
-            # Assuming you have a model instance `request_model` and an API client `api_client`
-            with request_model.connect(auth_config=auth_config) as api:
-                response = api.request()
 
-            # The above example assumes that the `connect` method has been used to initialize the client.
-            # The request method then sends the model's data to the API and returns the API's response.
+                # Assuming you have a model instance `request_model` and an API client `api_client`
+
+                ..code-block:: python
+
+                    with request_model.connect(auth_config=auth_config) as api:
+                        response = api.request()
+
+                # The above example assumes that the `connect` method has been used to initialize the client.
+                # The request method then sends the model's data to the API and returns the API's response.
+
         """
         if hasattr(self, "_api_client"):
             response = self._api_client.get_by_reference(
@@ -475,12 +530,17 @@ class ProductsGetBySearchModel(ApiRequestModel):
             ValueError: If the client is not initialized via the `connect` method.
 
         Example:
-            # Assuming you have a model instance `request_model` and an API client `api_client`
-            with request_model.connect(auth_config=auth_config) as api:
-                response = api.request()
 
-            # The above example assumes that the `connect` method has been used to initialize the client.
-            # The request method then sends the model's data to the API and returns the API's response.
+                # Assuming you have a model instance `request_model` and an API client `api_client`
+
+                ..code-block:: python
+
+                    with request_model.connect(auth_config=auth_config) as api:
+                        response = api.request()
+
+                # The above example assumes that the `connect` method has been used to initialize the client.
+                # The request method then sends the model's data to the API and returns the API's response.
+
         """
         if hasattr(self, "_api_client"):
             response = self._api_client.get_by_search(
@@ -514,12 +574,17 @@ class ProductsGetModifiedSinceModel(ApiRequestModel):
             ValueError: If the client is not initialized via the `connect` method.
 
         Example:
-            # Assuming you have a model instance `request_model` and an API client `api_client`
-            with request_model.connect(auth_config=auth_config) as api:
-                response = api.request()
 
-            # The above example assumes that the `connect` method has been used to initialize the client.
-            # The request method then sends the model's data to the API and returns the API's response.
+                # Assuming you have a model instance `request_model` and an API client `api_client`
+
+                ..code-block:: python
+
+                    with request_model.connect(auth_config=auth_config) as api:
+                        response = api.request()
+
+                # The above example assumes that the `connect` method has been used to initialize the client.
+                # The request method then sends the model's data to the API and returns the API's response.
+
         """
         if hasattr(self, "_api_client"):
             response = self._api_client.get_modified_since(
@@ -551,12 +616,17 @@ class ProductsGetOneModel(ApiRequestModel):
             ValueError: If the client is not initialized via the `connect` method.
 
         Example:
-            # Assuming you have a model instance `request_model` and an API client `api_client`
-            with request_model.connect(auth_config=auth_config) as api:
-                response = api.request()
 
-            # The above example assumes that the `connect` method has been used to initialize the client.
-            # The request method then sends the model's data to the API and returns the API's response.
+                # Assuming you have a model instance `request_model` and an API client `api_client`
+
+                ..code-block:: python
+
+                    with request_model.connect(auth_config=auth_config) as api:
+                        response = api.request()
+
+                # The above example assumes that the `connect` method has been used to initialize the client.
+                # The request method then sends the model's data to the API and returns the API's response.
+
         """
         if hasattr(self, "_api_client"):
             response = self._api_client.get_one(
@@ -604,12 +674,17 @@ class ProductsInsertModel(ApiRequestModel):
             ValueError: If the client is not initialized via the `connect` method.
 
         Example:
-            # Assuming you have a model instance `request_model` and an API client `api_client`
-            with request_model.connect(auth_config=auth_config) as api:
-                response = api.request()
 
-            # The above example assumes that the `connect` method has been used to initialize the client.
-            # The request method then sends the model's data to the API and returns the API's response.
+                # Assuming you have a model instance `request_model` and an API client `api_client`
+
+                ..code-block:: python
+
+                    with request_model.connect(auth_config=auth_config) as api:
+                        response = api.request()
+
+                # The above example assumes that the `connect` method has been used to initialize the client.
+                # The request method then sends the model's data to the API and returns the API's response.
+
         """
         if hasattr(self, "_api_client"):
             response = self._api_client.insert(
@@ -657,12 +732,17 @@ class ProductsUpdateModel(ApiRequestModel):
             ValueError: If the client is not initialized via the `connect` method.
 
         Example:
-            # Assuming you have a model instance `request_model` and an API client `api_client`
-            with request_model.connect(auth_config=auth_config) as api:
-                response = api.request()
 
-            # The above example assumes that the `connect` method has been used to initialize the client.
-            # The request method then sends the model's data to the API and returns the API's response.
+                # Assuming you have a model instance `request_model` and an API client `api_client`
+
+                ..code-block:: python
+
+                    with request_model.connect(auth_config=auth_config) as api:
+                        response = api.request()
+
+                # The above example assumes that the `connect` method has been used to initialize the client.
+                # The request method then sends the model's data to the API and returns the API's response.
+
         """
         if hasattr(self, "_api_client"):
             response = self._api_client.update(

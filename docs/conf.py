@@ -44,6 +44,7 @@ extensions = [
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ["_templates"]
+autoclass_content = "both"
 
 # List of patterns, relative to source directory, that match files and
 # directories to ignore when looking for source files.
@@ -54,19 +55,25 @@ autodoc_default_options = {
     "undoc-members": True,
     "member-order": "bysource",
 }
-html_theme_options = {"collapse_navigation": False}
+html_theme_options = {
+    "source_repository": "https://github.com/saleweaver/python-moloni",
+    "source_branch": "main",
+    "source_directory": "docs/",
+}
+# html_theme_options = {"collapse_navigation": False}
 # -- Options for HTML output -------------------------------------------------
 
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 #
-html_theme = "sphinx_rtd_theme"
-
+html_theme = "furo"
+HTML_TITLE = "PYTHON-MOLONI"
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
-
+pygments_style = "sphinx"
+pygments_dark_style = "monokai"
 
 napoleon_google_docstring = True
 napoleon_numpy_docstring = False
