@@ -128,7 +128,50 @@ class Test{{ class_name }}(unittest.TestCase):
             self.assertEqual(next_params["qty"], 5)
         except NoMoreRecords:
             pass
-        
+    
+    @patch.object(
+        {{ class_name }},
+        "_request"
+    )
+    def test_{{ method_name }}_from_model(self, mock_request):
+        # Mock the Response object
+        mock_response = Mock(spec=Response)
+        mock_response.json.return_value = {"some_key": "some_value"}
+        mock_response.status_code = 200
+        mock_response.headers = {"Content-Type": "application/json"}
+
+        # Create the ApiResponse object with the mocked Response
+        mock_request.return_value = ApiResponse(
+            response=mock_response, request_data={"qty": 10, "offset": 0}
+        )
+
+        model_data = {{ details['model_name'] }}(
+            {% for param_name, param_type in details['params'].items() %}
+            {% if param_name in ['products', 'warehouse', 'taxes', 'associated_documents', 'payments', 'suppliers', 'warehouses'] %}
+            {{ param_name }}=[],
+            {% else %} {{ param_name }}={% if param_type == 'str' %}"{{ param_name }}"{% elif param_type.startswith('Optional[List') %}[]{% elif param_type == 'int' %}1{% elif param_type == 'float' %}1.0{% elif param_type == 'bool' %}True{% else %}"sample_value"{% endif %},
+            {% endif %}
+            {% endfor %}
+        )
+        with model_data.connect() as api:
+            response = api.request()
+
+        # Assertions
+        self.assertIsInstance(response, ApiResponse)
+        self.assertEqual(response.payload, {"some_key": "some_value"})
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.headers["Content-Type"], "application/json")
+        mock_request.assert_called_once()
+
+        # Test pagination functionality
+        try:
+            next_params = response.next(qty=5)
+            self.assertEqual(next_params["offset"], 10)
+            self.assertEqual(next_params["qty"], 5)
+        except NoMoreRecords:
+            pass
+
+    
     {% endfor %}
 """
     )
