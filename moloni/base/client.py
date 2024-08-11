@@ -6,7 +6,7 @@ from requests import request
 
 from moloni import __version__
 from moloni.base.config import MoloniBaseUrl
-from moloni.base.helpers import AccessTokenResponse, ApiResponse, ApiException
+from moloni.base.helpers import AccessTokenResponse, ApiResponse, ApiResponseValidator
 from .logger_config import setup_logger
 
 logger = setup_logger(__name__)
@@ -160,6 +160,4 @@ class MoloniBaseClient:
         logger.debug(res.request.url)
         logger.debug(res.content)
 
-        if 200 <= res.status_code < 300:
-            return ApiResponse(res, data)
-        raise ApiException(res, data)
+        return ApiResponseValidator(res, data).validate()

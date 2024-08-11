@@ -72,6 +72,49 @@ class ApiException(Exception):
         return f"ApiException(error={self.error}, status_code={self.status_code}, headers={self.headers}, kwargs={self.kwargs}, request_data={self.request_data})"
 
 
+class ApiResponseValidator:
+    def __init__(self, response: Response, request_data: dict):
+        self.response = response
+        self.request_data = request_data
+
+    def is_all_strings(self):
+        """
+        Checks if all the elements in the response are strings.
+        """
+        return all(isinstance(line, str) for line in self.response.json())
+
+    def matches_error_pattern(self):
+        """
+        Checks if the response contains any lines that start with a number followed by a space.
+        This is indicative of an error message format.
+        """
+        lines = self.response.json()
+        pattern = re.compile(r"^\d+ \w+")
+        print(lines)
+        return all(pattern.match(line) for line in lines)
+
+    def is_error_response(self):
+        """
+        Comprehensive error check using multiple validation methods.
+        """
+        # Check for known error patterns (e.g., messages starting with a number)
+        if not self.is_all_strings():
+            return False
+
+        if self.matches_error_pattern():
+            return True
+
+        return False
+
+    def validate(self) -> "ApiResponse":
+        """
+        Validates the API response and determines if it's an error.
+        """
+        if self.is_error_response():
+            raise ApiException(self.response, self.request_data)
+        return ApiResponse(self.response, self.request_data)
+
+
 class ApiResponse:
     def __init__(self, response: Response, request_data: dict, **kwargs):
         self.payload = response.json()
