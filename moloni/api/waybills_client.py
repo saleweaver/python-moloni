@@ -5,6 +5,20 @@ from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
+class ApiRequestModel(BaseModel):
+    _api_client: Any = None
+
+    def connect(self, *args, **kwargs):
+        self._api_client = WaybillsClient(*args, **kwargs)
+        return self
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+
 class Associated_documents(BaseModel):
     associated_id: Optional[Any] = None
     value: Optional[Any] = None
@@ -30,7 +44,7 @@ class Products(BaseModel):
     warehouse_id: Optional[Any] = None
 
 
-class WaybillsCountModel(BaseModel):
+class WaybillsCountModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -39,13 +53,31 @@ class WaybillsCountModel(BaseModel):
     year: Optional[str] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.count(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class WaybillsDeleteModel(BaseModel):
+
+class WaybillsDeleteModel(ApiRequestModel):
     company_id: Union[str, int]
     document_id: Optional[Union[str, int]] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.delete(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class WaybillsGetAllModel(BaseModel):
+
+class WaybillsGetAllModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -56,8 +88,17 @@ class WaybillsGetAllModel(BaseModel):
     year: Optional[str] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_all(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class WaybillsGetOneModel(BaseModel):
+
+class WaybillsGetOneModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -67,8 +108,17 @@ class WaybillsGetOneModel(BaseModel):
     year: Optional[str] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_one(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class WaybillsInsertModel(BaseModel):
+
+class WaybillsInsertModel(ApiRequestModel):
     company_id: Union[str, int]
     associated_documents: Optional[List[Associated_documents]] = None
     customer_id: Optional[Union[str, int]] = None
@@ -92,14 +142,32 @@ class WaybillsInsertModel(BaseModel):
     vehicle_id: Optional[Union[str, int]] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.insert(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class WaybillsSetTransportCodeModel(BaseModel):
+
+class WaybillsSetTransportCodeModel(ApiRequestModel):
     company_id: Union[str, int]
     document_id: Optional[Union[str, int]] = None
     transport_code: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.set_transport_code(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class WaybillsUpdateModel(BaseModel):
+
+class WaybillsUpdateModel(ApiRequestModel):
     company_id: Union[str, int]
     associated_documents: Optional[List[Associated_documents]] = None
     customer_id: Optional[Union[str, int]] = None
@@ -123,6 +191,15 @@ class WaybillsUpdateModel(BaseModel):
     status: Optional[str] = None
     vehicle_id: Optional[Union[str, int]] = None
     your_reference: Optional[str] = None
+
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.update(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
 
 class WaybillsClient(MoloniBaseClient):

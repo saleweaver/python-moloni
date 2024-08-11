@@ -5,6 +5,20 @@ from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
 
 
+class ApiRequestModel(BaseModel):
+    _api_client: Any = None
+
+    def connect(self, *args, **kwargs):
+        self._api_client = SimplifiedinvoicesClient(*args, **kwargs)
+        return self
+
+    def __enter__(self):
+        return self
+
+    def __exit__(self, exc_type, exc_value, traceback):
+        pass
+
+
 class Associated_documents(BaseModel):
     associated_id: Optional[Any] = None
     value: Optional[Any] = None
@@ -30,7 +44,7 @@ class Products(BaseModel):
     warehouse_id: Optional[Any] = None
 
 
-class SimplifiedinvoicesCountModel(BaseModel):
+class SimplifiedinvoicesCountModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -43,13 +57,31 @@ class SimplifiedinvoicesCountModel(BaseModel):
     year: Optional[str] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.count(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class SimplifiedinvoicesDeleteModel(BaseModel):
+
+class SimplifiedinvoicesDeleteModel(ApiRequestModel):
     company_id: Union[str, int]
     document_id: Optional[Union[str, int]] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.delete(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class SimplifiedinvoicesGetAllModel(BaseModel):
+
+class SimplifiedinvoicesGetAllModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -64,8 +96,17 @@ class SimplifiedinvoicesGetAllModel(BaseModel):
     year: Optional[str] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_all(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class SimplifiedinvoicesGetOneModel(BaseModel):
+
+class SimplifiedinvoicesGetOneModel(ApiRequestModel):
     company_id: Union[str, int]
     customer_id: Optional[Union[str, int]] = None
     date: Optional[str] = None
@@ -79,8 +120,17 @@ class SimplifiedinvoicesGetOneModel(BaseModel):
     year: Optional[str] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.get_one(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class SimplifiedinvoicesInsertModel(BaseModel):
+
+class SimplifiedinvoicesInsertModel(ApiRequestModel):
     company_id: Union[str, int]
     associated_documents: Optional[List[Associated_documents]] = None
     customer_id: Optional[Union[str, int]] = None
@@ -111,8 +161,17 @@ class SimplifiedinvoicesInsertModel(BaseModel):
     vehicle_id: Optional[Union[str, int]] = None
     your_reference: Optional[str] = None
 
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.insert(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
-class SimplifiedinvoicesUpdateModel(BaseModel):
+
+class SimplifiedinvoicesUpdateModel(ApiRequestModel):
     company_id: Union[str, int]
     associated_documents: Optional[List[Associated_documents]] = None
     customer_id: Optional[Union[str, int]] = None
@@ -143,6 +202,15 @@ class SimplifiedinvoicesUpdateModel(BaseModel):
     status: Optional[str] = None
     vehicle_id: Optional[Union[str, int]] = None
     your_reference: Optional[str] = None
+
+    def request(self):
+        if hasattr(self, "_api_client"):
+            response = self._api_client.update(
+                self.model_dump(exclude={"_api_client"}, exclude_unset=True)
+            )
+            return response
+        else:
+            raise ValueError("Client not initialized. Use the 'connect' method.")
 
 
 class SimplifiedinvoicesClient(MoloniBaseClient):

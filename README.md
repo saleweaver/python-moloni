@@ -37,6 +37,30 @@ companies = CompaniesClient(
 )
 logger.info(companies.get_all())
 
+
+```
+
+#### Models as entrypoint
+
+```python
+
+from moloni.api import CustomersGetBySearchModel
+from moloni.base import AuthConfig, MoloniBaseUrl
+from pprint import pprint
+
+auth_config = AuthConfig(
+    client_id="your_client_id",
+    client_secret="your_client_secret",
+    username="your_username",  # Optional if refresh_token is set
+    password="your_password",  # Optional if refresh_token is set
+    refresh_token="your_refresh_token",  # Optional if username and password are set
+)
+
+with CustomersGetBySearchModel(company_id=5, search="cafe").connect(
+    auth_config=auth_config
+) as api:
+    pprint(api.request().payload)
+
 ```
 
 #### Minimal configuration, with credentials set as environment variables

@@ -30,12 +30,12 @@ def validate_data(data, validate, model):
         if validate:
             try:
                 model = model(**data)
-                data = model.model_dump(exclude_unset=True)
+                data = model.model_dump(exclude_unset=True, exclude={"_api_client"})
             except ValidationError as e:
                 raise e
         # No else needed here because we want to use the dict directly if validate is False
     elif isinstance(data, BaseModel):
-        data = data.model_dump(exclude_unset=True)
+        data = data.model_dump(exclude_unset=True, exclude={"_api_client"})
 
     return data
 
