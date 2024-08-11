@@ -62,7 +62,15 @@ jobs:
           NEW_VERSION=""
 
           # Retrieve the last commit message
-          COMMIT_MSG=$(git log -1 --format=%B $GITHUB_SHA)
+          # Check if the current commit is a merge commit
+          if git rev-parse -q --verify MERGE_HEAD; then
+            # Get the commit message of the latest non-merge commit
+            COMMIT_MSG=$(git log --no-merges -1 --format=%B)
+          else
+            # Get the commit message of the current commit
+            COMMIT_MSG=$(git log -1 --format=%B $GITHUB_SHA)
+          fi
+          
           echo "Commit Message: $COMMIT_MSG"
           # Check if the commit message specifies a version
           if echo "$COMMIT_MSG" | grep -q "version:"; then
