@@ -3,6 +3,7 @@ from typing import Union, Optional, List, Any
 
 from moloni.base.client import MoloniBaseClient
 from moloni.base.helpers import endpoint, fill_query_params, validate_data
+from moloni.base import ApiResponse
 
 
 class ApiRequestModel(BaseModel):
@@ -40,7 +41,30 @@ class ProductsCountModel(ApiRequestModel):
     company_id: Union[str, int]
     category_id: Optional[Union[str, int]] = None
 
-    def request(self):
+    def request(self) -> ApiResponse:
+        """
+        request(self) -> ApiResponse
+
+        Make an API request using the initialized client.
+
+        This method checks if the `_api_client` attribute is set (i.e., if the client has been initialized via the `connect` method).
+        If the client is initialized, it will make an API request using the provided method name and the model's data,
+        excluding the `_api_client` attribute itself from the request payload. If the client is not initialized, it will raise a `ValueError`.
+
+        Returns:
+            The response from the API.
+
+        Raises:
+            ValueError: If the client is not initialized via the `connect` method.
+
+        Example:
+            # Assuming you have a model instance `request_model` and an API client `api_client`
+            with request_model.connect(auth_config=auth_config) as api:
+                response = api.request()
+
+            # The above example assumes that the `connect` method has been used to initialize the client.
+            # The request method then sends the model's data to the API and returns the API's response.
+        """
         if hasattr(self, "_api_client"):
             response = self._api_client.count(
                 self.model_dump(exclude={"_api_client"}, exclude_unset=True)
@@ -54,7 +78,30 @@ class ProductsCountByEanModel(ApiRequestModel):
     company_id: Union[str, int]
     ean: Optional[str] = None
 
-    def request(self):
+    def request(self) -> ApiResponse:
+        """
+        request(self) -> ApiResponse
+
+        Make an API request using the initialized client.
+
+        This method checks if the `_api_client` attribute is set (i.e., if the client has been initialized via the `connect` method).
+        If the client is initialized, it will make an API request using the provided method name and the model's data,
+        excluding the `_api_client` attribute itself from the request payload. If the client is not initialized, it will raise a `ValueError`.
+
+        Returns:
+            The response from the API.
+
+        Raises:
+            ValueError: If the client is not initialized via the `connect` method.
+
+        Example:
+            # Assuming you have a model instance `request_model` and an API client `api_client`
+            with request_model.connect(auth_config=auth_config) as api:
+                response = api.request()
+
+            # The above example assumes that the `connect` method has been used to initialize the client.
+            # The request method then sends the model's data to the API and returns the API's response.
+        """
         if hasattr(self, "_api_client"):
             response = self._api_client.count_by_ean(
                 self.model_dump(exclude={"_api_client"}, exclude_unset=True)
@@ -68,7 +115,30 @@ class ProductsCountByNameModel(ApiRequestModel):
     company_id: Union[str, int]
     name: Optional[str] = None
 
-    def request(self):
+    def request(self) -> ApiResponse:
+        """
+        request(self) -> ApiResponse
+
+        Make an API request using the initialized client.
+
+        This method checks if the `_api_client` attribute is set (i.e., if the client has been initialized via the `connect` method).
+        If the client is initialized, it will make an API request using the provided method name and the model's data,
+        excluding the `_api_client` attribute itself from the request payload. If the client is not initialized, it will raise a `ValueError`.
+
+        Returns:
+            The response from the API.
+
+        Raises:
+            ValueError: If the client is not initialized via the `connect` method.
+
+        Example:
+            # Assuming you have a model instance `request_model` and an API client `api_client`
+            with request_model.connect(auth_config=auth_config) as api:
+                response = api.request()
+
+            # The above example assumes that the `connect` method has been used to initialize the client.
+            # The request method then sends the model's data to the API and returns the API's response.
+        """
         if hasattr(self, "_api_client"):
             response = self._api_client.count_by_name(
                 self.model_dump(exclude={"_api_client"}, exclude_unset=True)
@@ -82,7 +152,30 @@ class ProductsCountByReferenceModel(ApiRequestModel):
     company_id: Union[str, int]
     reference: Optional[str] = None
 
-    def request(self):
+    def request(self) -> ApiResponse:
+        """
+        request(self) -> ApiResponse
+
+        Make an API request using the initialized client.
+
+        This method checks if the `_api_client` attribute is set (i.e., if the client has been initialized via the `connect` method).
+        If the client is initialized, it will make an API request using the provided method name and the model's data,
+        excluding the `_api_client` attribute itself from the request payload. If the client is not initialized, it will raise a `ValueError`.
+
+        Returns:
+            The response from the API.
+
+        Raises:
+            ValueError: If the client is not initialized via the `connect` method.
+
+        Example:
+            # Assuming you have a model instance `request_model` and an API client `api_client`
+            with request_model.connect(auth_config=auth_config) as api:
+                response = api.request()
+
+            # The above example assumes that the `connect` method has been used to initialize the client.
+            # The request method then sends the model's data to the API and returns the API's response.
+        """
         if hasattr(self, "_api_client"):
             response = self._api_client.count_by_reference(
                 self.model_dump(exclude={"_api_client"}, exclude_unset=True)
@@ -96,7 +189,30 @@ class ProductsCountBySearchModel(ApiRequestModel):
     company_id: Union[str, int]
     search: Optional[str] = None
 
-    def request(self):
+    def request(self) -> ApiResponse:
+        """
+        request(self) -> ApiResponse
+
+        Make an API request using the initialized client.
+
+        This method checks if the `_api_client` attribute is set (i.e., if the client has been initialized via the `connect` method).
+        If the client is initialized, it will make an API request using the provided method name and the model's data,
+        excluding the `_api_client` attribute itself from the request payload. If the client is not initialized, it will raise a `ValueError`.
+
+        Returns:
+            The response from the API.
+
+        Raises:
+            ValueError: If the client is not initialized via the `connect` method.
+
+        Example:
+            # Assuming you have a model instance `request_model` and an API client `api_client`
+            with request_model.connect(auth_config=auth_config) as api:
+                response = api.request()
+
+            # The above example assumes that the `connect` method has been used to initialize the client.
+            # The request method then sends the model's data to the API and returns the API's response.
+        """
         if hasattr(self, "_api_client"):
             response = self._api_client.count_by_search(
                 self.model_dump(exclude={"_api_client"}, exclude_unset=True)
@@ -110,7 +226,30 @@ class ProductsCountModifiedSinceModel(ApiRequestModel):
     company_id: Union[str, int]
     lastmodified: Optional[str] = None
 
-    def request(self):
+    def request(self) -> ApiResponse:
+        """
+        request(self) -> ApiResponse
+
+        Make an API request using the initialized client.
+
+        This method checks if the `_api_client` attribute is set (i.e., if the client has been initialized via the `connect` method).
+        If the client is initialized, it will make an API request using the provided method name and the model's data,
+        excluding the `_api_client` attribute itself from the request payload. If the client is not initialized, it will raise a `ValueError`.
+
+        Returns:
+            The response from the API.
+
+        Raises:
+            ValueError: If the client is not initialized via the `connect` method.
+
+        Example:
+            # Assuming you have a model instance `request_model` and an API client `api_client`
+            with request_model.connect(auth_config=auth_config) as api:
+                response = api.request()
+
+            # The above example assumes that the `connect` method has been used to initialize the client.
+            # The request method then sends the model's data to the API and returns the API's response.
+        """
         if hasattr(self, "_api_client"):
             response = self._api_client.count_modified_since(
                 self.model_dump(exclude={"_api_client"}, exclude_unset=True)
@@ -124,7 +263,30 @@ class ProductsDeleteModel(ApiRequestModel):
     company_id: Union[str, int]
     product_id: Optional[Union[str, int]] = None
 
-    def request(self):
+    def request(self) -> ApiResponse:
+        """
+        request(self) -> ApiResponse
+
+        Make an API request using the initialized client.
+
+        This method checks if the `_api_client` attribute is set (i.e., if the client has been initialized via the `connect` method).
+        If the client is initialized, it will make an API request using the provided method name and the model's data,
+        excluding the `_api_client` attribute itself from the request payload. If the client is not initialized, it will raise a `ValueError`.
+
+        Returns:
+            The response from the API.
+
+        Raises:
+            ValueError: If the client is not initialized via the `connect` method.
+
+        Example:
+            # Assuming you have a model instance `request_model` and an API client `api_client`
+            with request_model.connect(auth_config=auth_config) as api:
+                response = api.request()
+
+            # The above example assumes that the `connect` method has been used to initialize the client.
+            # The request method then sends the model's data to the API and returns the API's response.
+        """
         if hasattr(self, "_api_client"):
             response = self._api_client.delete(
                 self.model_dump(exclude={"_api_client"}, exclude_unset=True)
@@ -140,7 +302,30 @@ class ProductsGetAllModel(ApiRequestModel):
     offset: Optional[Union[str, int]] = 0
     qty: Optional[Union[str, int]] = 25
 
-    def request(self):
+    def request(self) -> ApiResponse:
+        """
+        request(self) -> ApiResponse
+
+        Make an API request using the initialized client.
+
+        This method checks if the `_api_client` attribute is set (i.e., if the client has been initialized via the `connect` method).
+        If the client is initialized, it will make an API request using the provided method name and the model's data,
+        excluding the `_api_client` attribute itself from the request payload. If the client is not initialized, it will raise a `ValueError`.
+
+        Returns:
+            The response from the API.
+
+        Raises:
+            ValueError: If the client is not initialized via the `connect` method.
+
+        Example:
+            # Assuming you have a model instance `request_model` and an API client `api_client`
+            with request_model.connect(auth_config=auth_config) as api:
+                response = api.request()
+
+            # The above example assumes that the `connect` method has been used to initialize the client.
+            # The request method then sends the model's data to the API and returns the API's response.
+        """
         if hasattr(self, "_api_client"):
             response = self._api_client.get_all(
                 self.model_dump(exclude={"_api_client"}, exclude_unset=True)
@@ -156,7 +341,30 @@ class ProductsGetByEanModel(ApiRequestModel):
     offset: Optional[Union[str, int]] = 0
     qty: Optional[Union[str, int]] = 25
 
-    def request(self):
+    def request(self) -> ApiResponse:
+        """
+        request(self) -> ApiResponse
+
+        Make an API request using the initialized client.
+
+        This method checks if the `_api_client` attribute is set (i.e., if the client has been initialized via the `connect` method).
+        If the client is initialized, it will make an API request using the provided method name and the model's data,
+        excluding the `_api_client` attribute itself from the request payload. If the client is not initialized, it will raise a `ValueError`.
+
+        Returns:
+            The response from the API.
+
+        Raises:
+            ValueError: If the client is not initialized via the `connect` method.
+
+        Example:
+            # Assuming you have a model instance `request_model` and an API client `api_client`
+            with request_model.connect(auth_config=auth_config) as api:
+                response = api.request()
+
+            # The above example assumes that the `connect` method has been used to initialize the client.
+            # The request method then sends the model's data to the API and returns the API's response.
+        """
         if hasattr(self, "_api_client"):
             response = self._api_client.get_by_ean(
                 self.model_dump(exclude={"_api_client"}, exclude_unset=True)
@@ -172,7 +380,30 @@ class ProductsGetByNameModel(ApiRequestModel):
     offset: Optional[Union[str, int]] = 0
     qty: Optional[Union[str, int]] = 25
 
-    def request(self):
+    def request(self) -> ApiResponse:
+        """
+        request(self) -> ApiResponse
+
+        Make an API request using the initialized client.
+
+        This method checks if the `_api_client` attribute is set (i.e., if the client has been initialized via the `connect` method).
+        If the client is initialized, it will make an API request using the provided method name and the model's data,
+        excluding the `_api_client` attribute itself from the request payload. If the client is not initialized, it will raise a `ValueError`.
+
+        Returns:
+            The response from the API.
+
+        Raises:
+            ValueError: If the client is not initialized via the `connect` method.
+
+        Example:
+            # Assuming you have a model instance `request_model` and an API client `api_client`
+            with request_model.connect(auth_config=auth_config) as api:
+                response = api.request()
+
+            # The above example assumes that the `connect` method has been used to initialize the client.
+            # The request method then sends the model's data to the API and returns the API's response.
+        """
         if hasattr(self, "_api_client"):
             response = self._api_client.get_by_name(
                 self.model_dump(exclude={"_api_client"}, exclude_unset=True)
@@ -188,7 +419,30 @@ class ProductsGetByReferenceModel(ApiRequestModel):
     qty: Optional[Union[str, int]] = 25
     reference: Optional[str] = None
 
-    def request(self):
+    def request(self) -> ApiResponse:
+        """
+        request(self) -> ApiResponse
+
+        Make an API request using the initialized client.
+
+        This method checks if the `_api_client` attribute is set (i.e., if the client has been initialized via the `connect` method).
+        If the client is initialized, it will make an API request using the provided method name and the model's data,
+        excluding the `_api_client` attribute itself from the request payload. If the client is not initialized, it will raise a `ValueError`.
+
+        Returns:
+            The response from the API.
+
+        Raises:
+            ValueError: If the client is not initialized via the `connect` method.
+
+        Example:
+            # Assuming you have a model instance `request_model` and an API client `api_client`
+            with request_model.connect(auth_config=auth_config) as api:
+                response = api.request()
+
+            # The above example assumes that the `connect` method has been used to initialize the client.
+            # The request method then sends the model's data to the API and returns the API's response.
+        """
         if hasattr(self, "_api_client"):
             response = self._api_client.get_by_reference(
                 self.model_dump(exclude={"_api_client"}, exclude_unset=True)
@@ -204,7 +458,30 @@ class ProductsGetBySearchModel(ApiRequestModel):
     qty: Optional[Union[str, int]] = 25
     search: Optional[str] = None
 
-    def request(self):
+    def request(self) -> ApiResponse:
+        """
+        request(self) -> ApiResponse
+
+        Make an API request using the initialized client.
+
+        This method checks if the `_api_client` attribute is set (i.e., if the client has been initialized via the `connect` method).
+        If the client is initialized, it will make an API request using the provided method name and the model's data,
+        excluding the `_api_client` attribute itself from the request payload. If the client is not initialized, it will raise a `ValueError`.
+
+        Returns:
+            The response from the API.
+
+        Raises:
+            ValueError: If the client is not initialized via the `connect` method.
+
+        Example:
+            # Assuming you have a model instance `request_model` and an API client `api_client`
+            with request_model.connect(auth_config=auth_config) as api:
+                response = api.request()
+
+            # The above example assumes that the `connect` method has been used to initialize the client.
+            # The request method then sends the model's data to the API and returns the API's response.
+        """
         if hasattr(self, "_api_client"):
             response = self._api_client.get_by_search(
                 self.model_dump(exclude={"_api_client"}, exclude_unset=True)
@@ -220,7 +497,30 @@ class ProductsGetModifiedSinceModel(ApiRequestModel):
     offset: Optional[Union[str, int]] = 0
     qty: Optional[Union[str, int]] = 25
 
-    def request(self):
+    def request(self) -> ApiResponse:
+        """
+        request(self) -> ApiResponse
+
+        Make an API request using the initialized client.
+
+        This method checks if the `_api_client` attribute is set (i.e., if the client has been initialized via the `connect` method).
+        If the client is initialized, it will make an API request using the provided method name and the model's data,
+        excluding the `_api_client` attribute itself from the request payload. If the client is not initialized, it will raise a `ValueError`.
+
+        Returns:
+            The response from the API.
+
+        Raises:
+            ValueError: If the client is not initialized via the `connect` method.
+
+        Example:
+            # Assuming you have a model instance `request_model` and an API client `api_client`
+            with request_model.connect(auth_config=auth_config) as api:
+                response = api.request()
+
+            # The above example assumes that the `connect` method has been used to initialize the client.
+            # The request method then sends the model's data to the API and returns the API's response.
+        """
         if hasattr(self, "_api_client"):
             response = self._api_client.get_modified_since(
                 self.model_dump(exclude={"_api_client"}, exclude_unset=True)
@@ -234,7 +534,30 @@ class ProductsGetOneModel(ApiRequestModel):
     company_id: Union[str, int]
     product_id: Optional[Union[str, int]] = None
 
-    def request(self):
+    def request(self) -> ApiResponse:
+        """
+        request(self) -> ApiResponse
+
+        Make an API request using the initialized client.
+
+        This method checks if the `_api_client` attribute is set (i.e., if the client has been initialized via the `connect` method).
+        If the client is initialized, it will make an API request using the provided method name and the model's data,
+        excluding the `_api_client` attribute itself from the request payload. If the client is not initialized, it will raise a `ValueError`.
+
+        Returns:
+            The response from the API.
+
+        Raises:
+            ValueError: If the client is not initialized via the `connect` method.
+
+        Example:
+            # Assuming you have a model instance `request_model` and an API client `api_client`
+            with request_model.connect(auth_config=auth_config) as api:
+                response = api.request()
+
+            # The above example assumes that the `connect` method has been used to initialize the client.
+            # The request method then sends the model's data to the API and returns the API's response.
+        """
         if hasattr(self, "_api_client"):
             response = self._api_client.get_one(
                 self.model_dump(exclude={"_api_client"}, exclude_unset=True)
@@ -264,7 +587,30 @@ class ProductsInsertModel(ApiRequestModel):
     warehouse_id: Optional[Union[str, int]] = None
     warehouses: Optional[List[Warehouses]] = None
 
-    def request(self):
+    def request(self) -> ApiResponse:
+        """
+        request(self) -> ApiResponse
+
+        Make an API request using the initialized client.
+
+        This method checks if the `_api_client` attribute is set (i.e., if the client has been initialized via the `connect` method).
+        If the client is initialized, it will make an API request using the provided method name and the model's data,
+        excluding the `_api_client` attribute itself from the request payload. If the client is not initialized, it will raise a `ValueError`.
+
+        Returns:
+            The response from the API.
+
+        Raises:
+            ValueError: If the client is not initialized via the `connect` method.
+
+        Example:
+            # Assuming you have a model instance `request_model` and an API client `api_client`
+            with request_model.connect(auth_config=auth_config) as api:
+                response = api.request()
+
+            # The above example assumes that the `connect` method has been used to initialize the client.
+            # The request method then sends the model's data to the API and returns the API's response.
+        """
         if hasattr(self, "_api_client"):
             response = self._api_client.insert(
                 self.model_dump(exclude={"_api_client"}, exclude_unset=True)
@@ -294,7 +640,30 @@ class ProductsUpdateModel(ApiRequestModel):
     unit_id: Optional[Union[str, int]] = None
     warehouse_id: Optional[Union[str, int]] = None
 
-    def request(self):
+    def request(self) -> ApiResponse:
+        """
+        request(self) -> ApiResponse
+
+        Make an API request using the initialized client.
+
+        This method checks if the `_api_client` attribute is set (i.e., if the client has been initialized via the `connect` method).
+        If the client is initialized, it will make an API request using the provided method name and the model's data,
+        excluding the `_api_client` attribute itself from the request payload. If the client is not initialized, it will raise a `ValueError`.
+
+        Returns:
+            The response from the API.
+
+        Raises:
+            ValueError: If the client is not initialized via the `connect` method.
+
+        Example:
+            # Assuming you have a model instance `request_model` and an API client `api_client`
+            with request_model.connect(auth_config=auth_config) as api:
+                response = api.request()
+
+            # The above example assumes that the `connect` method has been used to initialize the client.
+            # The request method then sends the model's data to the API and returns the API's response.
+        """
         if hasattr(self, "_api_client"):
             response = self._api_client.update(
                 self.model_dump(exclude={"_api_client"}, exclude_unset=True)
