@@ -113,7 +113,7 @@ jobs:
 #          echo "new_version=$NEW_VERSION" >> $GITHUB_ENV
 
       - name: Increment version
-        uses: saleweaver/version_increment_action@v1.0.0
+        uses: saleweaver/version_increment_action@v1
         with:
           file_path: 'moloni/__version__.py'
           version_key: '__version__' # key to search for in the file, holding the version
