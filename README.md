@@ -7,6 +7,7 @@ Welcome to the Moloni API Client! This Python package provides a simple and flex
 
 - [Features](#features)
 - [Installation](#installation)
+- [Documentation](#documentation)
 - [Usage](#usage)
   - [Full Configuration](#full-configuration)
   - [Models as Entrypoints](#models-as-entrypoints)
@@ -30,6 +31,10 @@ You can install the Moloni API Client using pip:
 ```bash
 pip install moloni-api-client
 ```
+
+## Documentation
+
+[Documentation is available here](https://python-moloni.readthedocs.io/en/latest/index.html)
 
 ## Usage
 
