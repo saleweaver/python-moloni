@@ -66,12 +66,9 @@ jobs:
 
           # Check if the commit message specifies a version
           if echo "$COMMIT_MSG" | grep -q "version:"; then
-            NEW_VERSION=$(echo "$COMMIT_MSG" | grep -oP "(?<=version: ).*")
+            NEW_VERSION=$(echo "$COMMIT_MSG" | grep -oP "(?<=version: )\d+\.\d+\.\d+")
             echo "Using specified version: $NEW_VERSION"
-          fi
-
-          # If NEW_VERSION is still empty, increment the patch version
-          if [ -z "$NEW_VERSION" ]; then
+          else
             IFS='.' read -ra VERSION_PARTS <<< "$CURRENT_VERSION"
             MAJOR_VERSION=${VERSION_PARTS[0]}
             MINOR_VERSION=${VERSION_PARTS[1]}
