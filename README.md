@@ -29,7 +29,7 @@ Welcome to the Moloni API Client! This Python package provides a simple and flex
 You can install the Moloni API Client using pip:
 
 ```bash
-pip install moloni-api-client
+pip install python-moloni
 ```
 
 ## Documentation
