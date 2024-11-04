@@ -78,6 +78,7 @@ from .customers_client import CustomersCountModel
 from .customers_client import CustomersCountModifiedSinceModel
 from .customers_client import CustomersDeleteModel
 from .customers_client import CustomersGetAllModel
+from .customers_client import CustomersGetByEmailModel
 from .customers_client import CustomersGetByNameModel
 from .customers_client import CustomersGetByNumberModel
 from .customers_client import CustomersGetBySearchModel
@@ -435,6 +436,7 @@ __all__ = [
     "CustomersCountModifiedSinceModel",
     "CustomersDeleteModel",
     "CustomersGetAllModel",
+    "CustomersGetByEmailModel",
     "CustomersGetByNameModel",
     "CustomersGetByNumberModel",
     "CustomersGetBySearchModel",
